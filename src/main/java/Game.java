@@ -1,9 +1,24 @@
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.screen.TerminalScreen;
+import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+import com.googlecode.lanterna.terminal.Terminal;
+
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 
-public class Game implements KeyListener {
 
+public class Game implements KeyListener {
+    private Screen screen;
     Hero bomberman = new Hero(10,10);
     ArrayList<ConcreteBlock> blocks = new ArrayList<ConcreteBlock>();
     int rows = 13;
@@ -23,13 +38,24 @@ public class Game implements KeyListener {
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
-
     public Game(){
-        //create interface
+        try {
+            TerminalSize terminalSize = new TerminalSize(13, 13);
+            DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
+            Terminal terminal = terminalFactory.createTerminal();
+            screen = new TerminalScreen(terminal);
+            screen.setCursorPosition(null);
+            screen.startScreen();
+            screen.doResizeIfNecessary();
+            TextGraphics graphics = screen.newTextGraphics();
+            readMap();
+            run();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public void start(){
-        System.out.println("ta a andar");
-        //start game
+        readMap();
     }
 
     public void readMap() {
@@ -46,7 +72,6 @@ public class Game implements KeyListener {
             }
         }
     }
-
     public void moveHero(Position position) {
         if (canHeroMove(position))
             bomberman.setPosition(position);
@@ -59,6 +84,21 @@ public class Game implements KeyListener {
             }
         }
         return true;
+    }
+
+    public void run() throws IOException{
+        screen.clear();
+        draw(screen.newTextGraphics());
+        screen.refresh();
+    }
+
+    public void draw(TextGraphics graphics) {
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
+        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(13, 13), ' ');
+        bomberman.draw(graphics);
+        for(ConcreteBlock block : blocks) {
+            block.draw(graphics);
+        }
     }
 
 
