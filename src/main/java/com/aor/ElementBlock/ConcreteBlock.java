@@ -1,9 +1,11 @@
+package com.aor.ElementBlock;
+
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.SGR;
 
-public class ConcreteBlock extends ElementBlock{
+public class ConcreteBlock extends ElementBlock {
     public ConcreteBlock(int x, int y) {
         super(x,y);
     }

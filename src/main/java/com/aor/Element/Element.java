@@ -1,7 +1,12 @@
-public abstract class ElementBlock implements GameBlock {
+package com.aor.Element;
+
+import com.aor.game.Position;
+
+public abstract class Element implements GameCharecter {
+
     protected Position position;
 
-    public ElementBlock(int x, int y){
+    public Element(int x, int y){
         position = new Position(x,y);
         position.setX(x);
         position.setY(y);
@@ -12,4 +17,6 @@ public abstract class ElementBlock implements GameBlock {
     public void setPosition(Position position) {
         this.position = position;
     }
+
+
 }
