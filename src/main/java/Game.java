@@ -6,7 +6,10 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
+import com.googlecode.lanterna.terminal.swing.TerminalEmulatorAutoCloseTrigger;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -18,9 +21,15 @@ import java.util.ArrayList;
 
 
 public class Game implements KeyListener {
+    private boolean right, left, up, down,end;
+    int speed = 0;
+    private boolean moving;
+    private SwingTerminalFrame terminal;
     private Screen screen;
-    Hero bomberman = new Hero(10,10);
+    Hero bomberman;
     ArrayList<ConcreteBlock> blocks = new ArrayList<ConcreteBlock>();
+    int width = 720;
+    int height = 480;
     int rows = 13;
     int cols = 13;
     int[][] scene = new int[][]{
@@ -42,14 +51,21 @@ public class Game implements KeyListener {
         try {
             TerminalSize terminalSize = new TerminalSize(13, 13);
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
-            Terminal terminal = terminalFactory.createTerminal();
+            terminal = terminalFactory.createSwingTerminal();
+            terminal.setSize(500,400);
+            terminal.setPreferredSize(new Dimension(width,height));
+            terminal.setMaximumSize(new Dimension(width,height));
+            terminal.setMinimumSize(new Dimension(width,height));
+            terminal.pack();
+            terminal.setLocationRelativeTo(null);
+            terminal.setVisible(true);
+            terminal.addKeyListener(this);
+            terminal.setFocusable(true);
+            terminal.requestFocusInWindow();
             screen = new TerminalScreen(terminal);
-            screen.setCursorPosition(null);
             screen.startScreen();
+            screen.setCursorPosition(null);
             screen.doResizeIfNecessary();
-            TextGraphics graphics = screen.newTextGraphics();
-            readMap();
-            run();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -66,18 +82,13 @@ public class Game implements KeyListener {
                     blocks.add(block);
                 }
                 if(scene[i][j] == 2) {
-                    Position pos = new Position(i,j);
-                    bomberman.setPosition(pos);
+                    bomberman = new Hero(i,j);
                 }
             }
         }
     }
-    public void moveHero(Position position) {
-        if (canHeroMove(position))
-            bomberman.setPosition(position);
-    }
 
-    public boolean canHeroMove(Position position) {
+    private boolean canHeroMove(Position position) {
         for(ConcreteBlock block : blocks) {
             if(block.getPosition().equals(position)) {
                 return false;
@@ -86,15 +97,24 @@ public class Game implements KeyListener {
         return true;
     }
 
-    public void run() throws IOException{
-        screen.clear();
-        draw(screen.newTextGraphics());
-        screen.refresh();
+    public boolean run() throws IOException, InterruptedException {
+        boolean flag = true;
+        while(flag) {
+            screen.clear();
+            flag = update();
+            draw(screen.newTextGraphics());
+            screen.refresh();
+            Thread.sleep(1000/120);
+        }
+        screen.close();
+        terminal.dispose();
+
+        return flag;
     }
 
     public void draw(TextGraphics graphics) {
         graphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
-        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(13, 13), ' ');
+        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
         bomberman.draw(graphics);
         for(ConcreteBlock block : blocks) {
             block.draw(graphics);
@@ -103,8 +123,48 @@ public class Game implements KeyListener {
 
 
 
-    private void update(){
-        //updates
+    private boolean update(){
+        moving = false;
+        if(end){
+            return false;
+        }
+        if (right && canHeroMove(new Position(bomberman.getPosition().getX() + 1, bomberman.getPosition().getY()))) {
+            moving = true;
+        }else{
+            right = false;
+        }
+        if (left && canHeroMove(new Position(bomberman.getPosition().getX() - 1, bomberman.getPosition().getY()))) {
+            moving = true;
+        }else{
+            left = false;
+        }
+        if (up && canHeroMove(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY()- 1))) {
+            moving = true;
+        }else{
+            up = false;
+        }
+        if (down && canHeroMove(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY() + 1))) {
+            moving = true;
+        }else{
+            down = false;
+        }
+
+
+        //code
+
+        if (moving) {
+
+            if (right) {
+                bomberman.moveRight();
+            } else if (left) {
+                bomberman.moveLeft();
+            } else if (up) {
+                bomberman.moveUp();
+            } else if (down) {
+                bomberman.moveDown();
+            }
+        }
+    return true;
     }
 
     @Override
@@ -114,11 +174,41 @@ public class Game implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            int a = 0;
+            //place bomb
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            right = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            left = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            up = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            down = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            end = true;
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            right = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            left = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            up = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            down = false;
+        }
     }
 }
+
