@@ -1,31 +1,21 @@
-package com.aor.game;
+package com.aor.Game;
 
 import com.aor.Element.Hero;
 import com.aor.ElementBlock.ConcreteBlock;
-import com.aor.game.Position;
+import com.aor.LanternaGui.LanternaGUI;
+import com.aor.Positions.Position;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class Game implements KeyListener {
-    private boolean right, left, up, down,end;
+public class Game extends LanternaGUI implements KeyListener {
     int speed = 0;
-    private boolean moving;
-    private SwingTerminalFrame terminal;
-    private Screen screen;
     Hero bomberman;
     ArrayList<ConcreteBlock> blocks = new ArrayList<ConcreteBlock>();
     int width = 720;
@@ -47,28 +37,16 @@ public class Game implements KeyListener {
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
-    public Game(){
-        try {
-            TerminalSize terminalSize = new TerminalSize(13, 13);
-            DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
-            terminal = terminalFactory.createSwingTerminal();
-            terminal.setSize(500,400);
-            terminal.setPreferredSize(new Dimension(width,height));
-            terminal.setMaximumSize(new Dimension(width,height));
-            terminal.setMinimumSize(new Dimension(width,height));
-            terminal.pack();
-            terminal.setLocationRelativeTo(null);
-            terminal.setVisible(true);
-            terminal.addKeyListener(this);
-            terminal.setFocusable(true);
-            terminal.requestFocusInWindow();
-            screen = new TerminalScreen(terminal);
-            screen.startScreen();
-            screen.setCursorPosition(null);
-            screen.doResizeIfNecessary();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Game() throws IOException {
+        super();
+        terminal.setLocationRelativeTo(null);
+        terminal.setVisible(true);
+        terminal.setFocusable(true);
+        terminal.requestFocusInWindow();
+        terminal.addKeyListener(this);
+        screen.startScreen();
+        screen.setCursorPosition(null);
+        screen.doResizeIfNecessary();
     }
     public void start(){
         readMap();
@@ -167,48 +145,5 @@ public class Game implements KeyListener {
     return true;
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            int a = 0;
-            //place bomb
-        }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            right = true;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            left = true;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-            up = true;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            down = true;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            end = true;
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            right = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            left = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-            up = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            down = false;
-        }
-    }
 }
 

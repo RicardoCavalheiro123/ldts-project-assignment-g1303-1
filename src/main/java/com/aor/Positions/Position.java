@@ -1,4 +1,4 @@
-package com.aor.game;
+package com.aor.Positions;
 
 public class Position {
     private int x;

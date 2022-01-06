@@ -1,7 +1,5 @@
 package com.aor.Element;
 
-import com.aor.game.Position;
-
 public class Robot extends Element{
     public Robot(int x, int y) {
         super(x, y);

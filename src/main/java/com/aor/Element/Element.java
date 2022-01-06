@@ -1,6 +1,6 @@
 package com.aor.Element;
 
-import com.aor.game.Position;
+import com.aor.Positions.Position;
 
 public abstract class Element implements GameCharacter {
 
