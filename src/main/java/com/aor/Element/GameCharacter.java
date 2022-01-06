@@ -1,6 +1,6 @@
 package com.aor.Element;
 
-public interface GameCharecter {
+public interface GameCharacter {
     void moveUp();
     void moveDown();
     void moveLeft();

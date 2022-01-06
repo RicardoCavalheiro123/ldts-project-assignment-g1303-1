@@ -8,6 +8,7 @@ import com.googlecode.lanterna.SGR;
 public class ConcreteBlock extends ElementBlock {
     public ConcreteBlock(int x, int y) {
         super(x,y);
+        undestructableBlock = true;
     }
 
     public void draw(TextGraphics graphics) {
