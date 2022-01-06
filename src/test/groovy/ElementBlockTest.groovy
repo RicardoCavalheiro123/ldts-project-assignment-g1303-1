@@ -5,6 +5,7 @@ import com.aor.game.Position
 import spock.lang.Specification
 
 class ElementBlockTest extends Specification {
+
     def "GetPosition"() {
         given:
         def ConcreteBlock c = new ConcreteBlock(2,3);

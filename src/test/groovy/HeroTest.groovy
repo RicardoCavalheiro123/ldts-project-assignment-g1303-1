@@ -3,9 +3,13 @@ import com.aor.game.Position
 import spock.lang.Specification
 
 class HeroTest extends Specification {
+    private hero;
+
+    def setup() {
+        hero = new Hero(1, 1)
+    }
+
     def "MoveUp"() {
-        given:
-            def hero = new Hero(1,1);
         when:
             hero.moveUp();
         then:
@@ -13,8 +17,6 @@ class HeroTest extends Specification {
     }
 
     def "MoveDown"() {
-        given:
-            def hero = new Hero(1,1);
         when:
             hero.moveDown();
         then:
@@ -22,8 +24,6 @@ class HeroTest extends Specification {
     }
 
     def "MoveLeft"() {
-        given:
-            def hero = new Hero(1,1);
         when:
             hero.moveLeft();
         then:
@@ -31,8 +31,6 @@ class HeroTest extends Specification {
     }
 
     def "MoveRight"() {
-        given:
-            def hero = new Hero(1,1);
         when:
             hero.moveRight();
         then:

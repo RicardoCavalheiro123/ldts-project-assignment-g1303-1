@@ -3,10 +3,13 @@ import com.aor.game.Position
 import spock.lang.Specification
 
 class ElementTest extends Specification {
-    def "GetPosition"() {
-        given:
-            def Hero h = new Hero(2,3);
+    private h;
 
+    def setup(){
+        h = new Hero(2,3);
+    }
+
+    def "GetPosition"() {
         when:
             def pos = new Position(2,3);
 
@@ -17,7 +20,6 @@ class ElementTest extends Specification {
 
     def "SetPosition"() {
         given:
-            def h = new Hero(2,3);
             def pos = new Position(5,4);
             h.setPosition(pos);
 
@@ -30,7 +32,6 @@ class ElementTest extends Specification {
 
     def "moveUp"() {
         given:
-            def h = new Hero(2,3);
             h.moveUp();
         when:
             def posf = new Position(2,2);
@@ -41,7 +42,6 @@ class ElementTest extends Specification {
 
     def "moveDown"() {
         given:
-            def h = new Hero(2,3);
             h.moveDown();
         when:
             def posf = new Position(2,4);
@@ -52,7 +52,6 @@ class ElementTest extends Specification {
 
     def "moveLeft"() {
         given:
-            def h = new Hero(2,3);
             h.moveLeft();
         when:
             def posf = new Position(1,3);
@@ -63,7 +62,6 @@ class ElementTest extends Specification {
 
     def "moveRight"() {
         given:
-            def h = new Hero(2,3);
             h.moveRight();
         when:
             def posf = new Position(3,3);
