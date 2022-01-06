@@ -1,7 +1,7 @@
 import com.aor.ElementBlock.Bomb
 import com.aor.ElementBlock.ConcreteBlock
 import com.aor.ElementBlock.DestructableBlock
-import com.aor.game.Position
+import com.aor.Positions.Position
 import spock.lang.Specification
 
 class ElementBlockTest extends Specification {
@@ -33,10 +33,12 @@ class ElementBlockTest extends Specification {
     def "IsBomb"() {
         given:
             def block = new Bomb(1,1);
+            def block1 = new ConcreteBlock(1,1);
         expect:
             block.isBomb() == true
             block.isUndestructableBlock() == false
             block.isDestructableBlock() == false
+            block1.isBomb() == false
     }
 
     def "IsDestructableBlock"() {

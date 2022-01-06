@@ -1,5 +1,5 @@
 import com.aor.Element.Hero
-import com.aor.game.Position
+import com.aor.Positions.Position
 import spock.lang.Specification
 
 class ElementTest extends Specification {

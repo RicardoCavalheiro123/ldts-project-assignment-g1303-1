@@ -1,4 +1,4 @@
-import com.aor.game.Game;
+import com.aor.Game.Game;
 
 import java.io.IOException;
 
