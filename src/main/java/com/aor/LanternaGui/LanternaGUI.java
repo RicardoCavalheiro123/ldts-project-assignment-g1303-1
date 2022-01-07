@@ -5,7 +5,12 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+
 import com.googlecode.lanterna.terminal.swing.*;
+
+import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
+import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
+
 
 import java.awt.*;
 import java.io.IOException;
@@ -14,13 +19,16 @@ import java.io.InputStream;
 public abstract class LanternaGUI extends InputHandler {
     protected SwingTerminalFrame terminal;
     protected Screen screen;
+
     protected SwingTerminalFontConfiguration font;
+
     int width = 720;
     int height = 480;
 
     public LanternaGUI() throws FontFormatException {
         super();
         try {
+
             //GetFont("digital-7 (mono).ttf");
             TerminalSize terminalSize = new TerminalSize(width, height);
             //DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
@@ -33,7 +41,7 @@ public abstract class LanternaGUI extends InputHandler {
             terminal.pack();
             terminal.exitPrivateMode();
             screen = new TerminalScreen(terminal);
-        } catch (IOException e) {
+        } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
     }

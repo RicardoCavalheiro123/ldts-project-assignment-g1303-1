@@ -10,16 +10,20 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
 
 import java.awt.*;
 import java.awt.event.KeyListener;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 
 public class Game extends LanternaGUI implements KeyListener {
     int speed = 0;
     Hero bomberman;
+    Font font;
     ArrayList<ConcreteBlock> blocks = new ArrayList<ConcreteBlock>();
     ArrayList<DestructableBlock> blocksd = new ArrayList<DestructableBlock>();
     ArrayList<Bomb> bombs = new ArrayList<Bomb>();
@@ -53,6 +57,17 @@ public class Game extends LanternaGUI implements KeyListener {
         screen.startScreen();
         screen.setCursorPosition(null);
         screen.doResizeIfNecessary();
+        InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("fonte.ttf");
+        font = Font.createFont(Font.TRUETYPE_FONT, stream).deriveFont(48f);
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        ge.registerFont(font);
+        Font loadedFont = font.deriveFont(Font.PLAIN, 25);
+        terminal.getGraphics().setFont(loadedFont);
+        terminal.setFont(loadedFont);
+        boolean a = terminal.isFontSet();
+        SwingTerminalFontConfiguration fontConfiguration = SwingTerminalFontConfiguration.newInstance(loadedFont);
+        terminal.pack();
+        int x =0;
     }
     public void start(){
         readMap();
