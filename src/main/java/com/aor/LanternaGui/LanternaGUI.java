@@ -34,7 +34,7 @@ public abstract class LanternaGUI extends InputHandler {
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
             terminalFactory.setForceAWTOverSwing(true);
 
-            terminalFactory.setTerminalEmulatorFontConfiguration(setFont("src/main/resources/oi222.ttf"));
+            terminalFactory.setTerminalEmulatorFontConfiguration(setFont("src/main/resources/MONSTRO.ttf"));
 
             Terminal terminal = terminalFactory.createTerminal();
 
