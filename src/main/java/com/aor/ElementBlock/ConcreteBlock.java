@@ -14,6 +14,6 @@ public class ConcreteBlock extends ElementBlock {
     public void draw(TextGraphics graphics) {
         graphics.setForegroundColor(TextColor.Factory.fromString("#FF33B8"));
         graphics.enableModifiers(SGR.BOLD);
-        graphics.putString(new TerminalPosition(super.getPosition().getX(), super.getPosition().getY()), "+");
+        graphics.putString(new TerminalPosition(super.getPosition().getX(), super.getPosition().getY()), "j");
     }
 }

@@ -34,7 +34,7 @@ public abstract class LanternaGUI extends InputHandler {
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
             terminalFactory.setForceAWTOverSwing(true);
 
-            terminalFactory.setTerminalEmulatorFontConfiguration(setFont("src/main/resources/MONSTRO.ttf"));
+            terminalFactory.setTerminalEmulatorFontConfiguration(setFont("src/main/resources/Fonte.ttf"));
 
             Terminal terminal = terminalFactory.createTerminal();
 
@@ -59,7 +59,7 @@ public abstract class LanternaGUI extends InputHandler {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         ge.registerFont(font);
 
-        Font loaded = font.deriveFont(Font.PLAIN,20);
+        Font loaded = font.deriveFont(Font.PLAIN,100);
         return loaded;
     }
     protected AWTTerminalFontConfiguration setFont(Font lf){
