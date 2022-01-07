@@ -11,25 +11,22 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
+
 
 import java.awt.*;
-import java.awt.event.KeyListener;
 
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 
-public class Game extends LanternaGUI implements KeyListener {
-    int speed = 0;
+public class Game extends LanternaGUI {
     Hero bomberman;
-    Font font;
-    ArrayList<ConcreteBlock> blocks = new ArrayList<ConcreteBlock>();
-    ArrayList<DestructableBlock> blocksd = new ArrayList<DestructableBlock>();
-    ArrayList<Robot> robots = new ArrayList<Robot>();
-    ArrayList<Bomb> bombs = new ArrayList<Bomb>();
+    ArrayList<ConcreteBlock> blocks = new ArrayList<>();
+    ArrayList<DestructableBlock> blocksd = new ArrayList<>();
+    ArrayList<Robot> robots = new ArrayList<>();
+    ArrayList<Bomb> bombs = new ArrayList<>();
     int width = 720;
     int height = 480;
     int rows = 13;
@@ -60,17 +57,8 @@ public class Game extends LanternaGUI implements KeyListener {
         screen.startScreen();
         screen.setCursorPosition(null);
         screen.doResizeIfNecessary();
-        InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("fonte.ttf");
-        font = Font.createFont(Font.TRUETYPE_FONT, stream).deriveFont(48f);
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        ge.registerFont(font);
-        Font loadedFont = font.deriveFont(Font.PLAIN, 25);
-        terminal.getGraphics().setFont(loadedFont);
-        terminal.setFont(loadedFont);
-        boolean a = terminal.isFontSet();
-        SwingTerminalFontConfiguration fontConfiguration = SwingTerminalFontConfiguration.newInstance(loadedFont);
         terminal.pack();
-        int x =0;
+
     }
     public void start(){
         readMap();
@@ -97,7 +85,7 @@ public class Game extends LanternaGUI implements KeyListener {
         }
     }
 
-    private boolean canHeroMove(Position position) {
+    private boolean canMove(Position position) {
         for(ConcreteBlock block : blocks) {
             if(block.getPosition().equals(position)) {
                 return false;
@@ -119,42 +107,20 @@ public class Game extends LanternaGUI implements KeyListener {
         return true;
     }
 
-    private boolean canRobotMove(Position position) {
-        for(ConcreteBlock block : blocks) {
-            if(block.getPosition().equals(position)) {
-                return false;
-            }
-        }
-        for(DestructableBlock block : blocksd) {
-            if(block.IsDestroyed()){
-                continue;
-            }
-            if(block.getPosition().equals(position)) {
-                return false;
-            }
-        }
 
-        for(Robot robot : robots) {
-            if(robot.getPosition().equals(position)) {
-                return false;
-            }
-        }
-        return true;
-    }
+    public void run() throws IOException, InterruptedException {
 
-    public boolean run() throws IOException, InterruptedException {
         boolean flag = true;
+
         while(flag) {
             screen.clear();
             flag = update();
             draw(screen.newTextGraphics());
             screen.refresh();
-            Thread.sleep(1000/120);
+            Thread.sleep(1000/100);
         }
         screen.close();
         terminal.close();
-
-        return flag;
     }
 
     public void draw(TextGraphics graphics) {
@@ -187,22 +153,22 @@ public class Game extends LanternaGUI implements KeyListener {
         if(end){
             return false;
         }
-        if (right && canHeroMove(new Position(bomberman.getPosition().getX() + 1, bomberman.getPosition().getY()))) {
+        if (right && canMove(new Position(bomberman.getPosition().getX() + 1, bomberman.getPosition().getY()))) {
             moving = true;
         }else{
             right = false;
         }
-        if (left && canHeroMove(new Position(bomberman.getPosition().getX() - 1, bomberman.getPosition().getY()))) {
+        if (left && canMove(new Position(bomberman.getPosition().getX() - 1, bomberman.getPosition().getY()))) {
             moving = true;
         }else{
             left = false;
         }
-        if (up && canHeroMove(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY()- 1))) {
+        if (up && canMove(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY()- 1))) {
             moving = true;
         }else{
             up = false;
         }
-        if (down && canHeroMove(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY() + 1))) {
+        if (down && canMove(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY() + 1))) {
             moving = true;
         }else{
             down = false;
@@ -259,16 +225,16 @@ public class Game extends LanternaGUI implements KeyListener {
                 if(block.IsDestroyed()){
                     continue;
                 }
-                if(block.getPosition().equals(new Position(p.getX()+(1*x),p.getY())) && right) {
+                if(block.getPosition().equals(new Position(p.getX()+(x),p.getY())) && right) {
                     right = false;
                     block.setDestroyed();
-                }else if(block.getPosition().equals(new Position(p.getX()-(1*x),p.getY())) && left){
+                }else if(block.getPosition().equals(new Position(p.getX()-(x),p.getY())) && left){
                     left = false;
                     block.setDestroyed();
-                }else if(block.getPosition().equals(new Position(p.getX(),p.getY()+(1*x))) && down){
+                }else if(block.getPosition().equals(new Position(p.getX(),p.getY()+(x))) && down){
                     down = false;
                     block.setDestroyed();
-                }else if(block.getPosition().equals(new Position(p.getX()-(1*x),p.getY()-(1*x))) && up){
+                }else if(block.getPosition().equals(new Position(p.getX(),p.getY()-(x))) && up){
                     up = false;
                     block.setDestroyed();
                 }
@@ -280,16 +246,16 @@ public class Game extends LanternaGUI implements KeyListener {
         for(Robot temp : robots) {
             Random rand = new Random();
             int num = rand.nextInt(4)+1;
-            if(num == 1 && canRobotMove(new Position(temp.getPosition().getX() + 1, temp.getPosition().getY()))) {
+            if(num == 1 && canMove(new Position(temp.getPosition().getX() + 1, temp.getPosition().getY()))) {
                 temp.moveRight();
             }
-            else if(num == 2 && canRobotMove(new Position(temp.getPosition().getX() - 1, temp.getPosition().getY()))) {
+            else if(num == 2 && canMove(new Position(temp.getPosition().getX() - 1, temp.getPosition().getY()))) {
                 temp.moveLeft();
             }
-            else if(num == 3 && canRobotMove(new Position(temp.getPosition().getX(), temp.getPosition().getY() - 1))) {
+            else if(num == 3 && canMove(new Position(temp.getPosition().getX(), temp.getPosition().getY() - 1))) {
                 temp.moveUp();
             }
-            else if(num == 3 && canRobotMove(new Position(temp.getPosition().getX(), temp.getPosition().getY() + 1))) {
+            else if(num == 3 && canMove(new Position(temp.getPosition().getX(), temp.getPosition().getY() + 1))) {
                 temp.moveDown();
             }
         }
