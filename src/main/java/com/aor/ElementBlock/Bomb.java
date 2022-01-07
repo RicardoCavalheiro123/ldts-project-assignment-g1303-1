@@ -26,7 +26,7 @@ public class Bomb extends ElementBlock {
     public void draw(TextGraphics graphics) {
         graphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
         graphics.enableModifiers(SGR.BOLD);
-        graphics.putString(new TerminalPosition(super.getPosition().getX(), super.getPosition().getY()), "&");
+        graphics.putString(new TerminalPosition(super.getPosition().getX(), super.getPosition().getY()), "f");
     }
     public long getTime(){
         long finish = System.currentTimeMillis();
