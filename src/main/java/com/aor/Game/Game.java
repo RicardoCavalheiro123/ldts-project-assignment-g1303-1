@@ -4,6 +4,7 @@ import com.aor.Element.Hero;
 import com.aor.ElementBlock.Bomb;
 import com.aor.ElementBlock.ConcreteBlock;
 import com.aor.ElementBlock.DestructableBlock;
+import com.aor.Element.Robot;
 import com.aor.LanternaGui.LanternaGUI;
 import com.aor.Positions.Position;
 import com.googlecode.lanterna.TerminalPosition;
@@ -18,6 +19,7 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class Game extends LanternaGUI implements KeyListener {
@@ -26,6 +28,7 @@ public class Game extends LanternaGUI implements KeyListener {
     Font font;
     ArrayList<ConcreteBlock> blocks = new ArrayList<ConcreteBlock>();
     ArrayList<DestructableBlock> blocksd = new ArrayList<DestructableBlock>();
+    ArrayList<Robot> robots = new ArrayList<Robot>();
     ArrayList<Bomb> bombs = new ArrayList<Bomb>();
     int width = 720;
     int height = 480;
@@ -43,7 +46,7 @@ public class Game extends LanternaGUI implements KeyListener {
         {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
         {1, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1},
         {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-        {1, 0, 0, 0, 0, 3, 0, 3, 0, 0, 3, 3, 0, 0, 1},
+        {1, 5, 0, 0, 0, 3, 0, 3, 0, 5, 3, 3, 0, 0, 1},
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
     public Game() throws IOException, FontFormatException {
@@ -86,6 +89,10 @@ public class Game extends LanternaGUI implements KeyListener {
                     DestructableBlock block = new DestructableBlock(i,j);
                     blocksd.add(block);
                 }
+                if(scene[i][j] == 5) {
+                    Robot robot = new Robot(i,j);
+                    robots.add(robot);
+                }
             }
         }
     }
@@ -101,6 +108,34 @@ public class Game extends LanternaGUI implements KeyListener {
                 continue;
             }
             if(block.getPosition().equals(position)) {
+                return false;
+            }
+        }
+        for(Robot robot : robots) {
+            if(robot.getPosition().equals(position)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean canRobotMove(Position position) {
+        for(ConcreteBlock block : blocks) {
+            if(block.getPosition().equals(position)) {
+                return false;
+            }
+        }
+        for(DestructableBlock block : blocksd) {
+            if(block.IsDestroyed()){
+                continue;
+            }
+            if(block.getPosition().equals(position)) {
+                return false;
+            }
+        }
+
+        for(Robot robot : robots) {
+            if(robot.getPosition().equals(position)) {
                 return false;
             }
         }
@@ -139,6 +174,9 @@ public class Game extends LanternaGUI implements KeyListener {
                 continue;
             }
             bomb.draw(graphics);
+        }
+        for(Robot robot : robots) {
+            robot.draw(graphics);
         }
     }
 
@@ -235,7 +273,25 @@ public class Game extends LanternaGUI implements KeyListener {
                 }
             }
         }
+    }
 
+    public void movementRobots() {
+        for(Robot temp : robots) {
+            Random rand = new Random();
+            int num = rand.nextInt(4)+1;
+            if(num == 1 && canRobotMove(new Position(temp.getPosition().getX() + 1, temp.getPosition().getY()))) {
+                temp.moveRight();
+            }
+            else if(num == 2 && canRobotMove(new Position(temp.getPosition().getX() - 1, temp.getPosition().getY()))) {
+                temp.moveLeft();
+            }
+            else if(num == 3 && canRobotMove(new Position(temp.getPosition().getX(), temp.getPosition().getY() - 1))) {
+                temp.moveUp();
+            }
+            else if(num == 3 && canRobotMove(new Position(temp.getPosition().getX(), temp.getPosition().getY() + 1))) {
+                temp.moveDown();
+            }
+        }
     }
 
 }
