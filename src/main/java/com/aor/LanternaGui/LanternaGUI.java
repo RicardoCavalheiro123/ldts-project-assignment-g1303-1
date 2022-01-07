@@ -41,7 +41,7 @@ public abstract class LanternaGUI extends InputHandler {
             terminal.pack();
             terminal.exitPrivateMode();
             screen = new TerminalScreen(terminal);
-        } catch (IOException | FontFormatException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
