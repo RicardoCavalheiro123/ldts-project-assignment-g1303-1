@@ -210,6 +210,7 @@ public class Game extends LanternaGUI implements KeyListener {
 
         CheckAddBomb();
         CheckExplodedBomb();
+        movementRobots();
         //code
 
         if (moving) {
@@ -258,7 +259,7 @@ public class Game extends LanternaGUI implements KeyListener {
                 if(block.IsDestroyed()){
                     continue;
                 }
-                if(block.getPosition().equals(new Position(p.getX()+(1*x),p.getY())) && right){
+                if(block.getPosition().equals(new Position(p.getX()+(1*x),p.getY())) && right) {
                     right = false;
                     block.setDestroyed();
                 }else if(block.getPosition().equals(new Position(p.getX()-(1*x),p.getY())) && left){
