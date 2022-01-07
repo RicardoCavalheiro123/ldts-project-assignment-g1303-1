@@ -10,7 +10,7 @@ This game was developed by *Diogo Babo* (up202004407@fe.up.pt), *João Oliveira*
 
 ### PLANNED FEATURES
 
-- **Shop** - Will you will be able to buy new characters and maybe powerups(not defined yet).
+- **Shop** - Will you will be able to buy new characters and maybe powerups (not defined yet).
 - **Enemies** - There will be many enemies which move accordingly to the hero position.
 
 
