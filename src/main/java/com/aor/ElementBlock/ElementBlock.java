@@ -11,6 +11,9 @@ public abstract class ElementBlock implements GameBlock {
         position.setX(x);
         position.setY(y);
     }
+    public ElementBlock(Position position){
+        this.position = position;
+    }
     public Position getPosition() {
         return position;
     }

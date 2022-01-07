@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class InputHandler implements KeyListener {
     protected boolean moving;
-    protected boolean right, left, up, down,end;
+    protected boolean right, left, up, down,end,setBomb;
     public InputHandler(){
         moving = false;
         right = false;
@@ -13,6 +13,7 @@ public class InputHandler implements KeyListener {
         up = false;
         down = false;
         end = false;
+        setBomb = false;
     }
     @Override
     public void keyTyped(KeyEvent e) {
@@ -22,8 +23,7 @@ public class InputHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            int a = 0;
-            //place bomb
+            setBomb = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             right = true;
@@ -44,6 +44,9 @@ public class InputHandler implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            setBomb = false;
+        }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             right = false;
         }

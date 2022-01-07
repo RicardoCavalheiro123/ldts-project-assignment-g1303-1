@@ -1,7 +1,9 @@
 package com.aor.Game;
 
 import com.aor.Element.Hero;
+import com.aor.ElementBlock.Bomb;
 import com.aor.ElementBlock.ConcreteBlock;
+import com.aor.ElementBlock.DestructableBlock;
 import com.aor.LanternaGui.LanternaGUI;
 import com.aor.Positions.Position;
 import com.googlecode.lanterna.TerminalPosition;
@@ -9,6 +11,7 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
+import java.awt.*;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,32 +21,35 @@ public class Game extends LanternaGUI implements KeyListener {
     int speed = 0;
     Hero bomberman;
     ArrayList<ConcreteBlock> blocks = new ArrayList<ConcreteBlock>();
+    ArrayList<DestructableBlock> blocksd = new ArrayList<DestructableBlock>();
+    ArrayList<Bomb> bombs = new ArrayList<Bomb>();
     int width = 720;
     int height = 480;
     int rows = 13;
     int cols = 13;
     int[][] scene = new int[][]{
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 2, 0, 0, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 1, 0, 1, 3, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+        {1, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 1, 0, 1, 3, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+        {1, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 1, 0, 1, 3, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+        {1, 0, 0, 0, 0, 3, 0, 3, 3, 3, 0, 0, 0, 0, 1},
         {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1},
         {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 3, 0, 3, 0, 0, 3, 3, 0, 0, 1},
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
-    public Game() throws IOException {
+    public Game() throws IOException, FontFormatException {
         super();
         terminal.setLocationRelativeTo(null);
         terminal.setVisible(true);
         terminal.setFocusable(true);
         terminal.requestFocusInWindow();
         terminal.addKeyListener(this);
+        terminal.pack();
         screen.startScreen();
         screen.setCursorPosition(null);
         screen.doResizeIfNecessary();
@@ -61,6 +67,9 @@ public class Game extends LanternaGUI implements KeyListener {
                 }
                 if(scene[i][j] == 2) {
                     bomberman = new Hero(i,j);
+                }if(scene[i][j] == 3) {
+                    DestructableBlock block = new DestructableBlock(i,j);
+                    blocksd.add(block);
                 }
             }
         }
@@ -68,6 +77,14 @@ public class Game extends LanternaGUI implements KeyListener {
 
     private boolean canHeroMove(Position position) {
         for(ConcreteBlock block : blocks) {
+            if(block.getPosition().equals(position)) {
+                return false;
+            }
+        }
+        for(DestructableBlock block : blocksd) {
+            if(block.IsDestroyed()){
+                continue;
+            }
             if(block.getPosition().equals(position)) {
                 return false;
             }
@@ -96,6 +113,17 @@ public class Game extends LanternaGUI implements KeyListener {
         bomberman.draw(graphics);
         for(ConcreteBlock block : blocks) {
             block.draw(graphics);
+        }
+        for(DestructableBlock block : blocksd) {
+            if(block.IsDestroyed())
+                continue;
+            block.draw(graphics);
+        }
+        for(Bomb bomb : bombs) {
+            if(bomb.isExploded()){
+                continue;
+            }
+            bomb.draw(graphics);
         }
     }
 
@@ -127,7 +155,8 @@ public class Game extends LanternaGUI implements KeyListener {
             down = false;
         }
 
-
+        CheckAddBomb();
+        CheckExplodedBomb();
         //code
 
         if (moving) {
@@ -143,6 +172,55 @@ public class Game extends LanternaGUI implements KeyListener {
             }
         }
     return true;
+    }
+
+    private void CheckAddBomb() {
+        if(setBomb){
+            setBomb = false;
+            Bomb b = new Bomb(new Position(bomberman.getPosition().getX(),bomberman.getPosition().getY()));
+            bombs.add(b);
+            scene[b.getPosition().getY()][b.getPosition().getX()] = 4;
+        }
+    }
+    private void CheckExplodedBomb() {
+        for(Bomb bomb : bombs) {
+            if(!bomb.isExploded()){
+                if(bomb.getTime()>4000){
+                    bomb.setExploded();
+                    scene[bomb.getPosition().getY()][bomb.getPosition().getX()] = 0;
+                    destroyBlocks(bomb.getPosition());
+                }
+            }
+
+        }
+    }
+    private void destroyBlocks(Position p){
+        boolean up,down,left,right;
+        up = true;
+        down = true;
+        left = true;
+        right = true;
+        for(int x = 1; x<5;x++){
+            for(DestructableBlock block : blocksd) {
+                if(block.IsDestroyed()){
+                    continue;
+                }
+                if(block.getPosition().equals(new Position(p.getX()+(1*x),p.getY())) && right){
+                    right = false;
+                    block.setDestroyed();
+                }else if(block.getPosition().equals(new Position(p.getX()-(1*x),p.getY())) && left){
+                    left = false;
+                    block.setDestroyed();
+                }else if(block.getPosition().equals(new Position(p.getX(),p.getY()+(1*x))) && down){
+                    down = false;
+                    block.setDestroyed();
+                }else if(block.getPosition().equals(new Position(p.getX()-(1*x),p.getY()-(1*x))) && up){
+                    up = false;
+                    block.setDestroyed();
+                }
+            }
+        }
+
     }
 
 }
