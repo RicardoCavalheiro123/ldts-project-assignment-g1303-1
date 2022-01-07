@@ -5,8 +5,12 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+
+import com.googlecode.lanterna.terminal.swing.*;
+
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
+
 
 import java.awt.*;
 import java.io.IOException;
@@ -15,32 +19,45 @@ import java.io.InputStream;
 public abstract class LanternaGUI extends InputHandler {
     protected SwingTerminalFrame terminal;
     protected Screen screen;
-    Font font;
+
+    protected SwingTerminalFontConfiguration font;
+
     int width = 720;
     int height = 480;
 
-    public LanternaGUI(){
+    public LanternaGUI() throws FontFormatException {
         super();
         try {
-            InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("fonte.ttf");
-            font = Font.createFont(Font.TRUETYPE_FONT, stream).deriveFont(48f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(font);
-            Font loadedFont = font.deriveFont(Font.PLAIN, 25);
-            SwingTerminalFontConfiguration fontConfiguration = SwingTerminalFontConfiguration.newInstance(loadedFont);
+
+            //GetFont("digital-7 (mono).ttf");
             TerminalSize terminalSize = new TerminalSize(width, height);
-            DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
-            terminalFactory.setTerminalEmulatorFontConfiguration(fontConfiguration);
-            terminal = terminalFactory.createSwingTerminal();
+            //DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
+            terminal = new SwingTerminalFrame("Bomberman",terminalSize,new TerminalEmulatorDeviceConfiguration(),font,
+                    TerminalEmulatorColorConfiguration.newInstance(TerminalEmulatorPalette.DEFAULT),TerminalEmulatorAutoCloseTrigger.CloseOnEscape);
             terminal.setSize(width,height);
             terminal.setPreferredSize(new Dimension(width,height));
             terminal.setMaximumSize(new Dimension(width,height));
             terminal.setMinimumSize(new Dimension(width,height));
             terminal.pack();
+            terminal.exitPrivateMode();
             screen = new TerminalScreen(terminal);
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
+    }
+    protected Font GetFont(String name) throws IOException, FontFormatException {
+        InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(name);
+        Font f = Font.createFont(Font.TRUETYPE_FONT,stream).deriveFont(48f);
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        ge.registerFont(f);
+        Font lf = f.deriveFont(Font.PLAIN,25);
+        return lf;
+    }
+    protected void setFont(Font lf){
+        font = SwingTerminalFontConfiguration.newInstance(lf);
+    }
+    protected void setFont(String lf) throws IOException, FontFormatException {
+        font = SwingTerminalFontConfiguration.newInstance(GetFont(lf));
     }
 
 }
