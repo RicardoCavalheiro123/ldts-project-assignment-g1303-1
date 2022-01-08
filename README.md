@@ -27,15 +27,15 @@ This game was developed by *Diogo Babo* (up202004407@fe.up.pt), *João Oliveira*
 
 ------
 
-#### THE JUMP ACTION OF THE KANGAROOBOY SHOULD BEHAVE DIFFERENTLY DEPENDING ON ITS STATE
+#### Hero and Robot
 
 **Problem in Context**
 
-There was a lot of scattered conditional logic when deciding how the KangarooBoy should behave when jumping, as the jumps should be different depending on the items that came to his possession during the game (an helix will alow him to fly, driking a potion will allow him to jump double the height, etc.). This is a violation of the **Single Responsability Principle**. We could concentrate all the conditional logic in the same method to circumscribe the issue to that one method but the **Single Responsability Principle** would still be violated.
+We have a Hero class and Robot class that have the same methods, such as moveUp, moveDown, moveLeft and move Right and the method draw which depends on the object.
 
-**The Pattern**
+**Factory Method**
 
-We have applied the **State** pattern. This pattern allows you to represent different states with different subclasses. We can switch to a different state of the application by switching to another implementation (i.e., another subclass). This pattern allowed to address the identified problems because […].
+We have applied the **Factory Method** pattern. 
 
 **Implementation**
 
