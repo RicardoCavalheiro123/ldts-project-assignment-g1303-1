@@ -6,7 +6,7 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class DestructableBlock extends ElementBlock{
-    boolean IsDestroyed;
+
     public DestructableBlock(int x, int y) {
         super(x, y);
         IsDestroyed = false;
@@ -15,8 +15,9 @@ public class DestructableBlock extends ElementBlock{
     public boolean IsDestroyed(){
         return IsDestroyed;
     }
-    public void setDestroyed(){
+    public boolean setDestroyed(){
         IsDestroyed = true;
+        return true;
     }
     public void draw(TextGraphics graphics) {
         graphics.setForegroundColor(TextColor.Factory.fromString("#808080"));
