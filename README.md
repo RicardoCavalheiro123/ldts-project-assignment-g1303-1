@@ -13,6 +13,6 @@ The following mock-ups will illustrate how the game will look!
   
 ### Menus (to be implemented)
 ![img](docs/images/screenshots/menu.png)
-![img](docs/images/screenshots/YOU WON.png)
+![img](docs/images/screenshots/YOUWON.png)
 ![img](docs/images/screenshots/LEADERBOARD.png)
 ![img](docs/images/screenshots/SHOP.png)
