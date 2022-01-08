@@ -36,9 +36,7 @@ This game was developed by *Diogo Babo* (up202004407@fe.up.pt), *João Oliveira*
 - **Factory Method :** So we have applied the **Factory Method** pattern. **Element** is an abstract class that has an abstract **draw** method which is overridden by the Hero and Robot classes; that way when you are drawing the board it knows how to draw each class. We also did the same thing for the Concrete Blocks, Destructable Blocks and Bomb.
 
 
-**Implementation**
-
-Element is an abstract class which is responsible for creating the moving elements of the board but only the subclasses know how to draw themselves.
+- **Implementation :** Element is an abstract class which is responsible for creating the moving elements of the board but only the subclasses know how to draw themselves.
 
 ![img]()
 
@@ -48,7 +46,8 @@ These classes can be found in the following files:
 - [Hero](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Element/Hero.java)
 - [Robot](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Element/Robot.java)
 
-**Consequences**
+
+- **Consequences :**
 
 The use of the Factory Method Pattern allows some benefits to the design:
 
