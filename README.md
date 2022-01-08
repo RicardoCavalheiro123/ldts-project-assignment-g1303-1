@@ -3,3 +3,9 @@
 This game was developed by *Diogo Babo* (up202004950@fe.up.pt), *João Oliveira* (*up202004407@fe.up.pt) and *Ricardo Cavalheiro* (up202005103@fe.up.pt) for LDTS 2021/2022.
 
 ## For a more detailed version of this description click [here](./docs/README.md).
+  
+## Screenshots
+  
+The following mock-ups will illustrate how the game will look!
+### Game preview
+![img](docs/images/screenshots/jogoreal.png)
