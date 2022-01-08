@@ -1,4 +1,4 @@
-## LPOO_<T><G> - <PROJECT NAME>
+## LDTS<13><03> - <BOMBERMAN>
 
 > Our game consists in a Hero, known as, Bomberman who has the ability to drop BOMBS which are able to destroy some types of blocks and also to KILL the enemies, which is the main goal! By killing all the enemies you will then WIN the game!
 This game was developed by *Diogo Babo* (up202004407@fe.up.pt), *João Oliveira* (*up202004407@fe.up.pt) and *Ricardo Cavalheiro* (up202004407@fe.up.pt) for LDTS 2021/2022.
@@ -11,7 +11,8 @@ This game was developed by *Diogo Babo* (up202004407@fe.up.pt), *João Oliveira*
 ### PLANNED FEATURES
 
 - **Shop** - Will you will be able to buy new characters and maybe powerups (not defined yet).
-- **Enemies** - There will be many enemies which move accordingly to the hero position.
+- **Enemies** - There will be many enemies which move randomly or accordingly to the hero position.
+
 
 
 ### DESIGN
@@ -27,51 +28,67 @@ This game was developed by *Diogo Babo* (up202004407@fe.up.pt), *João Oliveira*
 
 ------
 
-#### Hero and Robot
+#### Methods to Draw each class
 
-**Problem in Context**
+- **Problem in Context :** One problem we knew from the start we had to deal with was the different methods we had to create to draw each class of the game(Ex: Hero, Robot, Blocks, Bomb).
 
-We have a Hero class and Robot class that have the same methods, such as moveUp, moveDown, moveLeft and move Right and the method draw which depends on the object.
 
-**Factory Method**
+- **Factory Method :** So we have applied the **Factory Method** pattern. **Element** is an abstract class that has an abstract **draw** method which is overridden by the Hero and Robot classes; that way when you are drawing the board it knows how to draw each class. We also did the same thing for the Concrete Blocks, Destructable Blocks and Bomb.
 
-We have applied the **Factory Method** pattern. 
 
-**Implementation**
+- **Implementation :** Element is an abstract class which is responsible for creating the moving elements of the board but only the subclasses know how to draw themselves.
 
-The following figure shows how the pattern’s roles were mapped to the application classes.
-
-![img](https://www.fe.up.pt/~arestivo/page/img/examples/lpoo/state.svg)
+![img](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/b0399dc5fbc7b0b5583e38732fa4c43af65e9753/docs/images/UML/Element.png)
 
 These classes can be found in the following files:
 
-- [Character](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/Character.java)
-- [JumpAbilityState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/JumpAbilityState.java)
-- [DoubleJumpState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/DoubleJumpState.java)
-- [HelicopterState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/HelicopterState.java)
-- [IncreasedGravityState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/IncreasedGravityState.java)
+- [Element](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Element/Element.java)
+- [Hero](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Element/Hero.java)
+- [Robot](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Element/Robot.java)
+
+
+- **Consequences :**
+
+The use of the Factory Method Pattern allows some benefits to the design:
+
+- Removes the need to bind application-specific classes into your code. ///FIX
+- You can construct objects step-by-step, defer construction steps or run steps recursively. ////FIX
+- You can introduce new types of Elements into the program without changing existing code.
+
+#### Diferents Strategies of a Robot
+
+- **Problem in Context :** We wanted the Robots to have different ways of deciding where they wanna move in each step to make it harder for the user to win. 
+
+- **Strategy Method :** We will use the **Strategy Pattern** to have different ways to move the Robot.Currently we have a strategy where Robots move randomly across the board and we are planning on adding another strategy where Robots move each time closer to the Hero making it harder for the user to win the game.
+
+- **Implementation :** *Not implemented yet*
+
+These classes can be found in the following files:
+
+- [___]()
+- [___]()
+- [___]()
 
 **Consequences**
 
-The use of the State Pattern in the current design allows the following benefits:
+The advantages of using the Strategy Pattern are the following:
 
-- The several states that represent the character’s hability to jump become explicit in the code, instead of relying on a series of flags.
-- We don’t need to have a long set of conditional if or switch statements associated with the various states; instead, polimorphism is used to activate the right behavior.
-- There are now more classes and instances to manage, but still in a reasonable number.
+- You can switch algorithms used inside an object at runtime.
+- Clean code because you avoid conditional-infested code.
+- Open/Closed Principle. You can add new strategies to the Robot without having to change the context.
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
 > This section should describe 3 to 5 different code smells that you have identified in your current implementation, and suggest ways in which the code could be refactored to eliminate them. Each smell and refactoring suggestions should be described in its own subsection.
 
-**Example of such a subsection**:
+**Example of such a subsection**
 
 ------
 
-#### DATA CLASS
+#### **DATA CLASS**
 
-The `PlatformSegment` class is a **Data Class**, as it contains only fields, and no behavior. This is problematic because […].
+The `Position` class is a **Data Class**, because it contains fields and not a lot of behavior. However, it is not a bad code smell as it a consequence of the design we choose. It allows you to understand and organize the code and the operations are now gathered in a single place, instead of throughout the code.
 
-A way to improve the code would be to move the `isPlatformSegmentSolid()` method to the `PlatformSegment` class, as this logic is purely concerned with the `PlatformSegment` class.
 
 ### TESTING
 
@@ -82,7 +99,8 @@ A way to improve the code would be to move the `isPlatformSegmentSolid()` method
 
 > In this section describe how the work regarding the project was divided between the students. In the event that members of the group do not agree on a work distribution, the group should send an email to the teacher explaining the disagreement.
 
-**Example**:
 
-- John Doe: 40%
-- Jane Doe: 60%
+- Diogo Babo: 33.3%
+- João Oliveira: 33.3%
+- Ricardo Cavalheiro: 33.3%
+- Bruno Lima: 0.1%
