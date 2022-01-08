@@ -42,8 +42,8 @@ These classes can be found in the following files:
 
 The use of the Factory Method Pattern allows some benefits to the design:
 
-- Removes the need to bind application-specific classes into your code. ///FIX
-- You can construct objects step-by-step, defer construction steps or run steps recursively. ////FIX
+- Removes the need to bind application-specific classes into your code. 
+- You can construct objects step-by-step, defer construction steps or run steps recursively. 
 - You can introduce new types of Elements into the program without changing existing code.
 
 #### Diferents Strategies of a Robot
