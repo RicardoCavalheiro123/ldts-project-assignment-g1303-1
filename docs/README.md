@@ -40,7 +40,7 @@ This game was developed by *Diogo Babo* (up202004950@fe.up.pt), *João Oliveira*
 
 - **Implementation :** Element is an abstract class which is responsible for creating the moving elements of the board but only the subclasses know how to draw themselves.
 
-![img](docs/images/UML/Element.png)
+![img](images/UML/Element.png)
 
 These classes can be found in the following files:
 
