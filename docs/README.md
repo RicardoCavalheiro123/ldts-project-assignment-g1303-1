@@ -40,7 +40,7 @@ This game was developed by *Diogo Babo* (up202004950@fe.up.pt), *João Oliveira*
 
 - **Implementation :** Element is an abstract class which is responsible for creating the moving elements of the board but only the subclasses know how to draw themselves.
 
-![img](images/UML/Element.png)
+![img](docs/images/UML/Element.png)
 
 These classes can be found in the following files:
 
@@ -81,15 +81,19 @@ The advantages of using the Strategy Pattern are the following:
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
-> This section should describe 3 to 5 different code smells that you have identified in your current implementation, and suggest ways in which the code could be refactored to eliminate them. Each smell and refactoring suggestions should be described in its own subsection.
-
-**Example of such a subsection**
-
-------
 
 #### **DATA CLASS**
 
 The `Position` class is a **Data Class**, because it contains fields and not a lot of behavior. However, it is not a bad code smell as it a consequence of the design we choose. It allows you to understand and organize the code and the operations are now gathered in a single place, instead of throughout the code.
+
+
+#### **SWITCH STATEMENTS**
+
+We had the need to use several if's depending on the direction the hero chooses to go. The refactoring suggestion is to use polymorphism, but we don't find it wise in this case as the code gets far less readable.
+
+#### **LARGE CLASS**
+
+The `Game` class contains many fields and long methods. We find it reasonable as it is the main class of the program and most of the methods don't really make sense to split into other classes.
 
 
 ### TESTING
