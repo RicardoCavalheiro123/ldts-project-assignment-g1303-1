@@ -1,25 +1,26 @@
 package com.aor.ElementBlock;
 
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.SGR;
 
-public class ConcreteBlock extends ElementBlock {
-    public ConcreteBlock(int x, int y) {
-        super(x,y);
-        undestructableBlock = true;
+public class Door extends ElementBlock{
+
+    public Door(int x, int y) {
+        super(x, y);
     }
 
+    @Override
     public void draw(TextGraphics graphics) {
-        graphics.setForegroundColor(TextColor.Factory.fromString("#808080"));
+        graphics.setForegroundColor(TextColor.Factory.fromString("#FFFF00"));
         graphics.enableModifiers(SGR.BOLD);
-        graphics.putString(new TerminalPosition(super.getPosition().getX(), super.getPosition().getY()), "j");
+        graphics.putString(new TerminalPosition(super.getPosition().getX(), super.getPosition().getY()), "l");
     }
 
     @Override
     public boolean IsDestroyed() {
-        return IsDestroyed;
+        return false;
     }
 
     @Override

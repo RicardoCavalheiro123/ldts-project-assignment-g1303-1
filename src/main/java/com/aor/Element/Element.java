@@ -6,6 +6,7 @@ public abstract class Element implements GameCharacter {
 
     protected Position position;
     boolean robot, hero, alive;
+
     public Element(int x, int y){
         position = new Position(x,y);
         position.setX(x);

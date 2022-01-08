@@ -4,16 +4,20 @@ import com.aor.Positions.Position;
 
 public abstract class ElementBlock implements GameBlock {
     protected Position position;
-    boolean bomb, destructableBlock, undestructableBlock;
+    boolean bomb, destructableBlock, undestructableBlock, IsDestroyed;
 
     public ElementBlock(int x, int y){
+        IsDestroyed = false;
         position = new Position(x,y);
         position.setX(x);
         position.setY(y);
     }
     public ElementBlock(Position position){
+        IsDestroyed = false;
         this.position = position;
     }
+
+    @Override
     public Position getPosition() {
         return position;
     }

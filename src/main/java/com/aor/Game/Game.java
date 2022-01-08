@@ -1,10 +1,11 @@
 package com.aor.Game;
 
 import com.aor.Element.Hero;
-import com.aor.ElementBlock.Bomb;
-import com.aor.ElementBlock.ConcreteBlock;
-import com.aor.ElementBlock.DestructableBlock;
+import com.aor.ElementBlock.*;
 import com.aor.Element.Robot;
+import com.aor.GameLogic.EndGameLogic.Loser;
+import com.aor.GameLogic.EndGameLogic.NotifyEndGame;
+import com.aor.GameLogic.EndGameLogic.Winner;
 import com.aor.LanternaGui.LanternaGUI;
 import com.aor.Positions.Position;
 import com.googlecode.lanterna.TerminalPosition;
@@ -23,28 +24,32 @@ import java.util.Random;
 
 public class Game extends LanternaGUI {
     Hero bomberman;
-    ArrayList<ConcreteBlock> blocks = new ArrayList<>();
-    ArrayList<DestructableBlock> blocksd = new ArrayList<>();
+    Door door;
+    NotifyEndGame notifyEndGame;
+
+    ArrayList<GameBlock> blocks = new ArrayList<>();
+
     ArrayList<Robot> robots = new ArrayList<>();
     ArrayList<Bomb> bombs = new ArrayList<>();
-    int width = 720;
-    int height = 480;
+
+    long time,startTime;
+
     int rows = 13;
-    int cols = 13;
+    int cols = 13*3+6;
     int[][] scene = new int[][]{
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 2, 0, 0, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 1, 0, 1, 3, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-        {1, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 1, 0, 1, 3, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-        {1, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 1, 0, 1, 3, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-        {1, 0, 0, 0, 0, 3, 0, 3, 3, 3, 0, 0, 0, 0, 1},
-        {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-        {1, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1},
-        {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-        {1, 5, 0, 0, 0, 3, 0, 3, 0, 5, 3, 3, 0, 0, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 2, 0, 0, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 3, 3, 3, 3, 0, 0, 0, 0, 0, 3, 0, 0, 1},
+        {1, 0, 1, 3, 1, 3, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 3, 1, 0, 1, 0, 1, 0, 1, 0, 3, 0, 1, 0, 1, 3, 1, 0, 1, 0, 1, 3, 1, 0, 0, 1},
+        {1, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 5, 0, 0, 0, 1},
+        {1, 0, 1, 0, 1, 3, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 3, 1, 0, 1, 3, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 5, 1, 3, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+        {1, 0, 0, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0, 0, 3, 3, 0, 0, 3, 0, 3, 0, 3, 0, 0, 0, 1},
+        {1, 0, 1, 0, 1, 3, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 3, 1, 3, 1, 0, 1, 3, 1, 0, 1, 0, 1, 0, 1, 0, 1, 3, 1, 0, 1, 0, 1, 3, 1, 0, 1, 0, 1},
+        {1, 0, 0, 0, 0, 3, 0, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 3, 3, 0, 5, 3, 3, 0, 0, 3, 0, 0, 3, 0, 3, 3, 3, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+        {1, 0, 3, 3, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 3, 3, 3, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 8, 0, 3, 0, 0, 0, 0, 1},
+        {1, 3, 1, 3, 1, 3, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+        {1, 5, 0, 0, 0, 3, 0, 3, 0, 5, 3, 3, 0, 0, 0, 3, 5, 0, 0, 0, 3, 0, 3, 0, 5, 3, 3, 0, 0, 0, 3, 5, 0, 0, 0, 3, 0, 3, 0, 5, 3, 3, 0, 0, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
     public Game() throws IOException, FontFormatException {
         super();
@@ -59,39 +64,39 @@ public class Game extends LanternaGUI {
         screen.doResizeIfNecessary();
         terminal.pack();
 
+
     }
     public void start(){
         readMap();
     }
 
     public void readMap() {
-        for(int i = 0; i < cols; i++) {
-            for(int j = 0; j < rows; j++) {
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < cols; j++) {
                 if(scene[i][j] == 1) {
-                    ConcreteBlock block = new ConcreteBlock(i,j);
+                    ConcreteBlock block = new ConcreteBlock(j,i);
                     blocks.add(block);
                 }
                 if(scene[i][j] == 2) {
-                    bomberman = new Hero(i,j);
+                    bomberman = new Hero(j,i);
                 }if(scene[i][j] == 3) {
-                    DestructableBlock block = new DestructableBlock(i,j);
-                    blocksd.add(block);
+                    DestructableBlock block = new DestructableBlock(j,i);
+                    blocks.add(block);
                 }
                 if(scene[i][j] == 5) {
-                    Robot robot = new Robot(i,j);
+                    Robot robot = new Robot(j,i);
                     robots.add(robot);
+                }
+                if(scene[i][j] == 8) {
+                    door = new Door(j,i);
                 }
             }
         }
     }
 
     private boolean canMove(Position position) {
-        for(ConcreteBlock block : blocks) {
-            if(block.getPosition().equals(position)) {
-                return false;
-            }
-        }
-        for(DestructableBlock block : blocksd) {
+
+        for(GameBlock block : blocks) {
             if(block.IsDestroyed()){
                 continue;
             }
@@ -100,6 +105,9 @@ public class Game extends LanternaGUI {
             }
         }
         for(Robot robot : robots) {
+            if(robot.getPosition().equals(bomberman.getPosition())){
+                return false;
+            }
             if(robot.getPosition().equals(position)) {
                 return false;
             }
@@ -109,28 +117,47 @@ public class Game extends LanternaGUI {
 
 
     public void run() throws IOException, InterruptedException {
-
+        startTime = System.currentTimeMillis();
         boolean flag = true;
-
+        Long l = System.currentTimeMillis();
+        Long l1;
         while(flag) {
+            l = System.currentTimeMillis();
             screen.clear();
             flag = update();
             draw(screen.newTextGraphics());
+            l1 = System.currentTimeMillis();
+            if(l1-l<(1000/20)){
+                Thread.sleep((1000/20)-(l1-l));
+            }
             screen.refresh();
-            Thread.sleep(1000/100);
+
         }
+        screen.clear();
+        screen.newTextGraphics().setBackgroundColor(TextColor.Factory.fromString("#006400"));
+        time = (System.currentTimeMillis()-startTime)/1000;
+        if(notifyEndGame.lost()){
+            String s = "YOU LOST IN : "+ time + " seconds";
+            screen.newTextGraphics().putString(new TerminalPosition(10,3),s );
+            screen.refresh();
+            Thread.sleep(2000);
+        }
+        if(notifyEndGame.won()){
+            String s = "YOU WON IN : "+ time+" seconds";
+            screen.newTextGraphics().putString(new TerminalPosition(10,3),s );
+            screen.refresh();
+            Thread.sleep(2000);
+
+        }
+        screen.refresh();
         screen.close();
         terminal.close();
     }
 
     public void draw(TextGraphics graphics) {
-        graphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
-        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
-        bomberman.draw(graphics);
-        for(ConcreteBlock block : blocks) {
-            block.draw(graphics);
-        }
-        for(DestructableBlock block : blocksd) {
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#006400"));
+        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(super.width, super.height), ' ');
+        for(GameBlock block : blocks) {
             if(block.IsDestroyed())
                 continue;
             block.draw(graphics);
@@ -141,9 +168,11 @@ public class Game extends LanternaGUI {
             }
             bomb.draw(graphics);
         }
+        bomberman.draw(graphics);
         for(Robot robot : robots) {
             robot.draw(graphics);
         }
+        door.draw(graphics);
     }
 
 
@@ -151,6 +180,7 @@ public class Game extends LanternaGUI {
     private boolean update(){
         moving = false;
         if(end){
+            notifyEndGame = new Loser();
             return false;
         }
         if (right && canMove(new Position(bomberman.getPosition().getX() + 1, bomberman.getPosition().getY()))) {
@@ -177,7 +207,27 @@ public class Game extends LanternaGUI {
         CheckAddBomb();
         CheckExplodedBomb();
         movementRobots();
-        //code
+        if(!bomberman.isAlive()){
+            notifyEndGame = new Loser();
+            notifyEndGame.NotifyLoser();
+            time = notifyEndGame.getTimeNotify();
+            return false;
+        }
+        if(robots.size()== 0){
+            notifyEndGame = new Winner();
+            notifyEndGame.NotifyWinner();
+            time = notifyEndGame.getTimeNotify();
+            return false;
+        }
+        for(Robot robot : robots){
+            if(robot.getPosition().equals(bomberman.getPosition())){
+                notifyEndGame = new Loser();
+                notifyEndGame.NotifyLoser();
+                time = notifyEndGame.getTimeNotify();
+                return false;
+            }
+        }
+
 
         if (moving) {
 
@@ -191,6 +241,12 @@ public class Game extends LanternaGUI {
                 bomberman.moveDown();
             }
         }
+        if(bomberman.getPosition().equals(door.getPosition())){
+            notifyEndGame = new Winner();
+            notifyEndGame.NotifyWinner();
+            time = notifyEndGame.getTimeNotify();
+            return false;
+        }
     return true;
     }
 
@@ -199,7 +255,6 @@ public class Game extends LanternaGUI {
             setBomb = false;
             Bomb b = new Bomb(new Position(bomberman.getPosition().getX(),bomberman.getPosition().getY()));
             bombs.add(b);
-            scene[b.getPosition().getY()][b.getPosition().getX()] = 4;
         }
     }
     private void CheckExplodedBomb() {
@@ -207,12 +262,22 @@ public class Game extends LanternaGUI {
             if(!bomb.isExploded()){
                 if(bomb.getTime()>4000){
                     bomb.setExploded();
-                    scene[bomb.getPosition().getY()][bomb.getPosition().getX()] = 0;
                     destroyBlocks(bomb.getPosition());
                 }
             }
 
         }
+    }
+
+    boolean verifyRPositionBomb(Position p){
+        for(Robot r:robots){
+            if(r.getPosition().equals(p)){
+                r.setAsDead();
+                robots.remove(r);
+                return true;
+            }
+        }
+        return false;
     }
     private void destroyBlocks(Position p){
         boolean up,down,left,right;
@@ -220,21 +285,66 @@ public class Game extends LanternaGUI {
         down = true;
         left = true;
         right = true;
+        if(bomberman.getPosition().equals(p)){
+            bomberman.setAsDead();
+        }
         for(int x = 1; x<5;x++){
-            for(DestructableBlock block : blocksd) {
+
+            if(right) {
+                if (bomberman.getPosition().equals(new Position(p.getX() + (x), p.getY()))) {
+                    bomberman.setAsDead();
+                }
+                verifyRPositionBomb(new Position(p.getX() + (x), p.getY()));
+            }
+            if(left){
+                if(bomberman.getPosition().equals(new Position(p.getX()-(x),p.getY()))){
+                    bomberman.setAsDead();
+                }
+                verifyRPositionBomb(new Position(p.getX()-(x),p.getY()));
+            }
+            if(down) {
+                if (bomberman.getPosition().equals(new Position(p.getX(), p.getY() + x))) {
+                    bomberman.setAsDead();
+                }
+                verifyRPositionBomb(new Position(p.getX(), p.getY() + (x)));
+            }
+            if(up) {
+                if (bomberman.getPosition().equals(new Position(p.getX(), p.getY() - x))) {
+                    bomberman.setAsDead();
+                }
+                verifyRPositionBomb(new Position(p.getX(), p.getY() - (x)));
+            }
+
+            for(GameBlock block : blocks) {
                 if(block.IsDestroyed()){
                     continue;
                 }
                 if(block.getPosition().equals(new Position(p.getX()+(x),p.getY())) && right) {
+                    if(!block.isDestructableBlock()){
+                        right = false;
+                        continue;
+                    }
                     right = false;
                     block.setDestroyed();
                 }else if(block.getPosition().equals(new Position(p.getX()-(x),p.getY())) && left){
+                    if(!block.isDestructableBlock()){
+                        left = false;
+                        continue;
+                    }
                     left = false;
                     block.setDestroyed();
                 }else if(block.getPosition().equals(new Position(p.getX(),p.getY()+(x))) && down){
+                    if(!block.isDestructableBlock()){
+                        down = false;
+                        continue;
+                    }
                     down = false;
                     block.setDestroyed();
                 }else if(block.getPosition().equals(new Position(p.getX(),p.getY()-(x))) && up){
+                    if(!block.isDestructableBlock()){
+                        up = false;
+                        continue;
+                    }
                     up = false;
                     block.setDestroyed();
                 }

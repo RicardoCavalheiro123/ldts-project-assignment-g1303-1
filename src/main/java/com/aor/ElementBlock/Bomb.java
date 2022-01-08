@@ -28,6 +28,17 @@ public class Bomb extends ElementBlock {
         graphics.enableModifiers(SGR.BOLD);
         graphics.putString(new TerminalPosition(super.getPosition().getX(), super.getPosition().getY()), "f");
     }
+
+    @Override
+    public boolean IsDestroyed() {
+        return exploded;
+    }
+
+    @Override
+    public boolean setDestroyed() {
+        return false;
+    }
+
     public long getTime(){
         long finish = System.currentTimeMillis();
         long timeElapsed = finish - start;
