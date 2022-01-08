@@ -38,7 +38,7 @@ This game was developed by *Diogo Babo* (up202004407@fe.up.pt), *João Oliveira*
 
 - **Implementation :** Element is an abstract class which is responsible for creating the moving elements of the board but only the subclasses know how to draw themselves.
 
-![img]()
+![img](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/b0399dc5fbc7b0b5583e38732fa4c43af65e9753/docs/images/UML/Element.png)
 
 These classes can be found in the following files:
 
