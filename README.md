@@ -1,19 +1,21 @@
 ## LDTS<13><03> - <BOMBERMAN>
 
-> Our game consists in a Hero, known as, Bomberman who has the ability to drop BOMBS which are able to destroy some types of blocks and also to KILL the enemies, which is the main goal! By killing all the enemies you will then WIN the game!
-This game was developed by *Diogo Babo* (up202004407@fe.up.pt), *João Oliveira* (*up202004407@fe.up.pt) and *Ricardo Cavalheiro* (up202004407@fe.up.pt) for LDTS 2021/2022.
+> Our game consists in a Hero, known as, Bomberman who has the ability to drop BOMBS which are able to destroy some types of blocks and also to KILL the enemies. By destroying the blocks you will be able to create a path leading to the door (EXIT) and then win the game. You can also win the game by killing every robot, be CAREFUL!
+This game was developed by *Diogo Babo* (up202004407@fe.up.pt), *João Oliveira* (*up202004407@fe.up.pt) and *Ricardo Cavalheiro* (up202005103@fe.up.pt) for LDTS 2021/2022.
 
 ### IMPLEMENTED FEATURES
 
 - **Movement** - The game character (hero) will move depending on which arrow key is pressed.
-- **Droping a Bomb** - The game character (hero) will drop a bomb where is he currently standing when the space bar is pressed. This bomb is able to destroy the non-concrete blocks but not the others.
+- **Droping a Bomb** - The game character (hero) will drop a bomb where is he currently standing when the space bar is pressed. This bomb is able to destroy the non-concrete blocks but not the others. It also capable of killing the robots. (The bomb has a time of 4s to explode, and a range of 4 blocks, be careful, don't too close to it!).
+- **Robots** - There will be many robots which move randomly (implemented already) or accordingly to the hero position (to develop further on!). These robots will try to kill you, so you better either avoid them or kill them!
+- **End Game Message** - There will be a message displayed on the screen depending on if you win/lose. It will also show the time of survival.
+  
 
 ### PLANNED FEATURES
 
+- **Menu** - The menu with all the features to be implemented, is yet to be developed.
+- **LeaderBoard** - You will be able to check the list of winners, based on their time for winning the game.
 - **Shop** - Will you will be able to buy new characters and maybe powerups (not defined yet).
-- **Enemies** - There will be many enemies which move randomly or accordingly to the hero position.
-
-
 
 ### DESIGN
 
