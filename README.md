@@ -9,3 +9,10 @@ This game was developed by *Diogo Babo* (up202004950@fe.up.pt), *João Oliveira*
 The following mock-ups will illustrate how the game will look!
 ### Game preview
 ![img](docs/images/screenshots/jogoreal.png)
+
+  
+### Menus (to be implemented)
+![img](docs/images/screenshots/menu.png)
+![img](docs/images/screenshots/YOU WON.png)
+![img](docs/images/screenshots/LEADERBOARD.png)
+![img](docs/images/screenshots/SHOP.png)
