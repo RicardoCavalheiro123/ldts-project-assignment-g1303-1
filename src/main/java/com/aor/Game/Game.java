@@ -107,7 +107,7 @@ public class Game extends LanternaGUI {
         }
     }
 
-    private boolean canMove(Position position) {
+    public boolean canMove(Position position) {
 
         for(GameBlock block : blocks) {
             if(block.IsDestroyed()){

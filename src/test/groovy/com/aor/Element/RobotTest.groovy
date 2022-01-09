@@ -2,6 +2,8 @@ package com.aor.Element
 
 import com.aor.Element.Robot
 import com.aor.Positions.Position
+import com.googlecode.lanterna.TerminalPosition
+import com.googlecode.lanterna.graphics.TextGraphics
 import spock.lang.Specification
 
 class RobotTest extends Specification {
@@ -40,5 +42,14 @@ class RobotTest extends Specification {
             robot.moveRight();
         then:
             robot.getPosition() == new Position(2,1);
+    }
+
+    def "Draw"() {
+        given:
+            def graphics = Mock(TextGraphics.class)
+        when:
+            robot.draw(graphics)
+        then:
+            1 * graphics.putString(new TerminalPosition(1, 1), "g");
     }
 }

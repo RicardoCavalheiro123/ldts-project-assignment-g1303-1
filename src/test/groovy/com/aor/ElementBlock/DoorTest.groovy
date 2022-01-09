@@ -1,5 +1,7 @@
 package com.aor.ElementBlock
 
+import com.googlecode.lanterna.TerminalPosition
+import com.googlecode.lanterna.graphics.TextGraphics
 import spock.lang.Specification
 
 class DoorTest extends Specification {
@@ -10,7 +12,12 @@ class DoorTest extends Specification {
     }
 
     def "Draw"() {
-
+        given:
+        def graphics = Mock(TextGraphics.class)
+        when:
+        d.draw(graphics)
+        then:
+        1 * graphics.putString(new TerminalPosition(1, 1), "l");
     }
 
     def "IsDestroyed"() {

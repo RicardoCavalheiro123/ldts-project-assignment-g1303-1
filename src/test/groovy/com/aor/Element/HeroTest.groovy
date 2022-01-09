@@ -1,6 +1,8 @@
 package com.aor.Element
 
 import com.aor.Positions.Position
+import com.googlecode.lanterna.TerminalPosition
+import com.googlecode.lanterna.graphics.TextGraphics
 import spock.lang.Specification
 
 class HeroTest extends Specification {
@@ -66,5 +68,11 @@ class HeroTest extends Specification {
     }
 
     def "Draw"() {
+        given:
+        def graphics = Mock(TextGraphics.class)
+        when:
+        hero.draw(graphics)
+        then:
+        1 * graphics.putString(new TerminalPosition(1, 1), "h");
     }
 }

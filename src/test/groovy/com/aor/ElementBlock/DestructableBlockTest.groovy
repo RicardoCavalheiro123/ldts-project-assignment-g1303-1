@@ -1,5 +1,7 @@
 package com.aor.ElementBlock
 
+import com.googlecode.lanterna.TerminalPosition
+import com.googlecode.lanterna.graphics.TextGraphics
 import spock.lang.Specification
 
 class DestructableBlockTest extends Specification {
@@ -26,5 +28,11 @@ class DestructableBlockTest extends Specification {
     }
 
     def "Draw"() {
+        given:
+        def graphics = Mock(TextGraphics.class)
+        when:
+        b.draw(graphics)
+        then:
+        1 * graphics.putString(new TerminalPosition(1, 1), "i");
     }
 }

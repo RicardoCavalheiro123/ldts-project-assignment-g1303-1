@@ -1,15 +1,23 @@
 package com.aor.ElementBlock
 
+import com.googlecode.lanterna.TerminalPosition
+import com.googlecode.lanterna.graphics.TextGraphics
 import spock.lang.Specification
 
 class ConcreteBlockTest extends Specification {
     private b;
 
     def setup(){
-        b = new ConcreteBlock(1,1)
+        b = new ConcreteBlock(3,3)
     }
 
     def "Draw"() {
+        given:
+            def graphics = Mock(TextGraphics.class)
+        when:
+            b.draw(graphics)
+        then:
+            1 * graphics.putString(new TerminalPosition(3, 3), "j");
     }
 
     def "IsDestroyed"() {
