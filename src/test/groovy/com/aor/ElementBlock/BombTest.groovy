@@ -7,9 +7,11 @@ import spock.lang.Specification
 
 class BombTest extends Specification {
     private bomb;
+    private start
 
     def setup(){
         bomb = new Bomb(1,1)
+        start = System.currentTimeMillis();
     }
 
     def "Draw"() {
@@ -38,6 +40,12 @@ class BombTest extends Specification {
     }
 
     def "GetTime"() {
+        when:
+            def l = bomb.getTime()
+            def timenow = System.currentTimeMillis()
+        then:
+            l == timenow - start
+
     }
 
     def "SetExploded"() {

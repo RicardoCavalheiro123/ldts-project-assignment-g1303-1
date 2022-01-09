@@ -10,18 +10,10 @@ class GameTest extends Specification {
     private game;
 
     def setup(){
-        game = new Game()
+        //game = new Game()
     }
 
-    def "ReadMap"() {
-        given:
-            game = Mock(Game.class)
-            def b
-        when:
-            b = game.canMove(new Position(0,0))
-        then:
-            b == true
-    }
+
 
     def "Run"() {
     }
