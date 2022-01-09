@@ -1,3 +1,5 @@
+package com.aor.Element
+
 import com.aor.Element.Robot
 import com.aor.Positions.Position
 import spock.lang.Specification
@@ -10,13 +12,15 @@ class RobotTest extends Specification {
     }
     def "MoveUp"() {
         when:
-            robot.moveUp();
+            Thread.sleep(251)
+            robot.moveUp()
         then:
             robot.getPosition() == new Position(1,0);
     }
 
     def "MoveDown"() {
         when:
+            Thread.sleep(251)
             robot.moveDown();
         then:
             robot.getPosition() == new Position(1,2);
@@ -24,6 +28,7 @@ class RobotTest extends Specification {
 
     def "MoveLeft"() {
         when:
+            Thread.sleep(251)
             robot.moveLeft();
         then:
             robot.getPosition() == new Position(0,1);
@@ -31,6 +36,7 @@ class RobotTest extends Specification {
 
     def "MoveRight"() {
         when:
+            Thread.sleep(251)
             robot.moveRight();
         then:
             robot.getPosition() == new Position(2,1);
