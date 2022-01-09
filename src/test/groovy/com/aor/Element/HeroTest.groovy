@@ -39,15 +39,30 @@ class HeroTest extends Specification {
     }
 
     def "GetPosition"() {
+        when:
+        def pos = new Position(1,1)
+
+        then:
+        pos == hero.getPosition()
     }
 
     def "SetPosition"() {
+        when:
+        def pos = new Position(2,2)
+
+        then:
+        hero.setPosition(pos);
+        pos == hero.getPosition()
+
     }
 
     def "SetAsDead"() {
-    }
+        when:
+        def dead = true;
 
-    def "IsAlive"() {
+        then:
+        hero.setAsDead();
+        dead != hero.isAlive();
     }
 
     def "Draw"() {
