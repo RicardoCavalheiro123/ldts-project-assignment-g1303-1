@@ -6,12 +6,17 @@ import com.aor.Element.Robot;
 import com.aor.GameLogic.EndGameLogic.Loser;
 import com.aor.GameLogic.EndGameLogic.NotifyEndGame;
 import com.aor.GameLogic.EndGameLogic.Winner;
+import com.aor.InputHandler.InputHandler;
 import com.aor.LanternaGui.LanternaGUI;
 import com.aor.Positions.Position;
+
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.screen.TerminalScreen;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
 
 import java.awt.*;
@@ -22,7 +27,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-public class Game extends LanternaGUI {
+public class Game{
+    InputHandler inputHandler = new InputHandler();
+
+    AWTTerminalFrame terminal;
+    Screen screen;
+
     Hero bomberman;
     Door door;
     NotifyEndGame notifyEndGame;
@@ -65,18 +75,18 @@ public class Game extends LanternaGUI {
     }
 
     public Game() throws IOException, FontFormatException {
-        super();
+        terminal = LanternaGUI.AWTTerminalFrameFactory();
+        screen = new TerminalScreen(terminal);
         terminal.setLocationRelativeTo(null);
         terminal.setVisible(true);
         terminal.setFocusable(true);
         terminal.requestFocusInWindow();
-        terminal.addKeyListener(this);
+        terminal.addKeyListener(inputHandler);
         terminal.pack();
         screen.startScreen();
         screen.setCursorPosition(null);
         screen.doResizeIfNecessary();
         terminal.pack();
-
 
     }
     public void start(){
@@ -169,7 +179,7 @@ public class Game extends LanternaGUI {
 
     public void draw(TextGraphics graphics) {
         graphics.setBackgroundColor(TextColor.Factory.fromString("#006400"));
-        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(super.width, super.height), ' ');
+        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(LanternaGUI.width, LanternaGUI.height), ' ');
         for(GameBlock block : blocks) {
             if(block.IsDestroyed())
                 continue;
@@ -191,30 +201,30 @@ public class Game extends LanternaGUI {
 
 
     private boolean update(){
-        moving = false;
-        if(end){
+        inputHandler.moving = false;
+        if(inputHandler.end){
             notifyEndGame = new Loser();
             return false;
         }
-        if (right && canMove(new Position(bomberman.getPosition().getX() + 1, bomberman.getPosition().getY()))) {
-            moving = true;
+        if (inputHandler.right && canMove(new Position(bomberman.getPosition().getX() + 1, bomberman.getPosition().getY()))) {
+            inputHandler.moving = true;
         }else{
-            right = false;
+            inputHandler.right = false;
         }
-        if (left && canMove(new Position(bomberman.getPosition().getX() - 1, bomberman.getPosition().getY()))) {
-            moving = true;
+        if (inputHandler.left && canMove(new Position(bomberman.getPosition().getX() - 1, bomberman.getPosition().getY()))) {
+            inputHandler.moving = true;
         }else{
-            left = false;
+            inputHandler.left = false;
         }
-        if (up && canMove(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY()- 1))) {
-            moving = true;
+        if (inputHandler.up && canMove(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY()- 1))) {
+            inputHandler.moving = true;
         }else{
-            up = false;
+            inputHandler.up = false;
         }
-        if (down && canMove(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY() + 1))) {
-            moving = true;
+        if (inputHandler.down && canMove(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY() + 1))) {
+            inputHandler.moving = true;
         }else{
-            down = false;
+            inputHandler.down = false;
         }
 
         CheckAddBomb();
@@ -242,15 +252,15 @@ public class Game extends LanternaGUI {
         }
 
 
-        if (moving) {
+        if ( inputHandler.moving) {
 
-            if (right) {
+            if ( inputHandler.right) {
                 bomberman.moveRight();
-            } else if (left) {
+            } else if ( inputHandler.left) {
                 bomberman.moveLeft();
-            } else if (up) {
+            } else if ( inputHandler.up) {
                 bomberman.moveUp();
-            } else if (down) {
+            } else if ( inputHandler.down) {
                 bomberman.moveDown();
             }
         }
@@ -264,8 +274,8 @@ public class Game extends LanternaGUI {
     }
 
     private void CheckAddBomb() {
-        if(setBomb){
-            setBomb = false;
+        if( inputHandler.setBomb){
+            inputHandler.setBomb = false;
             Bomb b = new Bomb(new Position(bomberman.getPosition().getX(),bomberman.getPosition().getY()));
             bombs.add(b);
         }

@@ -13,16 +13,17 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public abstract class LanternaGUI extends InputHandler {
-    protected AWTTerminalFrame terminal;
-    protected Screen screen;
+public class LanternaGUI{
 
-    protected int width = 45;
-    protected int height = 13;
+    static public int width = 45;
+    static public int height = 13;
 
-    public LanternaGUI() throws FontFormatException {
-        super();
+    public LanternaGUI(){
+    }
+    static public AWTTerminalFrame AWTTerminalFrameFactory(){
+
         try {
+            AWTTerminalFrame terminal;
             TerminalSize terminalSize = new TerminalSize(width, height);
 
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize).setTerminalEmulatorTitle("BOMBERMAN");
@@ -30,22 +31,23 @@ public abstract class LanternaGUI extends InputHandler {
 
             terminalFactory.setTerminalEmulatorFontConfiguration(setFont("src/main/resources/FonteFinal.ttf",80));
 
-            Terminal terminal = terminalFactory.createTerminal();
+            Terminal terminal1 = terminalFactory.createTerminal();
 
 
-            this.terminal =(AWTTerminalFrame)terminal;
-            this.terminal.setCursor(null);
+            terminal =(AWTTerminalFrame)terminal1;
+            terminal.setCursor(null);
 
             terminal.exitPrivateMode();
 
+            return terminal;
 
-            screen = new TerminalScreen(terminal);
-        } catch (IOException e) {
+        } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
+        return new AWTTerminalFrame();
     }
 
-    protected Font GetFont(String name,int size) throws IOException, FontFormatException {
+    protected static Font GetFont(String name,int size) throws IOException, FontFormatException {
         File fontFile = new File(name);
         Font font = Font.createFont(Font.TRUETYPE_FONT,fontFile);
 
@@ -56,11 +58,7 @@ public abstract class LanternaGUI extends InputHandler {
         return loaded;
     }
 
-    protected AWTTerminalFontConfiguration setFont(Font lf){
-        return AWTTerminalFontConfiguration.newInstance(lf);
-    }
-
-    protected AWTTerminalFontConfiguration setFont(String lf,int size) throws IOException, FontFormatException {
+    protected static AWTTerminalFontConfiguration setFont(String lf, int size) throws IOException, FontFormatException {
         return AWTTerminalFontConfiguration.newInstance(GetFont(lf,size));
     }
 

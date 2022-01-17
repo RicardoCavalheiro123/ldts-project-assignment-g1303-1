@@ -4,8 +4,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class InputHandler implements KeyListener {
-    protected boolean moving;
-    protected boolean right, left, up, down,end,setBomb;
+    public boolean moving;
+    public boolean right, left, up, down,end,setBomb;
     public InputHandler(){
         moving = false;
         right = false;
