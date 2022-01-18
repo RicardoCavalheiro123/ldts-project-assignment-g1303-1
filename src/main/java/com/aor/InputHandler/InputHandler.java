@@ -40,6 +40,7 @@ public class InputHandler implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             end = true;
         }
+        e.consume();
     }
 
     @Override

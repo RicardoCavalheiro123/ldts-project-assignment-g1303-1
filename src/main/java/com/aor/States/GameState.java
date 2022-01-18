@@ -11,7 +11,7 @@ public abstract class GameState {
         this.bomberMan = game;
     }
     public abstract void start();
-    public abstract void update(BomberMan bomberMan) throws IOException;
+    public abstract void update(BomberMan bomberMan) throws IOException, InterruptedException;
     public void changeState(GameState gameState){
         this.bomberMan.setGameState(gameState);
     }

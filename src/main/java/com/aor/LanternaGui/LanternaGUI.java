@@ -1,9 +1,6 @@
 package com.aor.LanternaGui;
 
-import com.aor.InputHandler.InputHandler;
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
 
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
@@ -35,7 +32,6 @@ public class LanternaGUI{
 
 
             terminal =(AWTTerminalFrame)terminal1;
-            terminal.setCursor(null);
 
             terminal.exitPrivateMode();
 

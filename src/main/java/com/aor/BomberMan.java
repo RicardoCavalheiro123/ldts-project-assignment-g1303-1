@@ -1,17 +1,31 @@
 package com.aor;
 
-import com.aor.States.GameState;
+import com.aor.LanternaGui.LanternaGUI;
+
 import com.aor.States.PlayingState;
+import com.aor.States.GameState;
+import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.screen.TerminalScreen;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
 import java.awt.*;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class BomberMan {
+    public Screen screen;
     private static BomberMan bomberMan = null;
     private GameState gameState;
+    public AWTTerminalFrame terminal = LanternaGUI.AWTTerminalFrameFactory();
 
     public BomberMan() throws IOException, FontFormatException {
+        terminal.setLocationRelativeTo(null);
+        terminal.setVisible(true);
+        terminal.pack();
+        terminal.pack();
+        screen = new TerminalScreen(terminal);
+        screen.startScreen();
+        screen.setCursorPosition(null);
+        screen.doResizeIfNecessary();
         this.gameState = new PlayingState(this);
     }
     public void setGameState(GameState gameState) {
@@ -19,13 +33,13 @@ public class BomberMan {
         if (gameState != null)
             this.gameState.start();
     }
-    public static BomberMan getInstance() throws IOException, URISyntaxException, FontFormatException {
+    public static BomberMan getInstance() throws IOException, FontFormatException {
         if (bomberMan == null) {
             bomberMan = new BomberMan();
         }
         return bomberMan;
     }
-    public void start() throws IOException {
+    public void start() throws IOException, InterruptedException {
         this.gameState.start();
 
         while (gameState != null){
