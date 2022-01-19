@@ -44,8 +44,10 @@ public class Leaderboard {
         return l;
     }
 
-    public void updateLeaderboardFile() throws IOException {
+    public void updateLeaderboardFile(Lead lead) throws IOException {
         ArrayList<Lead> leaderboard = getLeaderboardsList();
+        leaderboard.add(lead);
+        leaderboard.sort(new LeadComparator());
         PrintWriter erasor = new PrintWriter(fileName);
         erasor.close();
         FileWriter myWriter = new FileWriter(fileName);

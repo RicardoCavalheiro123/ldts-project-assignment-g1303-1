@@ -18,7 +18,5 @@ class LeaderboardTest extends Specification {
             l.get(1).getTime() == 50
             l.get(2).getName() == "Joao"
             l.get(2).getTime() == 212
-
-
     }
 }
