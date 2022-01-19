@@ -1,7 +1,5 @@
 package com.aor.Leaderboard;
 
-import com.aor.Positions.Position;
-
 public class Lead {
     String playerName;
     Integer time;
