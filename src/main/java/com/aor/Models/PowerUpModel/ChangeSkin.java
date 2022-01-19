@@ -1,11 +1,13 @@
-package com.aor.Models.PowerUp;
+package com.aor.Models.PowerUpModel;
 
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
-public class ChangeSkin implements PowerUp {
+public class ChangeSkin implements PowerUpModel {
+    boolean selected,red;
+    long timestarted;
     @Override
     public int getPrice() {
         return 5;
@@ -18,7 +20,7 @@ public class ChangeSkin implements PowerUp {
 
     @Override
     public boolean isExpired() {
-        return false;
+        return (System.currentTimeMillis()-timestarted>5);
     }
 
     @Override
@@ -42,5 +44,23 @@ public class ChangeSkin implements PowerUp {
         graphics.enableModifiers(SGR.BOLD);
         graphics.putString(new TerminalPosition(20,20 ), "r");
     }
+    @Override
+    public boolean isSelected() {
+        return selected;
+    }
 
+    @Override
+    public void setSelected() {
+        selected = true;
+    }
+
+    @Override
+    public void setUnselected() {
+        selected = false;
+    }
+
+    @Override
+    public void setRed() {
+        red = true;
+    }
 }

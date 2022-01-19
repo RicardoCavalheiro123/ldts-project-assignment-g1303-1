@@ -1,8 +1,8 @@
-package com.aor.Models.PowerUp;
+package com.aor.Models.PowerUpModel;
 
 import com.googlecode.lanterna.graphics.TextGraphics;
 
-public interface PowerUp {
+public interface PowerUpModel {
     int getPrice();
     void startTimer();
     boolean isExpired();
@@ -10,4 +10,8 @@ public interface PowerUp {
     boolean changeSkin();
     boolean increaseSpeed();
     void draw(TextGraphics graphics);
+    void setSelected();
+    boolean isSelected();
+    void setUnselected();
+    void setRed();
 }
