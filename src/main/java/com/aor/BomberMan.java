@@ -2,8 +2,10 @@ package com.aor;
 
 import com.aor.LanternaGui.LanternaGUI;
 
-import com.aor.States.PlayingState;
+import com.aor.States.MenuState;
+
 import com.aor.States.GameState;
+import com.aor.States.PlayingState;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
