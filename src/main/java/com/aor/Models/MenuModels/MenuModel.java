@@ -5,4 +5,6 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 public interface MenuModel {
     void draw(TextGraphics graphics);
     boolean isSelected();
+    void setSelected();
+    void setUnselected();
 }

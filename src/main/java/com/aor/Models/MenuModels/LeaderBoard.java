@@ -13,4 +13,14 @@ public class LeaderBoard implements MenuModel{
     public boolean isSelected() {
         return false;
     }
+
+    @Override
+    public void setSelected() {
+
+    }
+
+    @Override
+    public void setUnselected() {
+
+    }
 }

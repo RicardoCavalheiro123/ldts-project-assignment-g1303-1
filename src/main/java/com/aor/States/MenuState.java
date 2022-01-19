@@ -11,8 +11,8 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
 
+import java.awt.*;
 import java.io.IOException;
-import java.util.List;
 
 public class MenuState extends GameState{
     MenuModel play,shop,leaderboard,exit;
@@ -46,7 +46,58 @@ public class MenuState extends GameState{
     }
     private void Selectable(){
         if(menuController.down){
-
+            menuController.down = false;
+            if(play.isSelected()){
+                play.setUnselected();
+                shop.setSelected();
+            }
+            if(shop.isSelected()){
+                shop.setUnselected();
+                leaderboard.setSelected();
+            }
+            if(leaderboard.isSelected()){
+                leaderboard.setUnselected();
+                exit.setSelected();
+            }
         }
+        if(menuController.up){
+            menuController.up = false;
+            if(exit.isSelected()){
+                exit.setUnselected();
+                leaderboard.setSelected();
+            }
+            if(leaderboard.isSelected()){
+                leaderboard.setUnselected();
+                shop.setSelected();
+            }
+            if(shop.isSelected()){
+                shop.setUnselected();
+                play.setSelected();
+            }
+        }
+        if(menuController.Enter){
+            doAction();
+        }
+    }
+    private void doAction(){
+        if(play.isSelected()){
+            try {
+                changeState(new PlayingState(super.bomberMan));
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (FontFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        if(shop.isSelected()){
+            changeState(null);
+        }
+        if(leaderboard.isSelected()){
+            changeState(null);
+        }
+        if(exit.isSelected()){
+            changeState(null);
+        }
+
     }
 }

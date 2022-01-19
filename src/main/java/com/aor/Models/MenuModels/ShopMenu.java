@@ -13,4 +13,14 @@ public class ShopMenu implements MenuModel{
     public boolean isSelected() {
         return false;
     }
+
+    @Override
+    public void setSelected() {
+
+    }
+
+    @Override
+    public void setUnselected() {
+
+    }
 }
