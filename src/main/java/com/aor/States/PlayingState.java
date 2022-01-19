@@ -356,5 +356,6 @@ public class PlayingState extends GameState {
     public Hero getHero() {
         return bomberman;
     }
+
 }
 
