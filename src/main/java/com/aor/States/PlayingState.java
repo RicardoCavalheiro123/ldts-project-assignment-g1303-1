@@ -9,6 +9,7 @@ import com.aor.GameLogic.EndGameLogic.NotifyEndGame;
 import com.aor.GameLogic.EndGameLogic.Winner;
 import com.aor.InputHandler.InputHandler;
 import com.aor.LanternaGui.LanternaGUI;
+import com.aor.Leaderboard.Leaderboard;
 import com.aor.Music.MusicPlayer;
 import com.aor.Positions.Position;
 
