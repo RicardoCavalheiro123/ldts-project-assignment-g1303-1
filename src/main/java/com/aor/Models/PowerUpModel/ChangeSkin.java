@@ -40,9 +40,21 @@ public class ChangeSkin implements PowerUpModel {
 
     @Override
     public void draw(TextGraphics graphics) {
-        graphics.setForegroundColor(TextColor.Factory.fromString("#ADD8E6"));
-        graphics.enableModifiers(SGR.BOLD);
-        graphics.putString(new TerminalPosition(20,20 ), "r");
+        if(!selected) {
+            graphics.setForegroundColor(TextColor.Factory.fromString("#00bd03"));
+            graphics.enableModifiers(SGR.BOLD);
+            graphics.putString(new TerminalPosition(20,20 ), "-> r (CHANGE SKIN)");
+        }
+        else if(selected && red) {
+            graphics.setForegroundColor(TextColor.Factory.fromString("#880808"));
+            graphics.enableModifiers(SGR.BOLD);
+            graphics.putString(new TerminalPosition(20,20 ), "-> r (CHANGE SKIN)");
+        }
+        else if(selected) {
+            graphics.setForegroundColor(TextColor.Factory.fromString("#006400"));
+            graphics.enableModifiers(SGR.BOLD);
+            graphics.putString(new TerminalPosition(20,20 ), "-> r (CHANGE SKIN)");
+        }
     }
     @Override
     public boolean isSelected() {

@@ -40,9 +40,21 @@ public class IncreaseSpeed implements PowerUpModel {
 
     @Override
     public void draw(TextGraphics graphics) {
-        graphics.setForegroundColor(TextColor.Factory.fromString("#ADD8E6"));
-        graphics.enableModifiers(SGR.BOLD);
-        graphics.putString(new TerminalPosition(20,20 ), "p");
+        if(!selected) {
+            graphics.setForegroundColor(TextColor.Factory.fromString("#00bd03"));
+            graphics.enableModifiers(SGR.BOLD);
+            graphics.putString(new TerminalPosition(20,20 ), "-> p (INCREASE SPEED)");
+        }
+        else if(selected && red) {
+            graphics.setForegroundColor(TextColor.Factory.fromString("#880808"));
+            graphics.enableModifiers(SGR.BOLD);
+            graphics.putString(new TerminalPosition(20,20 ), "-> p (INCREASE SPEED)");
+        }
+        else if(selected) {
+            graphics.setForegroundColor(TextColor.Factory.fromString("#006400"));
+            graphics.enableModifiers(SGR.BOLD);
+            graphics.putString(new TerminalPosition(20,20 ), "-> p (INCREASE SPEED)");
+        }
     }
     @Override
     public boolean isSelected() {
