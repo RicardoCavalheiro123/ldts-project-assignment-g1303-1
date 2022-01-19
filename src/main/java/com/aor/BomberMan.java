@@ -6,6 +6,7 @@ import com.aor.States.MenuState;
 
 import com.aor.States.GameState;
 
+import com.aor.User.User;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
@@ -14,6 +15,7 @@ import java.awt.*;
 import java.io.IOException;
 
 public class BomberMan {
+    public User user = new User("Unknown");
     public Screen screen;
     private static BomberMan bomberMan = null;
     private GameState gameState;

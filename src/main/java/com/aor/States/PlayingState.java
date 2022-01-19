@@ -10,6 +10,7 @@ import com.aor.LanternaGui.LanternaGUI;
 
 import com.aor.Models.Positions.Position;
 
+import com.aor.Music.MusicPlayer;
 import com.aor.Strategy.FollowHeroMovement;
 import com.aor.Strategy.RandomMovement;
 import com.aor.Strategy.Strategy;
@@ -32,8 +33,8 @@ public class PlayingState extends GameState {
 
     private Strategy strategy;
     Hero bomberman;
-    Door door;;
-    //MusicPlayer music;
+    Door door;
+    MusicPlayer music;
 
     ArrayList<GameBlock> blocks = new ArrayList<>();
 
@@ -76,7 +77,7 @@ public class PlayingState extends GameState {
         super(superb);
         readMap();
         time = System.currentTimeMillis();
-        //music = new MusicPlayer();
+        music = new MusicPlayer();
     }
     @Override
     public void start(){
@@ -169,6 +170,9 @@ public class PlayingState extends GameState {
             changeState(new PauseState(super.bomberMan));
             return false;
         }
+        CheckAddBomb();
+        CheckExplodedBomb();
+        easyRobots();
         if (gameController.right && canMove(new Position(bomberman.getPosition().getX() + 1, bomberman.getPosition().getY()))) {
             gameController.moving = true;
         }else{
@@ -190,9 +194,6 @@ public class PlayingState extends GameState {
             gameController.down = false;
         }
 
-        CheckAddBomb();
-        CheckExplodedBomb();
-        easyRobots();
         if(!bomberman.isAlive()){
             super.bomberMan.terminal.removeKeyListener(gameController);
             changeState(new EndGame(super.bomberMan));

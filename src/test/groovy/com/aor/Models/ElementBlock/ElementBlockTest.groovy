@@ -1,7 +1,6 @@
 package com.aor.Models.ElementBlock
 
-
-import com.aor.Positions.Position
+import com.aor.Models.Positions.Position
 import spock.lang.Specification
 
 class ElementBlockTest extends Specification {
