@@ -3,6 +3,7 @@ package com.aor.States;
 import com.aor.BomberMan;
 import com.aor.InputHandler.MenuController;
 import com.aor.LanternaGui.LanternaGUI;
+import com.aor.Models.MenuModels.*;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
@@ -11,17 +12,18 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 
 
 import java.io.IOException;
+import java.util.List;
 
 public class MenuState extends GameState{
+    MenuModel play,shop,leaderboard,exit;
     MenuController menuController = new MenuController();
-    enum ACTION{
-        play,
-        shop,
-        leaderboard,
-        exit
-    }
+
     public MenuState(BomberMan game) {
         super(game);
+        play = new Play();
+        shop = new ShopMenu();
+        leaderboard = new LeaderBoard();
+        exit = new ExitMenu();
     }
 
     @Override
@@ -43,6 +45,8 @@ public class MenuState extends GameState{
         super.bomberMan.screen.refresh();
     }
     private void Selectable(){
+        if(menuController.down){
 
+        }
     }
 }

@@ -9,6 +9,7 @@ import com.aor.GameLogic.EndGameLogic.NotifyEndGame;
 import com.aor.GameLogic.EndGameLogic.Winner;
 import com.aor.InputHandler.GameController;
 import com.aor.LanternaGui.LanternaGUI;
+import com.aor.Music.MusicPlayer;
 import com.aor.Positions.Position;
 
 import com.aor.Strategy.FollowHeroMovement;
@@ -35,7 +36,7 @@ public class PlayingState extends GameState {
     Hero bomberman;
     Door door;
     NotifyEndGame notifyEndGame;
-    MusicPlayer music;
+    //MusicPlayer music;
 
     ArrayList<GameBlock> blocks = new ArrayList<>();
 
@@ -76,13 +77,13 @@ public class PlayingState extends GameState {
 
     public PlayingState(BomberMan superb) throws IOException, FontFormatException {
         super(superb);
-        super.bomberMan.terminal.addKeyListener(inputHandler);
-        music = new MusicPlayer();
+        super.bomberMan.terminal.addKeyListener(gameController);
+        //music = new MusicPlayer();
     }
     @Override
     public void start(){
         readMap();
-        music.startMusic();
+        //music.startMusic();
     }
 
     public void readMap() {
@@ -218,9 +219,9 @@ public class PlayingState extends GameState {
 
        
 
-        if ( inputHandler.moving) {
-            music.startFootstep();
-            if ( inputHandler.right) {
+        if ( gameController.moving) {
+            //music.startFootstep();
+            if ( gameController.right) {
                 bomberman.moveRight();
                 gameController.right = false;
             } else if ( gameController.left) {
@@ -248,7 +249,7 @@ public class PlayingState extends GameState {
             gameController.setBomb = false;
             Bomb b = new Bomb(new Position(bomberman.getPosition().getX(),bomberman.getPosition().getY()));
             bombs.add(b);
-            music.startBombMusic();
+            //music.startBombMusic();
         }
     }
     private void CheckExplodedBomb() {
@@ -257,7 +258,7 @@ public class PlayingState extends GameState {
                 if(bomb.getTime()>4000){
                     bomb.setExploded();
                     destroyBlocks(bomb.getPosition());
-                    music.startBombExplosionMusic();
+                    //music.startBombExplosionMusic();
                 }
             }
 
