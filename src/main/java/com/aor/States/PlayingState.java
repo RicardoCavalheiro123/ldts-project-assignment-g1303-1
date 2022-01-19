@@ -9,6 +9,7 @@ import com.aor.GameLogic.EndGameLogic.NotifyEndGame;
 import com.aor.GameLogic.EndGameLogic.Winner;
 import com.aor.InputHandler.InputHandler;
 import com.aor.LanternaGui.LanternaGUI;
+import com.aor.Music.MusicPlayer;
 import com.aor.Positions.Position;
 
 import com.googlecode.lanterna.TerminalPosition;
@@ -37,6 +38,8 @@ public class PlayingState extends GameState {
 
     ArrayList<Robot> robots = new ArrayList<>();
     ArrayList<Bomb> bombs = new ArrayList<>();
+
+    //MusicPlayer music;
 
     long time,startTime;
 
@@ -73,11 +76,12 @@ public class PlayingState extends GameState {
     public PlayingState(BomberMan superb) throws IOException, FontFormatException {
         super(superb);
         super.bomberMan.terminal.addKeyListener(inputHandler);
-
+        //music = new MusicPlayer();
     }
     @Override
     public void start(){
         readMap();
+        //music.startMusic();
     }
 
     public void readMap() {
@@ -144,16 +148,19 @@ public class PlayingState extends GameState {
             super.bomberMan.screen.refresh();
 
         }
+        //music.endMusic();
         super.bomberMan.screen.clear();
         super.bomberMan.screen.newTextGraphics().setBackgroundColor(TextColor.Factory.fromString("#006400"));
         time = (System.currentTimeMillis()-startTime)/1000;
         if(notifyEndGame.lost()){
+            //music.startLoseMusic();
             String s = "YOU LOST IN : "+ time + " seconds";
             super.bomberMan.screen.newTextGraphics().putString(new TerminalPosition(10,3),s );
             super.bomberMan.screen.refresh();
             Thread.sleep(2000);
         }
         if(notifyEndGame.won()){
+            //music.startWinMusic();
             String s = "YOU WON IN : "+ time+" seconds";
             super.bomberMan.screen.newTextGraphics().putString(new TerminalPosition(10,3),s );
             super.bomberMan.screen.refresh();
@@ -242,7 +249,7 @@ public class PlayingState extends GameState {
 
 
         if ( inputHandler.moving) {
-
+            //music.startFootstep();
             if ( inputHandler.right) {
                 bomberman.moveRight();
             } else if ( inputHandler.left) {
@@ -267,6 +274,7 @@ public class PlayingState extends GameState {
             inputHandler.setBomb = false;
             Bomb b = new Bomb(new Position(bomberman.getPosition().getX(),bomberman.getPosition().getY()));
             bombs.add(b);
+            //music.startBombMusic();
         }
     }
     private void CheckExplodedBomb() {
@@ -275,13 +283,14 @@ public class PlayingState extends GameState {
                 if(bomb.getTime()>4000){
                     bomb.setExploded();
                     destroyBlocks(bomb.getPosition());
+                    //music.startBombExplosionMusic();
                 }
             }
 
         }
     }
 
-    boolean verifyRPositionBomb(Position p){
+    private boolean verifyRPositionBomb(Position p){
         for(Robot r:robots){
             if(r.getPosition().equals(p)){
                 r.setAsDead();
