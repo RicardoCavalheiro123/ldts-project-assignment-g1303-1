@@ -137,6 +137,4 @@ public class MusicPlayer {
         footstep.setMicrosecondPosition(0);
         footstep.start();
     }
-
-
 }
