@@ -1,6 +1,6 @@
-package com.aor.ElementBlock
+package com.aor.Models.ElementBlock
 
-import com.aor.Element.Robot
+
 import com.googlecode.lanterna.TerminalPosition
 import com.googlecode.lanterna.graphics.TextGraphics
 import spock.lang.Specification

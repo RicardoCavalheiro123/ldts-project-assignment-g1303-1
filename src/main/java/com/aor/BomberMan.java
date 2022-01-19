@@ -17,6 +17,7 @@ public class BomberMan {
     public Screen screen;
     private static BomberMan bomberMan = null;
     private GameState gameState;
+    private GameState LastGameState;
     public AWTTerminalFrame terminal = LanternaGUI.AWTTerminalFrameFactory();
 
     public BomberMan() throws IOException, FontFormatException {
@@ -31,7 +32,13 @@ public class BomberMan {
         this.gameState = new PlayingState(this);
     }
     public void setGameState(GameState gameState) {
+        this.LastGameState = this.gameState;
         this.gameState = gameState;
+        if (gameState != null)
+            this.gameState.start();
+    }
+    public void setLastGameState() {
+        this.gameState = this.LastGameState;
         if (gameState != null)
             this.gameState.start();
     }
@@ -50,7 +57,7 @@ public class BomberMan {
             gameState.update(this);
 
             long elapsedTime = System.currentTimeMillis() - startTime;
-            long sleepTime = 1000 /20 - elapsedTime;
+            long sleepTime = 1000 /60 - elapsedTime;
 
             if (sleepTime > 0) try {
                 Thread.sleep(sleepTime);

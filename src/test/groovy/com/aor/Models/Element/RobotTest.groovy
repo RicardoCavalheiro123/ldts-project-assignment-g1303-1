@@ -1,6 +1,6 @@
-package com.aor.Element
+package com.aor.Models.Element
 
-import com.aor.Element.Robot
+
 import com.aor.Positions.Position
 import com.googlecode.lanterna.TerminalPosition
 import com.googlecode.lanterna.graphics.TextGraphics

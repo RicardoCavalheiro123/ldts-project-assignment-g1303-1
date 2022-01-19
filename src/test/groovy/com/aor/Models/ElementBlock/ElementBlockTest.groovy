@@ -1,8 +1,6 @@
-package com.aor.ElementBlock
+package com.aor.Models.ElementBlock
 
-import com.aor.ElementBlock.Bomb
-import com.aor.ElementBlock.ConcreteBlock
-import com.aor.ElementBlock.DestructableBlock
+
 import com.aor.Positions.Position
 import spock.lang.Specification
 

@@ -1,4 +1,4 @@
-package com.aor.ElementBlock;
+package com.aor.Models.ElementBlock;
 
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;

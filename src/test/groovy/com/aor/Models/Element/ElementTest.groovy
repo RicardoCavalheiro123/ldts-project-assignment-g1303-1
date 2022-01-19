@@ -1,6 +1,6 @@
-package com.aor.Element
+package com.aor.Models.Element
 
-import com.aor.Element.Hero
+
 import com.aor.Positions.Position
 import spock.lang.Specification
 
