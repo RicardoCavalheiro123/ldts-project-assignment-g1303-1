@@ -1,4 +1,4 @@
-package com.aor.ElementBlock;
+package com.aor.Models.ElementBlock;
 
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;

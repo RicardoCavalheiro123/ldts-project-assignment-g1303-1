@@ -1,15 +1,14 @@
 package com.aor.States;
 
 import com.aor.BomberMan;
-import com.aor.Element.Hero;
-import com.aor.ElementBlock.*;
-import com.aor.Element.Robot;
+import com.aor.Models.Element.Hero;
+import com.aor.Models.ElementBlock.*;
+import com.aor.Models.Element.Robot;
 import com.aor.GameLogic.EndGameLogic.Loser;
 import com.aor.GameLogic.EndGameLogic.NotifyEndGame;
 import com.aor.GameLogic.EndGameLogic.Winner;
-import com.aor.InputHandler.InputHandler;
+import com.aor.InputHandler.GameController;
 import com.aor.LanternaGui.LanternaGUI;
-import com.aor.Music.MusicPlayer;
 import com.aor.Positions.Position;
 
 import com.aor.Strategy.FollowHeroMovement;
@@ -30,7 +29,7 @@ import java.util.ArrayList;
 
 
 public class PlayingState extends GameState {
-    InputHandler inputHandler = new InputHandler();
+    GameController gameController = new GameController();
 
     private Strategy strategy;
     Hero bomberman;
@@ -133,46 +132,11 @@ public class PlayingState extends GameState {
 
     @Override
     public void update(BomberMan bomberMan) throws IOException, InterruptedException {
-        startTime = System.currentTimeMillis();
-        boolean flag = true;
-        Long l = System.currentTimeMillis();
-        Long l1;
-        while(flag) {
-            l = System.currentTimeMillis();
-            super.bomberMan.screen.clear();
-            flag = update();
-            super.bomberMan.screen.setCursorPosition(null);
-            draw(super.bomberMan.screen.newTextGraphics());
-            l1 = System.currentTimeMillis();
-            if(l1-l<(1000/20)){
-                Thread.sleep((1000/20)-(l1-l));
-            }
-            super.bomberMan.screen.refresh();
-
-        }
-        music.endMusic();
         super.bomberMan.screen.clear();
-        super.bomberMan.screen.newTextGraphics().setBackgroundColor(TextColor.Factory.fromString("#006400"));
-        time = (System.currentTimeMillis()-startTime)/1000;
-        if(notifyEndGame.lost()){
-            music.startLoseMusic();
-            String s = "YOU LOST IN : "+ time + " seconds";
-            super.bomberMan.screen.newTextGraphics().putString(new TerminalPosition(10,3),s );
-            super.bomberMan.screen.refresh();
-            Thread.sleep(2000);
-        }
-        if(notifyEndGame.won()){
-            music.startWinMusic();
-            String s = "YOU WON IN : "+ time+" seconds";
-            super.bomberMan.screen.newTextGraphics().putString(new TerminalPosition(10,3),s );
-            super.bomberMan.screen.refresh();
-            Thread.sleep(2000);
-
-        }
+        update1();
+        super.bomberMan.screen.setCursorPosition(null);
+        draw(super.bomberMan.screen.newTextGraphics());
         super.bomberMan.screen.refresh();
-        super.bomberMan.screen.close();
-        super.bomberMan.terminal.close();
-        super.changeState(null);
     }
 
     public void draw(TextGraphics graphics) {
@@ -198,31 +162,32 @@ public class PlayingState extends GameState {
 
 
 
-    private boolean update(){
-        inputHandler.moving = false;
-        if(inputHandler.end){
-            notifyEndGame = new Loser();
-            return false;
+    private boolean update1(){
+        gameController.moving = false;
+        if(gameController.Menu){
+            gameController.Menu = false;
+            super.bomberMan.terminal.removeKeyListener(gameController);
+            changeState(new MenuState(super.bomberMan));
         }
-        if (inputHandler.right && canMove(new Position(bomberman.getPosition().getX() + 1, bomberman.getPosition().getY()))) {
-            inputHandler.moving = true;
+        if (gameController.right && canMove(new Position(bomberman.getPosition().getX() + 1, bomberman.getPosition().getY()))) {
+            gameController.moving = true;
         }else{
-            inputHandler.right = false;
+            gameController.right = false;
         }
-        if (inputHandler.left && canMove(new Position(bomberman.getPosition().getX() - 1, bomberman.getPosition().getY()))) {
-            inputHandler.moving = true;
+        if (gameController.left && canMove(new Position(bomberman.getPosition().getX() - 1, bomberman.getPosition().getY()))) {
+            gameController.moving = true;
         }else{
-            inputHandler.left = false;
+            gameController.left = false;
         }
-        if (inputHandler.up && canMove(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY()- 1))) {
-            inputHandler.moving = true;
+        if (gameController.up && canMove(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY()- 1))) {
+            gameController.moving = true;
         }else{
-            inputHandler.up = false;
+            gameController.up = false;
         }
-        if (inputHandler.down && canMove(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY() + 1))) {
-            inputHandler.moving = true;
+        if (gameController.down && canMove(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY() + 1))) {
+            gameController.moving = true;
         }else{
-            inputHandler.down = false;
+            gameController.down = false;
         }
 
         CheckAddBomb();
@@ -250,16 +215,23 @@ public class PlayingState extends GameState {
         }
 
 
+
+       
+
         if ( inputHandler.moving) {
             music.startFootstep();
             if ( inputHandler.right) {
                 bomberman.moveRight();
-            } else if ( inputHandler.left) {
+                gameController.right = false;
+            } else if ( gameController.left) {
                 bomberman.moveLeft();
-            } else if ( inputHandler.up) {
+                gameController.left = false;
+            } else if ( gameController.up) {
                 bomberman.moveUp();
-            } else if ( inputHandler.down) {
+                gameController.up = false;
+            } else if ( gameController.down) {
                 bomberman.moveDown();
+                gameController.down = false;
             }
         }
         if(bomberman.getPosition().equals(door.getPosition())){
@@ -272,8 +244,8 @@ public class PlayingState extends GameState {
     }
 
     private void CheckAddBomb() {
-        if( inputHandler.setBomb){
-            inputHandler.setBomb = false;
+        if( gameController.setBomb){
+            gameController.setBomb = false;
             Bomb b = new Bomb(new Position(bomberman.getPosition().getX(),bomberman.getPosition().getY()));
             bombs.add(b);
             music.startBombMusic();
