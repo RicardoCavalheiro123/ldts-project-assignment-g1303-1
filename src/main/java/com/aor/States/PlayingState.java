@@ -36,7 +36,7 @@ public class PlayingState extends GameState {
     Hero bomberman;
     Door door;
     NotifyEndGame notifyEndGame;
-    //MusicPlayer music;
+    MusicPlayer music;
 
     ArrayList<GameBlock> blocks = new ArrayList<>();
 
@@ -78,12 +78,12 @@ public class PlayingState extends GameState {
     public PlayingState(BomberMan superb) throws IOException, FontFormatException {
         super(superb);
         super.bomberMan.terminal.addKeyListener(gameController);
-        //music = new MusicPlayer();
+        music = new MusicPlayer();
     }
     @Override
     public void start(){
         readMap();
-        //music.startMusic();
+        music.startMusic();
     }
 
     public void readMap() {
@@ -249,7 +249,7 @@ public class PlayingState extends GameState {
             gameController.setBomb = false;
             Bomb b = new Bomb(new Position(bomberman.getPosition().getX(),bomberman.getPosition().getY()));
             bombs.add(b);
-            //music.startBombMusic();
+            music.startBombMusic();
         }
     }
     private void CheckExplodedBomb() {
@@ -258,7 +258,7 @@ public class PlayingState extends GameState {
                 if(bomb.getTime()>4000){
                     bomb.setExploded();
                     destroyBlocks(bomb.getPosition());
-                    //music.startBombExplosionMusic();
+                    music.startBombExplosionMusic();
                 }
             }
 
