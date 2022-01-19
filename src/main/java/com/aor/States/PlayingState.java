@@ -12,6 +12,9 @@ import com.aor.LanternaGui.LanternaGUI;
 import com.aor.Music.MusicPlayer;
 import com.aor.Positions.Position;
 
+import com.aor.Strategy.FollowHeroMovement;
+import com.aor.Strategy.RandomMovement;
+import com.aor.Strategy.Strategy;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -30,6 +33,7 @@ import java.util.Random;
 public class PlayingState extends GameState {
     InputHandler inputHandler = new InputHandler();
 
+    private Strategy strategy;
     Hero bomberman;
     Door door;
     NotifyEndGame notifyEndGame;
@@ -225,7 +229,7 @@ public class PlayingState extends GameState {
 
         CheckAddBomb();
         CheckExplodedBomb();
-        movementRobots();
+        easyRobots();
         if(!bomberman.isAlive()){
             notifyEndGame = new Loser();
             notifyEndGame.NotifyLoser();
@@ -373,24 +377,18 @@ public class PlayingState extends GameState {
         }
     }
 
-    public void movementRobots() {
-        for(Robot temp : robots) {
-            Random rand = new Random();
-            int num = rand.nextInt(4)+1;
-            if(num == 1 && canMove(new Position(temp.getPosition().getX() + 1, temp.getPosition().getY()))) {
-                temp.moveRight();
-            }
-            else if(num == 2 && canMove(new Position(temp.getPosition().getX() - 1, temp.getPosition().getY()))) {
-                temp.moveLeft();
-            }
-            else if(num == 3 && canMove(new Position(temp.getPosition().getX(), temp.getPosition().getY() - 1))) {
-                temp.moveUp();
-            }
-            else if(num == 3 && canMove(new Position(temp.getPosition().getX(), temp.getPosition().getY() + 1))) {
-                temp.moveDown();
-            }
-        }
+    public void easyRobots() {
+        this.strategy = new RandomMovement();
+        strategy.moveRobot(this);
     }
 
+    public void hardRobots() {
+        this.strategy = new FollowHeroMovement();
+        strategy.moveRobot(this);
+    }
+
+    public Hero getHero() {
+        return bomberman;
+    }
 }
 
