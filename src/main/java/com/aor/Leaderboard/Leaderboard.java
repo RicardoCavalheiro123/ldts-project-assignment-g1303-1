@@ -14,7 +14,6 @@ public class Leaderboard {
                     return;
             else{
                 tempFile.createNewFile();
-                System.out.println("file nao exists");
                 FileWriter myWriter = new FileWriter(fileName);
                 myWriter.write("PlayerName,Time");
                 myWriter.close();
@@ -41,7 +40,22 @@ public class Leaderboard {
         {
             e.printStackTrace();
         }
+        l.sort(new LeadComparator());
         return l;
+    }
+
+    public void updateLeaderboardFile() throws IOException {
+        ArrayList<Lead> leaderboard = getLeaderboardsList();
+        PrintWriter erasor = new PrintWriter(fileName);
+        erasor.close();
+        FileWriter myWriter = new FileWriter(fileName);
+        myWriter.write("PlayerName,Time");
+        for(Lead l1 : leaderboard){
+            Integer time = l1.getTime();
+            String name = l1.getName();
+            myWriter.write("\n" +name + "," + time.toString());
+        }
+        myWriter.close();
     }
 
 }

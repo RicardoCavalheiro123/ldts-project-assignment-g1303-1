@@ -1,8 +1,8 @@
 package com.aor.Leaderboard;
 
 public class Lead {
-    String playerName;
-    Integer time;
+    private String playerName;
+    private Integer time;
 
     public Lead(String p, Integer t){
         this.playerName = p;

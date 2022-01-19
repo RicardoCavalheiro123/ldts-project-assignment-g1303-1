@@ -11,8 +11,7 @@ public class Application {
 
     public static void main(String[] args) throws IOException, FontFormatException, URISyntaxException, InterruptedException {
         Leaderboard l = new Leaderboard("src/main/resources/leaderboard/leaderboard.txt");
-        ArrayList<Lead> lss = new ArrayList<Lead>();
-        lss = l.getLeaderboardsList();
+        l.updateLeaderboardFile();
         BomberMan game = BomberMan.getInstance();
         game.start();
     }
