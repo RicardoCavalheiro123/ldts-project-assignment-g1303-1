@@ -1,4 +1,4 @@
-package com.aor.Positions;
+package com.aor.Models.Positions;
 
 public class Position {
     private int x;

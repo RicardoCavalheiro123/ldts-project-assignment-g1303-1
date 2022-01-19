@@ -4,13 +4,11 @@ import com.aor.BomberMan;
 import com.aor.Models.Element.Hero;
 import com.aor.Models.ElementBlock.*;
 import com.aor.Models.Element.Robot;
-import com.aor.GameLogic.EndGameLogic.Loser;
-import com.aor.GameLogic.EndGameLogic.NotifyEndGame;
-import com.aor.GameLogic.EndGameLogic.Winner;
+
 import com.aor.InputHandler.GameController;
 import com.aor.LanternaGui.LanternaGUI;
-import com.aor.Music.MusicPlayer;
-import com.aor.Positions.Position;
+
+import com.aor.Models.Positions.Position;
 
 import com.aor.Strategy.FollowHeroMovement;
 import com.aor.Strategy.RandomMovement;
@@ -34,16 +32,15 @@ public class PlayingState extends GameState {
 
     private Strategy strategy;
     Hero bomberman;
-    Door door;
-    NotifyEndGame notifyEndGame;
-    MusicPlayer music;
+    Door door;;
+    //MusicPlayer music;
 
     ArrayList<GameBlock> blocks = new ArrayList<>();
 
     ArrayList<Robot> robots = new ArrayList<>();
     ArrayList<Bomb> bombs = new ArrayList<>();
 
-    long time,startTime;
+    long time;
 
     int rows = 13;
     int cols = 13*3+6;
@@ -77,13 +74,14 @@ public class PlayingState extends GameState {
 
     public PlayingState(BomberMan superb) throws IOException, FontFormatException {
         super(superb);
-        super.bomberMan.terminal.addKeyListener(gameController);
-        music = new MusicPlayer();
+        readMap();
+        time = System.currentTimeMillis();
+        //music = new MusicPlayer();
     }
     @Override
     public void start(){
-        readMap();
-        music.startMusic();
+        super.bomberMan.terminal.addKeyListener(gameController);
+        //music.startMusic();
     }
 
     public void readMap() {
@@ -168,7 +166,8 @@ public class PlayingState extends GameState {
         if(gameController.Menu){
             gameController.Menu = false;
             super.bomberMan.terminal.removeKeyListener(gameController);
-            changeState(new MenuState(super.bomberMan));
+            changeState(new PauseState(super.bomberMan));
+            return false;
         }
         if (gameController.right && canMove(new Position(bomberman.getPosition().getX() + 1, bomberman.getPosition().getY()))) {
             gameController.moving = true;
@@ -195,22 +194,19 @@ public class PlayingState extends GameState {
         CheckExplodedBomb();
         easyRobots();
         if(!bomberman.isAlive()){
-            notifyEndGame = new Loser();
-            notifyEndGame.NotifyLoser();
-            time = notifyEndGame.getTimeNotify();
+            super.bomberMan.terminal.removeKeyListener(gameController);
+            changeState(new EndGame(super.bomberMan));
             return false;
         }
         if(robots.size()== 0){
-            notifyEndGame = new Winner();
-            notifyEndGame.NotifyWinner();
-            time = notifyEndGame.getTimeNotify();
+            super.bomberMan.terminal.removeKeyListener(gameController);
+            changeState(new EndGame(super.bomberMan));
             return false;
         }
         for(Robot robot : robots){
             if(robot.getPosition().equals(bomberman.getPosition())){
-                notifyEndGame = new Loser();
-                notifyEndGame.NotifyLoser();
-                time = notifyEndGame.getTimeNotify();
+                super.bomberMan.terminal.removeKeyListener(gameController);
+                changeState(new EndGame(super.bomberMan));
                 return false;
             }
         }
@@ -236,9 +232,8 @@ public class PlayingState extends GameState {
             }
         }
         if(bomberman.getPosition().equals(door.getPosition())){
-            notifyEndGame = new Winner();
-            notifyEndGame.NotifyWinner();
-            time = notifyEndGame.getTimeNotify();
+            super.bomberMan.terminal.removeKeyListener(gameController);
+            changeState(new EndGame(super.bomberMan));
             return false;
         }
     return true;
@@ -249,7 +244,7 @@ public class PlayingState extends GameState {
             gameController.setBomb = false;
             Bomb b = new Bomb(new Position(bomberman.getPosition().getX(),bomberman.getPosition().getY()));
             bombs.add(b);
-            music.startBombMusic();
+            //music.startBombMusic();
         }
     }
     private void CheckExplodedBomb() {
@@ -258,7 +253,7 @@ public class PlayingState extends GameState {
                 if(bomb.getTime()>4000){
                     bomb.setExploded();
                     destroyBlocks(bomb.getPosition());
-                    music.startBombExplosionMusic();
+                    //music.startBombExplosionMusic();
                 }
             }
 

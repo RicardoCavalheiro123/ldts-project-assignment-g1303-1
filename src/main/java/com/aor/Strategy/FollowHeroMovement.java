@@ -2,7 +2,7 @@ package com.aor.Strategy;
 
 
 import com.aor.Models.Element.Robot;
-import com.aor.Positions.Position;
+import com.aor.Models.Positions.Position;
 import com.aor.States.PlayingState;
 
 public class FollowHeroMovement implements Strategy {

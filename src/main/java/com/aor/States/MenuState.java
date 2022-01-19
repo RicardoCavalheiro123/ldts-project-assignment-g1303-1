@@ -4,7 +4,6 @@ import com.aor.BomberMan;
 import com.aor.InputHandler.MenuController;
 import com.aor.LanternaGui.LanternaGUI;
 import com.aor.Models.MenuModels.*;
-import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -29,6 +28,7 @@ public class MenuState extends GameState{
     @Override
     public void start() {
         super.bomberMan.terminal.addKeyListener(menuController);
+        play.setSelected();
     }
 
     @Override
@@ -37,11 +37,11 @@ public class MenuState extends GameState{
         TextGraphics t = super.bomberMan.screen.newTextGraphics();
         t.setBackgroundColor(TextColor.Factory.fromString("#CBE1EF"));
         t.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(LanternaGUI.width, LanternaGUI.height), ' ');
-        t.enableModifiers(SGR.BOLD);
-        t.putString(new TerminalPosition(10, 10), "PLAY");
-        t.putString(new TerminalPosition(20, 20), "SHOP");
-        t.putString(new TerminalPosition(30, 30), "LEADERBOARD");
-        t.putString(new TerminalPosition(40, 40), "EXIT");
+        play.draw(t);
+        shop.draw(t);
+        leaderboard.draw(t);
+        exit.draw(t);
+        Selectable();
         super.bomberMan.screen.refresh();
     }
     private void Selectable(){
@@ -51,11 +51,11 @@ public class MenuState extends GameState{
                 play.setUnselected();
                 shop.setSelected();
             }
-            if(shop.isSelected()){
+            else if(shop.isSelected()){
                 shop.setUnselected();
                 leaderboard.setSelected();
             }
-            if(leaderboard.isSelected()){
+            else if(leaderboard.isSelected()){
                 leaderboard.setUnselected();
                 exit.setSelected();
             }
@@ -66,37 +66,43 @@ public class MenuState extends GameState{
                 exit.setUnselected();
                 leaderboard.setSelected();
             }
-            if(leaderboard.isSelected()){
+            else if(leaderboard.isSelected()){
                 leaderboard.setUnselected();
                 shop.setSelected();
             }
-            if(shop.isSelected()){
+            else if(shop.isSelected()){
                 shop.setUnselected();
                 play.setSelected();
             }
         }
         if(menuController.Enter){
+            menuController.Enter = false;
             doAction();
         }
     }
     private void doAction(){
         if(play.isSelected()){
             try {
+                super.bomberMan.terminal.removeKeyListener(menuController);
                 changeState(new PlayingState(super.bomberMan));
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (FontFormatException e) {
                 e.printStackTrace();
             }
+            return;
         }
         if(shop.isSelected()){
             changeState(null);
+            return;
         }
         if(leaderboard.isSelected()){
             changeState(null);
+            return;
         }
         if(exit.isSelected()){
             changeState(null);
+            return;
         }
 
     }

@@ -1,6 +1,6 @@
 package com.aor.Models.ElementBlock;
 
-import com.aor.Positions.Position;
+import com.aor.Models.Positions.Position;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;

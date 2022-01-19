@@ -12,12 +12,12 @@ public class ExitMenu implements MenuModel{
         if(selected) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#006400"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(30, 30), "-> EXIT");
+            graphics.putString(new TerminalPosition(20, 10), "-> EXIT");
         }
         else {
             graphics.setForegroundColor(TextColor.Factory.fromString("#00bd03"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(30, 30), "EXIT");
+            graphics.putString(new TerminalPosition(20, 10), "EXIT");
         }
     }
 
@@ -32,17 +32,8 @@ public class ExitMenu implements MenuModel{
     }
 
     @Override
-    public void setUnSelected() {
+    public void setUnselected() {
         selected = false;
     }
 
-    @Override
-    public void setSelected() {
-
-    }
-
-    @Override
-    public void setUnselected() {
-
-    }
 }

@@ -1,4 +1,4 @@
-package com.aor.Positions
+package com.aor.Models.Positions
 
 import spock.lang.Specification
 

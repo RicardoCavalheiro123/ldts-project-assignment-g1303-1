@@ -1,23 +1,23 @@
-package com.aor.Models.MenuModels;
+package com.aor.Models.EndGameModel;
 
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
-public class LeaderBoard implements MenuModel{
+public class MenuEnd implements EndGameModel{
     boolean selected;
     @Override
     public void draw(TextGraphics graphics) {
         if(selected) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#006400"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(17, 8), "-> LEADERBOARD");
+            graphics.putString(new TerminalPosition(20, 8), "-> MENU");
         }
         else {
             graphics.setForegroundColor(TextColor.Factory.fromString("#00bd03"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(17, 8), "LEADERBOARD");
+            graphics.putString(new TerminalPosition(20, 8), "MENU");
         }
     }
 
@@ -35,5 +35,4 @@ public class LeaderBoard implements MenuModel{
     public void setUnselected() {
         selected = false;
     }
-
 }

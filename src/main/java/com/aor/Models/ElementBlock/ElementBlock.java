@@ -1,6 +1,6 @@
 package com.aor.Models.ElementBlock;
 
-import com.aor.Positions.Position;
+import com.aor.Models.Positions.Position;
 
 public abstract class ElementBlock implements GameBlock {
     protected Position position;

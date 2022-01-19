@@ -12,12 +12,12 @@ public class Play implements MenuModel{
         if(selected) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#006400"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(10, 10), "-> PLAY");
+            graphics.putString(new TerminalPosition(20, 4), "-> PLAY");
         }
         else {
             graphics.setForegroundColor(TextColor.Factory.fromString("#00bd03"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(10, 10), "PLAY");
+            graphics.putString(new TerminalPosition(20, 4), "PLAY");
         }
     }
 
@@ -32,17 +32,7 @@ public class Play implements MenuModel{
     }
 
     @Override
-    public void setUnSelected() {
-        selected = false;
-    }
-
-    @Override
-    public void setSelected() {
-
-    }
-
-    @Override
     public void setUnselected() {
-
+        selected = false;
     }
 }

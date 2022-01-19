@@ -18,4 +18,8 @@ public abstract class GameState {
     public BomberMan getGame(){
         return bomberMan;
     }
+
+    public void setLastGameState(){
+        this.bomberMan.setLastGameState();
+    }
 }

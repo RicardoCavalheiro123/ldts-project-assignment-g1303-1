@@ -12,12 +12,12 @@ public class ShopMenu implements MenuModel{
         if(selected) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#006400"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20, 20), "-> PLAY");
+            graphics.putString(new TerminalPosition(20, 6), "-> SHOP");
         }
         else {
             graphics.setForegroundColor(TextColor.Factory.fromString("#00bd03"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20, 20), "PLAY");
+            graphics.putString(new TerminalPosition(20, 6), "SHOP");
         }
     }
 
@@ -32,17 +32,8 @@ public class ShopMenu implements MenuModel{
     }
 
     @Override
-    public void setUnSelected() {
+    public void setUnselected() {
         selected = false;
     }
 
-    @Override
-    public void setSelected() {
-
-    }
-
-    @Override
-    public void setUnselected() {
-
-    }
 }

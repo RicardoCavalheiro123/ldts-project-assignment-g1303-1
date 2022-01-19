@@ -5,7 +5,7 @@ import com.aor.LanternaGui.LanternaGUI;
 import com.aor.States.MenuState;
 
 import com.aor.States.GameState;
-import com.aor.States.PlayingState;
+
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
@@ -20,7 +20,7 @@ public class BomberMan {
     private GameState LastGameState;
     public AWTTerminalFrame terminal = LanternaGUI.AWTTerminalFrameFactory();
 
-    public BomberMan() throws IOException, FontFormatException {
+    public BomberMan() throws IOException {
         terminal.setLocationRelativeTo(null);
         terminal.setVisible(true);
         terminal.pack();
@@ -29,7 +29,7 @@ public class BomberMan {
         screen.startScreen();
         screen.setCursorPosition(null);
         screen.doResizeIfNecessary();
-        this.gameState = new PlayingState(this);
+        this.gameState = new MenuState(this);
     }
     public void setGameState(GameState gameState) {
         this.LastGameState = this.gameState;
@@ -65,6 +65,10 @@ public class BomberMan {
 
             }
         }
+        screen.close();
+        terminal.close();
+
+        return;
 
     }
 }
