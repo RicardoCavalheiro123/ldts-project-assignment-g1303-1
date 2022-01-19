@@ -1,6 +1,6 @@
-package com.aor.GameLogic.EndGameLogic
+package com.aor.GameLogic
 
-
+import com.aor.GameLogic.EndGameLogic.Loser
 import spock.lang.Specification
 
 class LoserTest extends Specification {

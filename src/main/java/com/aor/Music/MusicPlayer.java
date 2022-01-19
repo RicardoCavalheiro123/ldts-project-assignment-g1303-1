@@ -5,6 +5,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import java.io.File;
+import java.util.Objects;
 
 public class MusicPlayer {
     private final Clip backgroundMusic, bombMusic, winMusic, loseMusic, bombExplosion, footstep;
@@ -22,7 +23,7 @@ public class MusicPlayer {
 
     private Clip loadMusic() throws NullPointerException{
         try {
-            File musicFile = new File(MusicPlayer.class.getResource("src/main/resources/music/theme_song2.wav").getFile());
+            File musicFile = new File(Objects.requireNonNull(MusicPlayer.class.getResource("/music/theme_song2.wav")).getFile());
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicFile);
             Clip musicClip = AudioSystem.getClip();
             musicClip.open(audioInput);
@@ -36,7 +37,7 @@ public class MusicPlayer {
     }
     private Clip loadBombMusic() throws NullPointerException{
         try {
-            File musicFile = new File(MusicPlayer.class.getResource("src/main/resources/music/bomb.wav").getFile());
+            File musicFile = new File(Objects.requireNonNull(MusicPlayer.class.getResource("/music/bomb.wav")).getFile());
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicFile);
             Clip musicClip = AudioSystem.getClip();
             musicClip.open(audioInput);
@@ -50,7 +51,7 @@ public class MusicPlayer {
     }
     private Clip loadWinMusic() throws NullPointerException{
         try {
-            File musicFile = new File(MusicPlayer.class.getResource("src/main/resources/music/win.wav").getFile());
+            File musicFile = new File(Objects.requireNonNull(MusicPlayer.class.getResource("/music/win.wav")).getFile());
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicFile);
             Clip musicClip = AudioSystem.getClip();
             musicClip.open(audioInput);
@@ -64,7 +65,7 @@ public class MusicPlayer {
     }
     private Clip loadLossMusic() throws NullPointerException{
         try {
-            File musicFile = new File(MusicPlayer.class.getResource("src/main/resources/music/lose.wav").getFile());
+            File musicFile = new File(Objects.requireNonNull(MusicPlayer.class.getResource("/music/lose.wav")).getFile());
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicFile);
             Clip musicClip = AudioSystem.getClip();
             musicClip.open(audioInput);
@@ -78,7 +79,7 @@ public class MusicPlayer {
     }
     private Clip loadBombExplosion() throws NullPointerException{
         try {
-            File musicFile = new File(MusicPlayer.class.getResource("src/main/resources/music/soft_explosion.wav").getFile());
+            File musicFile = new File(Objects.requireNonNull(MusicPlayer.class.getResource("/music/soft_explosion.wav")).getFile());
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicFile);
             Clip musicClip = AudioSystem.getClip();
             musicClip.open(audioInput);
@@ -93,7 +94,7 @@ public class MusicPlayer {
 
     private Clip loadFootStep() throws NullPointerException{
         try {
-            File musicFile = new File(MusicPlayer.class.getResource("src/main/resources/music/footsteps.wav").getFile());
+            File musicFile = new File(Objects.requireNonNull(MusicPlayer.class.getResource("/music/footsteps.wav")).getFile());
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicFile);
             Clip musicClip = AudioSystem.getClip();
             musicClip.open(audioInput);
@@ -136,6 +137,4 @@ public class MusicPlayer {
         footstep.setMicrosecondPosition(0);
         footstep.start();
     }
-
-
 }

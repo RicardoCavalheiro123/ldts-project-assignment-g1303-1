@@ -1,5 +1,6 @@
-package com.aor.GameLogic.EndGameLogic
+package com.aor.GameLogic
 
+import com.aor.GameLogic.EndGameLogic.Winner
 import spock.lang.Specification
 
 class WinnerTest extends Specification {
