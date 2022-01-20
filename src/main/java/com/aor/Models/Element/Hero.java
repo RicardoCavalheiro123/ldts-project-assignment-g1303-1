@@ -6,6 +6,7 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class Hero extends Element {
+    boolean flag = false;
     public Hero(int x, int y) {
         super(x, y);
         hero = true;
@@ -34,6 +35,14 @@ public class Hero extends Element {
     public void draw(TextGraphics graphics) {
         graphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
         graphics.enableModifiers(SGR.BOLD);
-        graphics.putString(new TerminalPosition(super.getPosition().getX(), super.getPosition().getY()), "r");
+        if(flag) {
+            graphics.putString(new TerminalPosition(super.getPosition().getX(), super.getPosition().getY()), "r");
+        }
+        else {
+            graphics.putString(new TerminalPosition(super.getPosition().getX(), super.getPosition().getY()), "h");
+        }
+    }
+    public void notifySkin(){
+        flag = true;
     }
 }

@@ -2,11 +2,11 @@ package com.aor.Leaderboard
 
 import spock.lang.Specification
 
-class LeadTest extends Specification {
+class LeaderboardObjectTest extends Specification {
     private lead;
 
     def setup(){
-        lead = new Lead("D",1)
+        lead = new LeaderboardObject("D",1)
     }
     def "GetName"() {
         expect:
@@ -20,7 +20,7 @@ class LeadTest extends Specification {
 
     def "Equals"() {
         given:
-            def leadAux = new Lead("D",1)
+            def leadAux = new LeaderboardObject("D",1)
         expect:
             lead.equals(leadAux)
     }

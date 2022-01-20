@@ -14,7 +14,7 @@ import java.awt.*;
 import java.io.IOException;
 
 public class MenuState extends GameState{
-    MenuModel play,shop,leaderboard,exit;
+    MenuModel play,shop,leaderboard,exit,options;
     MenuController menuController = new MenuController();
 
     public MenuState(BomberMan game) {
@@ -23,6 +23,7 @@ public class MenuState extends GameState{
         shop = new ShopMenu();
         leaderboard = new LeaderBoard();
         exit = new ExitMenu();
+        options = new OptionsModel();
     }
 
     @Override
@@ -33,6 +34,8 @@ public class MenuState extends GameState{
         leaderboard.setUnselected();
         exit.setUnselected();
         music.startMenuMusic();
+        options.setUnselected();
+
     }
 
     @Override
@@ -44,6 +47,7 @@ public class MenuState extends GameState{
         play.draw(t);
         shop.draw(t);
         leaderboard.draw(t);
+        options.draw(t);
         exit.draw(t);
         Selectable();
         super.bomberMan.screen.refresh();
@@ -61,6 +65,10 @@ public class MenuState extends GameState{
             }
             else if(leaderboard.isSelected()){
                 leaderboard.setUnselected();
+                options.setSelected();
+            }
+            else if(options.isSelected()) {
+                options.setUnselected();
                 exit.setSelected();
             }
         }
@@ -68,6 +76,10 @@ public class MenuState extends GameState{
             menuController.up = false;
             if(exit.isSelected()){
                 exit.setUnselected();
+                options.setSelected();
+            }
+            else if(options.isSelected()) {
+                options.setUnselected();
                 leaderboard.setSelected();
             }
             else if(leaderboard.isSelected()){
@@ -105,7 +117,7 @@ public class MenuState extends GameState{
         }
         if(leaderboard.isSelected()){
             super.bomberMan.terminal.removeKeyListener(menuController);
-            changeState(null);
+            changeState(new LeaderboardState(this.bomberMan));
             return;
         }
         if(exit.isSelected()){
@@ -113,6 +125,10 @@ public class MenuState extends GameState{
             changeState(null);
             return;
         }
-
+        if(options.isSelected()) {
+            super.bomberMan.terminal.removeKeyListener(menuController);
+            changeState(new DifficultyChangeState(this.bomberMan));
+            return;
+        }
     }
 }

@@ -7,6 +7,7 @@ import com.aor.Models.EndGameModel.EndGameModel;
 import com.aor.Models.EndGameModel.MenuEnd;
 import com.aor.Models.EndGameModel.PlayAgainEnd;
 
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -18,10 +19,14 @@ import java.io.IOException;
 public class EndGame extends GameState{
     EndGameModel play,menu;
     MenuController menuController = new MenuController();
-    public EndGame(BomberMan game) {
+    int winBool;
+    long timeCurrent;
+    public EndGame(BomberMan game,int win,long time1) {
         super(game);
         play = new PlayAgainEnd();
         menu = new MenuEnd();
+        winBool = win;
+        timeCurrent = time1;
     }
 
     @Override
@@ -38,8 +43,28 @@ public class EndGame extends GameState{
         t.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(LanternaGUI.width, LanternaGUI.height), ' ');
         play.draw(t);
         menu.draw(t);
+        drawBestScoreUser(t);
         Selectable();
         super.bomberMan.screen.refresh();
+    }
+    private void drawBestScoreUser(TextGraphics graphics){
+        if(winBool == 0 ){
+            graphics.setForegroundColor(TextColor.Factory.fromString("#880808"));
+            graphics.enableModifiers(SGR.BOLD);
+            String s = "YOU LOSE";
+            graphics.putString(new TerminalPosition(18,2 ), s);
+            return;
+        }
+
+        graphics.setForegroundColor(TextColor.Factory.fromString("#FFEA17"));
+        graphics.enableModifiers(SGR.BOLD);
+        String s = "YOUR BEST TIME - " + super.bomberMan.user.getTime();
+        graphics.putString(new TerminalPosition(5,2 ), s);
+
+        graphics.setForegroundColor(TextColor.Factory.fromString("#880808"));
+        graphics.enableModifiers(SGR.BOLD);
+        String t = "CURRENT TIME - " + timeCurrent;
+        graphics.putString(new TerminalPosition(5,4 ), t);
     }
 
     private void Selectable() {

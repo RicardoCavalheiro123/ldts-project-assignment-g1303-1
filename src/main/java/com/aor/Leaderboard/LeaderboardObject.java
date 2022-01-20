@@ -1,10 +1,10 @@
 package com.aor.Leaderboard;
 
-public class Lead {
+public class LeaderboardObject {
     private String playerName;
     private Integer time;
 
-    public Lead(String p, Integer t){
+    public LeaderboardObject(String p, Integer t){
         this.playerName = p;
         this.time = t;
     }
@@ -21,6 +21,6 @@ public class Lead {
         if(o == null || o.getClass() != this.getClass()) return false;
 
         return (this == o) ||
-                (this.time == ((Lead) o).time && this.playerName == ((Lead) o).playerName);
+                (this.time == ((LeaderboardObject) o).time && this.playerName == ((LeaderboardObject) o).playerName);
     }
 }
