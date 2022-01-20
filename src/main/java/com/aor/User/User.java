@@ -1,7 +1,7 @@
 package com.aor.User;
 
 import com.aor.Models.PowerUpModel.PowerUpModel;
-import com.aor.States.Observer.UserObserver;
+
 import com.aor.States.PlayingState;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class User {
     String name;
     long time = 0;
     ArrayList<PowerUpModel> powerUpModels = new ArrayList<>();
-    int balence = 0;
+    int balence = 500;
     public User(String name){
         this.name = name;
     }
@@ -53,6 +53,9 @@ public class User {
         return powerUpModels;
     }
     public boolean deletePowerUp(PowerUpModel powerUpModel){
+        if(powerUpModel == null){
+            return false;
+        }
         for(PowerUpModel x : powerUpModels){
             if(x == powerUpModel){
                 powerUpModels.remove(x);
@@ -65,12 +68,15 @@ public class User {
         powerUpModels.add(powerUpModel);
     }
     public PowerUpModel getNextPowerUpModel(){
-        return powerUpModels.get(0);
+        if(powerUpModels.size() != 0)
+            return powerUpModels.get(0);
+        return null;
     }
     public void ChangeObserver(PlayingState bomberManObserver){
         this.Observer = bomberManObserver;
     }
     public void notifyObserverBegin() {
+        getNextPowerUpModel().startTimer();
         Observer.notifyObserverBeginPowerUp(getNextPowerUpModel());
     }
     public void notifyObserverEnd() {

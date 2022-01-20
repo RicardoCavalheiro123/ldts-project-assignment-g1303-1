@@ -20,7 +20,7 @@ public class IncreaseSpeed implements PowerUpModel {
 
     @Override
     public boolean isExpired() {
-        return (System.currentTimeMillis()-timestarted>5);
+        return (System.currentTimeMillis()-timestarted>10000);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class IncreaseSpeed implements PowerUpModel {
 
     @Override
     public boolean increaseSpeed() {
-        return false;
+        return true;
     }
 
     @Override
