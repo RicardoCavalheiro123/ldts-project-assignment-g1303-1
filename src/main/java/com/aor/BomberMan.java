@@ -5,7 +5,8 @@ import com.aor.LanternaGui.LanternaGUI;
 import com.aor.States.MenuState;
 
 import com.aor.States.GameState;
-import com.aor.States.PlayingState;
+
+import com.aor.User.User;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
@@ -14,12 +15,14 @@ import java.awt.*;
 import java.io.IOException;
 
 public class BomberMan {
+    public User user = new User("Unknown");
     public Screen screen;
     private static BomberMan bomberMan = null;
     private GameState gameState;
+    private GameState LastGameState;
     public AWTTerminalFrame terminal = LanternaGUI.AWTTerminalFrameFactory();
 
-    public BomberMan() throws IOException, FontFormatException {
+    public BomberMan() throws IOException {
         terminal.setLocationRelativeTo(null);
         terminal.setVisible(true);
         terminal.pack();
@@ -28,10 +31,16 @@ public class BomberMan {
         screen.startScreen();
         screen.setCursorPosition(null);
         screen.doResizeIfNecessary();
-        this.gameState = new PlayingState(this);
+        this.gameState = new MenuState(this);
     }
     public void setGameState(GameState gameState) {
+        this.LastGameState = this.gameState;
         this.gameState = gameState;
+        if (gameState != null)
+            this.gameState.start();
+    }
+    public void setLastGameState() {
+        this.gameState = this.LastGameState;
         if (gameState != null)
             this.gameState.start();
     }
@@ -50,7 +59,7 @@ public class BomberMan {
             gameState.update(this);
 
             long elapsedTime = System.currentTimeMillis() - startTime;
-            long sleepTime = 1000 /20 - elapsedTime;
+            long sleepTime = 1000 /60 - elapsedTime;
 
             if (sleepTime > 0) try {
                 Thread.sleep(sleepTime);
@@ -58,6 +67,10 @@ public class BomberMan {
 
             }
         }
+        screen.close();
+        terminal.close();
+
+        return;
 
     }
 }

@@ -1,8 +1,6 @@
 package com.aor.Game
 
-import com.aor.ElementBlock.DestructableBlock
-import com.aor.ElementBlock.Door
-import com.aor.Positions.Position
+
 import spock.lang.Specification
 
 class GameTest extends Specification {
