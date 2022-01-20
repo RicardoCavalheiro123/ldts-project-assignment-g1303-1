@@ -5,7 +5,7 @@ import com.aor.InputHandler.MenuController;
 import com.aor.LanternaGui.LanternaGUI;
 import com.aor.Leaderboard.LeaderboardFactory;
 import com.aor.Leaderboard.LeaderboardObject;
-import com.aor.User.User;
+
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
