@@ -33,7 +33,7 @@ public class MenuState extends GameState{
         shop.setUnselected();
         leaderboard.setUnselected();
         exit.setUnselected();
-        music.startMenuMusic();
+        //music.startMenuMusic();
         options.setUnselected();
 
     }
@@ -99,7 +99,7 @@ public class MenuState extends GameState{
     private void doAction(){
         if(play.isSelected()){
             try {
-                music.endMainMusic();
+                //music.endMainMusic();
                 super.bomberMan.terminal.removeKeyListener(menuController);
                 changeState(new PlayingState(this.bomberMan));
             } catch (IOException e) {

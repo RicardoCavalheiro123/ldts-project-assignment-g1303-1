@@ -6,6 +6,8 @@ import com.aor.States.MenuState;
 
 import com.aor.States.GameState;
 
+import com.aor.Strategy.RandomMovement;
+import com.aor.Strategy.Strategy;
 import com.aor.User.User;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
@@ -15,6 +17,7 @@ import java.awt.*;
 import java.io.IOException;
 
 public class BomberMan {
+    public Strategy strategy = new RandomMovement();
     public User user = new User("USER");
     public Screen screen;
     private static BomberMan bomberMan = null;

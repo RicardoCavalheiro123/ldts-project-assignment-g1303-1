@@ -5,6 +5,8 @@ import com.aor.LanternaGui.LanternaGUI;
 import com.aor.Models.RobotsSettingsModel.DifficultyModel;
 import com.aor.Models.RobotsSettingsModel.EasyRobots;
 import com.aor.Models.RobotsSettingsModel.HardRobots;
+import com.aor.Strategy.FollowHeroMovement;
+import com.aor.Strategy.RandomMovement;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -64,11 +66,13 @@ public class DifficultyChangeState extends GameState {
     }
     private void doAction(){
         if(easy.isSelected()){
+            super.bomberMan.strategy = new RandomMovement();
             super.bomberMan.terminal.removeKeyListener(menuController);
             changeState(new MenuState(this.bomberMan));
             return;
         }
         if(hard.isSelected()){
+            super.bomberMan.strategy = new FollowHeroMovement();
             super.bomberMan.terminal.removeKeyListener(menuController);
             changeState(new MenuState(this.bomberMan));
             return;

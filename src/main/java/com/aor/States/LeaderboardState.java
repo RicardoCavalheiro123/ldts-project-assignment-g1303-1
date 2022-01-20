@@ -112,7 +112,7 @@ public class LeaderboardState extends GameState{
         }
         if(user.isSelected()){
             super.bomberMan.terminal.removeKeyListener(menuController);
-            changeState(new MenuState(this.bomberMan));
+            changeState(new GetNameState(this.bomberMan));
             return;
         }
     }

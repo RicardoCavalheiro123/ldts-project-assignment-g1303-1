@@ -12,12 +12,12 @@ public class ShopMenu implements MenuModel{
         if(selected) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#006400"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20, 6), "-> SHOP");
+            graphics.putString(new TerminalPosition(20, 4), "-> SHOP");
         }
         else {
             graphics.setForegroundColor(TextColor.Factory.fromString("#00bd03"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20, 6), "SHOP");
+            graphics.putString(new TerminalPosition(20, 4), "SHOP");
         }
     }
 

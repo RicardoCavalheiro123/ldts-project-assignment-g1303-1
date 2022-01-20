@@ -20,7 +20,6 @@ public class LeaderboardObject {
     public boolean equals(Object o) {
         if(o == null || o.getClass() != this.getClass()) return false;
 
-        return (this == o) ||
-                (this.time == ((LeaderboardObject) o).time && this.playerName == ((LeaderboardObject) o).playerName);
+        return (this == o) || (this.playerName == ((LeaderboardObject) o).playerName);
     }
 }

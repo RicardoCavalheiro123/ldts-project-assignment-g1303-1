@@ -12,12 +12,12 @@ public class Play implements MenuModel{
         if(selected) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#006400"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20, 4), "-> PLAY");
+            graphics.putString(new TerminalPosition(20, 2), "-> PLAY");
         }
         else {
             graphics.setForegroundColor(TextColor.Factory.fromString("#00bd03"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20, 4), "PLAY");
+            graphics.putString(new TerminalPosition(20, 2), "PLAY");
         }
     }
 

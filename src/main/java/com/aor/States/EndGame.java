@@ -3,6 +3,8 @@ package com.aor.States;
 import com.aor.BomberMan;
 import com.aor.InputHandler.MenuController;
 import com.aor.LanternaGui.LanternaGUI;
+import com.aor.Leaderboard.LeaderboardFactory;
+import com.aor.Leaderboard.LeaderboardObject;
 import com.aor.Models.EndGameModel.EndGameModel;
 import com.aor.Models.EndGameModel.MenuEnd;
 import com.aor.Models.EndGameModel.PlayAgainEnd;
@@ -19,6 +21,7 @@ import java.io.IOException;
 public class EndGame extends GameState{
     EndGameModel play,menu;
     MenuController menuController = new MenuController();
+    LeaderboardFactory leaderboardFactory;
     int winBool;
     long timeCurrent;
     public EndGame(BomberMan game,int win,long time1) {
@@ -33,6 +36,16 @@ public class EndGame extends GameState{
     public void start() {
         super.bomberMan.terminal.addKeyListener(menuController);
         play.setSelected();
+        if(winBool == 1){
+            leaderboardFactory = new LeaderboardFactory("src/main/resources/Leaderboard/leaderboard.txt");
+            try {
+                leaderboardFactory.updateLeaderboardFile(new LeaderboardObject(super.bomberMan.user.getName(), Math.toIntExact(super.bomberMan.user.getTime())));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
     }
 
     @Override

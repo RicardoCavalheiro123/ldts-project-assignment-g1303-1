@@ -43,10 +43,19 @@ public class LeaderboardFactory {
         l.sort(new LeadComparator());
         return l;
     }
-
+    private boolean notinLeaderboard(ArrayList<LeaderboardObject> leaderboard,LeaderboardObject leaderboardObject){
+        for(LeaderboardObject sus:leaderboard){
+            if(leaderboard.equals(leaderboardObject)){
+                return false;
+            }
+        }
+        return true;
+    }
     public void updateLeaderboardFile(LeaderboardObject leaderboardObject) throws IOException {
         ArrayList<LeaderboardObject> leaderboard = getLeaderboardsList();
-        leaderboard.add(leaderboardObject);
+        if(notinLeaderboard(leaderboard,leaderboardObject)){
+            leaderboard.add(leaderboardObject);
+        }
         leaderboard.sort(new LeadComparator());
         PrintWriter erasor = new PrintWriter(fileName);
         erasor.close();
