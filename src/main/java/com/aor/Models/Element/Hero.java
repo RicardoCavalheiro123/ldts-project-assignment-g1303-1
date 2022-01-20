@@ -34,6 +34,6 @@ public class Hero extends Element {
     public void draw(TextGraphics graphics) {
         graphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
         graphics.enableModifiers(SGR.BOLD);
-        graphics.putString(new TerminalPosition(super.getPosition().getX(), super.getPosition().getY()), "h");
+        graphics.putString(new TerminalPosition(super.getPosition().getX(), super.getPosition().getY()), "r");
     }
 }
