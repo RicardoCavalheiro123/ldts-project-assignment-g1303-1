@@ -117,17 +117,20 @@ public class MenuState extends GameState{
         }
         if(leaderboard.isSelected()){
             super.bomberMan.terminal.removeKeyListener(menuController);
+            music.endMainMusic();
             changeState(new LeaderboardState(this.bomberMan));
             return;
         }
         if(exit.isSelected()){
             super.bomberMan.terminal.removeKeyListener(menuController);
             changeState(null);
+            music.endMainMusic();
             return;
         }
         if(options.isSelected()) {
             super.bomberMan.terminal.removeKeyListener(menuController);
             changeState(new DifficultyChangeState(this.bomberMan));
+            music.endMainMusic();
             return;
         }
     }

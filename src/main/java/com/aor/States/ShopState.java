@@ -95,29 +95,35 @@ public class ShopState extends GameState{
         }
         if(skin.isSelected()){
             if(super.bomberMan.user.getBalence()>skin.getPrice()){
+                music.confirmationSfx();
                 super.bomberMan.user.takeFromBalence(skin.getPrice());
                 super.bomberMan.user.addPowerUp(new ChangeSkin());
             }
             else{
                 skin.setRed();
+                music.errorSfx();
             }
         }
         if(fast.isSelected()){
             if(super.bomberMan.user.getBalence()>fast.getPrice()){
+                music.confirmationSfx();
                 super.bomberMan.user.takeFromBalence(fast.getPrice());
                 super.bomberMan.user.addPowerUp(new IncreaseSpeed());
             }
             else{
                 fast.setRed();
+                music.errorSfx();
             }
         }
         if(slow.isSelected()){
             if(super.bomberMan.user.getBalence()>slow.getPrice()){
+                music.confirmationSfx();
                 super.bomberMan.user.takeFromBalence(slow.getPrice());
                 super.bomberMan.user.addPowerUp(new SlowTime());
             }
             else{
                 slow.setRed();
+                music.errorSfx();
             }
         }
     }

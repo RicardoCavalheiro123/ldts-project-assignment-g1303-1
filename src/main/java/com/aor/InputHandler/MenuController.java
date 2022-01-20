@@ -29,7 +29,7 @@ public class MenuController extends KeyAdapter {
         }
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             Enter = true;
-            music.EnterSoundEffect();
+            music.enterSoundEffect();
         }
     }
 }
