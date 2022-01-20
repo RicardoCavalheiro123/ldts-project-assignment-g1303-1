@@ -84,7 +84,7 @@ public class PlayingState extends GameState {
     @Override
     public void start(){
         super.bomberMan.terminal.addKeyListener(gameController);
-        //music.startMusic();
+        music.startMusic();
     }
 
     public void readMap() {
@@ -167,6 +167,7 @@ public class PlayingState extends GameState {
     private boolean update1(){
         gameController.moving = false;
         if(gameController.Menu){
+            music.endMusic();
             gameController.Menu = false;
             super.bomberMan.terminal.removeKeyListener(gameController);
             changeState(new PauseState(this.bomberMan));
@@ -198,6 +199,8 @@ public class PlayingState extends GameState {
 
         if(!bomberman.isAlive()){
             super.bomberMan.terminal.removeKeyListener(gameController);
+            music.endMusic();
+            music.startLoseMusic();
             changeState(new EndGame(this.bomberMan));
             return false;
         }
@@ -209,6 +212,8 @@ public class PlayingState extends GameState {
         for(Robot robot : robots){
             if(robot.getPosition().equals(bomberman.getPosition())){
                 super.bomberMan.terminal.removeKeyListener(gameController);
+                music.endMusic();
+                music.startLoseMusic();
                 changeState(new EndGame(this.bomberMan));
                 return false;
             }
@@ -219,7 +224,7 @@ public class PlayingState extends GameState {
        
 
         if ( gameController.moving) {
-            //music.startFootstep();
+            music.startFootstep();
             if ( gameController.right) {
                 bomberman.moveRight();
                 gameController.right = false;
@@ -236,6 +241,8 @@ public class PlayingState extends GameState {
         }
         if(bomberman.getPosition().equals(door.getPosition())){
             super.bomberMan.terminal.removeKeyListener(gameController);
+            music.endMusic();
+            music.startWinMusic();
             changeState(new EndGame(this.bomberMan));
             return false;
         }
@@ -247,7 +254,7 @@ public class PlayingState extends GameState {
             gameController.setBomb = false;
             Bomb b = new Bomb(new Position(bomberman.getPosition().getX(),bomberman.getPosition().getY()));
             bombs.add(b);
-            //music.startBombMusic();
+            music.startBombMusic();
         }
     }
     private void CheckExplodedBomb() {
@@ -256,7 +263,7 @@ public class PlayingState extends GameState {
                 if(bomb.getTime()>4000){
                     bomb.setExploded();
                     destroyBlocks(bomb.getPosition());
-                    //music.startBombExplosionMusic();
+                    music.startBombExplosionMusic();
                 }
             }
 

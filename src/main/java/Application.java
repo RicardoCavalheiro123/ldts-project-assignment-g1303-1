@@ -8,7 +8,6 @@ import java.net.URISyntaxException;
 public class Application {
 
     public static void main(String[] args) throws IOException, FontFormatException, URISyntaxException, InterruptedException {
-        LeaderboardFactory l = new LeaderboardFactory("src/main/resources/leaderboard/leaderboard.txt");
         BomberMan game = BomberMan.getInstance();
         game.start();
     }
