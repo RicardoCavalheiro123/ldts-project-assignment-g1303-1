@@ -39,7 +39,7 @@ public class PlayingState extends GameState {
     MusicPlayer music;
 
     ArrayList<GameBlock> blocks = new ArrayList<>();
-
+    ArrayList<Explosion> explosions = new ArrayList<>();
     ArrayList<Robot> robots = new ArrayList<>();
     ArrayList<Bomb> bombs = new ArrayList<>();
     ArrayList<Coin> coins = new ArrayList<>();
@@ -176,6 +176,9 @@ public class PlayingState extends GameState {
         for(Coin coin:coins){
             coin.draw(graphics);
         }
+        for(Explosion explode : explosions) {
+            explode.draw(graphics);
+        }
     }
 
 
@@ -188,8 +191,10 @@ public class PlayingState extends GameState {
             changeState(new PauseState(this.bomberMan));
             return false;
         }
+
         CheckAddBomb();
         CheckExplodedBomb();
+        checkExplosions();
         easyRobots();
         if (gameController.right && canMove(new Position(bomberman.getPosition().getX() + 1, bomberman.getPosition().getY()))) {
             gameController.moving = true;
@@ -277,7 +282,6 @@ public class PlayingState extends GameState {
                     //music.startBombExplosionMusic();
                 }
             }
-
         }
     }
 
@@ -301,31 +305,6 @@ public class PlayingState extends GameState {
             bomberman.setAsDead();
         }
         for(int x = 1; x<5;x++){
-
-            if(right) {
-                if (bomberman.getPosition().equals(new Position(p.getX() + (x), p.getY()))) {
-                    bomberman.setAsDead();
-                }
-                verifyRPositionBomb(new Position(p.getX() + (x), p.getY()));
-            }
-            if(left){
-                if(bomberman.getPosition().equals(new Position(p.getX()-(x),p.getY()))){
-                    bomberman.setAsDead();
-                }
-                verifyRPositionBomb(new Position(p.getX()-(x),p.getY()));
-            }
-            if(down) {
-                if (bomberman.getPosition().equals(new Position(p.getX(), p.getY() + x))) {
-                    bomberman.setAsDead();
-                }
-                verifyRPositionBomb(new Position(p.getX(), p.getY() + (x)));
-            }
-            if(up) {
-                if (bomberman.getPosition().equals(new Position(p.getX(), p.getY() - x))) {
-                    bomberman.setAsDead();
-                }
-                verifyRPositionBomb(new Position(p.getX(), p.getY() - (x)));
-            }
 
             for(GameBlock block : blocks) {
                 if(block.IsDestroyed()){
@@ -361,6 +340,39 @@ public class PlayingState extends GameState {
                     block.setDestroyed();
                 }
             }
+
+            if(right) {
+                if (bomberman.getPosition().equals(new Position(p.getX() + (x), p.getY()))) {
+                    bomberman.setAsDead();
+                }
+                Explosion temp = new Explosion(p.getX() + (x), p.getY());
+                explosions.add(temp);
+                verifyRPositionBomb(new Position(p.getX() + (x), p.getY()));
+            }
+            if(left){
+                if(bomberman.getPosition().equals(new Position(p.getX()-(x),p.getY()))){
+                    bomberman.setAsDead();
+                }
+                Explosion temp = new Explosion(p.getX() - (x), p.getY());
+                explosions.add(temp);
+                verifyRPositionBomb(new Position(p.getX()-(x),p.getY()));
+            }
+            if(down) {
+                if (bomberman.getPosition().equals(new Position(p.getX(), p.getY() + x))) {
+                    bomberman.setAsDead();
+                }
+                Explosion temp = new Explosion(p.getX(), p.getY() + (x));
+                explosions.add(temp);
+                verifyRPositionBomb(new Position(p.getX(), p.getY() + (x)));
+            }
+            if(up) {
+                if (bomberman.getPosition().equals(new Position(p.getX(), p.getY() - x))) {
+                    bomberman.setAsDead();
+                }
+                Explosion temp = new Explosion(p.getX(), p.getY() - (x));
+                explosions.add(temp);
+                verifyRPositionBomb(new Position(p.getX(), p.getY() - (x)));
+            }
         }
     }
 
@@ -378,5 +390,14 @@ public class PlayingState extends GameState {
         return bomberman;
     }
 
+    public void checkExplosions() {
+        for(Explosion exp : explosions) {
+            if(!exp.isVanished()) {
+                if(exp.getTime() > 1000) {
+                    exp.setVanished();
+                }
+            }
+        }
+    }
 }
 
