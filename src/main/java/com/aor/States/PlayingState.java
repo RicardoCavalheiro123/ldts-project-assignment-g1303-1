@@ -8,11 +8,14 @@ import com.aor.Models.Element.Robot;
 import com.aor.InputHandler.GameController;
 import com.aor.LanternaGui.LanternaGUI;
 
+import com.aor.Models.PowerUpModel.PowerUpModel;
 import com.aor.Music.MusicPlayer;
 
 
 import com.aor.Models.Positions.Position;
 
+
+import com.aor.States.Observer.UserObserver;
 import com.aor.Strategy.FollowHeroMovement;
 import com.aor.Strategy.RandomMovement;
 import com.aor.Strategy.Strategy;
@@ -30,7 +33,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class PlayingState extends GameState {
+public class PlayingState extends GameState implements UserObserver {
     GameController gameController = new GameController();
 
     private Strategy strategy;
@@ -39,6 +42,8 @@ public class PlayingState extends GameState {
     MusicPlayer music;
 
     ArrayList<GameBlock> blocks = new ArrayList<>();
+
+    PowerUpModel powerUpModelUsing = null;
 
     ArrayList<Robot> robots = new ArrayList<>();
     ArrayList<Bomb> bombs = new ArrayList<>();
@@ -85,9 +90,20 @@ public class PlayingState extends GameState {
     @Override
     public void start(){
         super.bomberMan.terminal.addKeyListener(gameController);
+        super.bomberMan.user.ChangeObserver(this);
         //music.startMusic();
     }
-
+    public void verifyPowerUp(){
+        if(super.bomberMan.user.getPowerUpList().size()>0 && powerUpModelUsing != super.bomberMan.user.getNextPowerUpModel()){
+            super.bomberMan.user.notifyObserverBegin();
+        }
+        else if(powerUpModelUsing == null){
+            return;
+        }
+        else if(powerUpModelUsing.isExpired()){
+            super.bomberMan.user.notifyObserverEnd();
+        }
+    }
     public void readMap() {
         for(int i = 0; i < rows; i++) {
             for(int j = 0; j < cols; j++) {
@@ -148,6 +164,7 @@ public class PlayingState extends GameState {
     @Override
     public void update(BomberMan bomberMan) throws IOException, InterruptedException {
         super.bomberMan.screen.clear();
+        verifyPowerUp();
         update1();
         super.bomberMan.screen.setCursorPosition(null);
         draw(super.bomberMan.screen.newTextGraphics());
@@ -336,6 +353,7 @@ public class PlayingState extends GameState {
                         right = false;
                         continue;
                     }
+
                     right = false;
                     block.setDestroyed();
                 }else if(block.getPosition().equals(new Position(p.getX()-(x),p.getY())) && left){
@@ -343,6 +361,7 @@ public class PlayingState extends GameState {
                         left = false;
                         continue;
                     }
+
                     left = false;
                     block.setDestroyed();
                 }else if(block.getPosition().equals(new Position(p.getX(),p.getY()+(x))) && down){
@@ -350,6 +369,7 @@ public class PlayingState extends GameState {
                         down = false;
                         continue;
                     }
+
                     down = false;
                     block.setDestroyed();
                 }else if(block.getPosition().equals(new Position(p.getX(),p.getY()-(x))) && up){
@@ -378,5 +398,35 @@ public class PlayingState extends GameState {
         return bomberman;
     }
 
+    public void notifyObserverBeginPowerUp(PowerUpModel powerUpModel) {
+        if(powerUpModel.changeSkin()){
+            PlayingState.this.bomberman.notifySkin();
+        }
+        else if(powerUpModel.slowTime()){
+            PlayingState.this.notifyRobotsTimeBegin();
+        }
+        if(powerUpModel.increaseSpeed()){
+            PlayingState.super.bomberMan.changeFps(144);
+        }
+    }
+
+    public void notifyObserverEndPowerUp(PowerUpModel powerUpModel) {
+        if(powerUpModel.slowTime()){
+            PlayingState.this.notifyRobotsTimeEnd();
+        }
+        if(powerUpModel.increaseSpeed()){
+            PlayingState.super.bomberMan.changeFps(30);
+        }
+    }
+    private void notifyRobotsTimeBegin(){
+        for(Robot robot:robots){
+            robot.notifyTimeBegin();
+        }
+    }
+    private void notifyRobotsTimeEnd(){
+        for(Robot robot:robots){
+            robot.notifyTimeEnd();
+        }
+    }
 }
 

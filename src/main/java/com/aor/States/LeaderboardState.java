@@ -9,7 +9,6 @@ import com.aor.Leaderboard.LeaderboardObject;
 import com.aor.Models.LeaderBoardModel.BackMenu;
 import com.aor.Models.LeaderBoardModel.ChangeUser;
 import com.aor.Models.LeaderBoardModel.LeaderBoardModel;
-import com.aor.User.User;
 
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
