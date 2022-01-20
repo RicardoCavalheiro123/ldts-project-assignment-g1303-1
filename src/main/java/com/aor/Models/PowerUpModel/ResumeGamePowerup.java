@@ -15,7 +15,7 @@ public class ResumeGamePowerup implements PowerUpModel{
 
     @Override
     public void startTimer() {
-
+        timestarted = System.currentTimeMillis();
     }
 
     @Override

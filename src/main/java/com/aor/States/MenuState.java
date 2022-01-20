@@ -29,6 +29,9 @@ public class MenuState extends GameState{
     public void start() {
         super.bomberMan.terminal.addKeyListener(menuController);
         play.setSelected();
+        shop.setUnselected();
+        leaderboard.setUnselected();
+        exit.setUnselected();
     }
 
     @Override
@@ -84,7 +87,7 @@ public class MenuState extends GameState{
         if(play.isSelected()){
             try {
                 super.bomberMan.terminal.removeKeyListener(menuController);
-                changeState(new PlayingState(super.bomberMan));
+                changeState(new PlayingState(this.bomberMan));
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (FontFormatException e) {
@@ -93,14 +96,18 @@ public class MenuState extends GameState{
             return;
         }
         if(shop.isSelected()){
-            changeState(null);
+            super.bomberMan.terminal.removeKeyListener(menuController);
+            super.bomberMan.setGameStateBeforeShop(super.bomberMan.getGameLastState());
+            changeState(new ShopState(this.bomberMan));
             return;
         }
         if(leaderboard.isSelected()){
+            super.bomberMan.terminal.removeKeyListener(menuController);
             changeState(null);
             return;
         }
         if(exit.isSelected()){
+            super.bomberMan.terminal.removeKeyListener(menuController);
             changeState(null);
             return;
         }

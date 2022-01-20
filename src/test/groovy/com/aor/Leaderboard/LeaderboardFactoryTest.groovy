@@ -2,11 +2,11 @@ package com.aor.Leaderboard
 
 import spock.lang.Specification
 
-class LeaderboardTest extends Specification {
+class LeaderboardFactoryTest extends Specification {
     private leaderboard
 
     def setup(){
-        leaderboard = new Leaderboard("src/main/resources/leaderboard/leaderboard.txt")
+        leaderboard = new LeaderboardFactory("src/main/resources/leaderboard/leaderboard.txt")
     }
     def "GetLeaderboardsList"() {
         when:

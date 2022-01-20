@@ -4,6 +4,7 @@ import com.aor.BomberMan;
 import com.aor.InputHandler.MenuController;
 import com.aor.LanternaGui.LanternaGUI;
 import com.aor.Models.PowerUpModel.*;
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -34,12 +35,19 @@ public class ShopState extends GameState{
         TextGraphics t = super.bomberMan.screen.newTextGraphics();
         t.setBackgroundColor(TextColor.Factory.fromString("#CBE1EF"));
         t.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(LanternaGUI.width, LanternaGUI.height), ' ');
+        drawBalence(t);
         skin.draw(t);
         fast.draw(t);
         slow.draw(t);
         resume.draw(t);
         Selectable();
         super.bomberMan.screen.refresh();
+    }
+    private void drawBalence(TextGraphics graphics){
+        graphics.setForegroundColor(TextColor.Factory.fromString("#FFEA17"));
+        graphics.enableModifiers(SGR.BOLD);
+        String s = "BALENCE: " + String.valueOf(this.bomberMan.user.getBalence()) + "s";
+        graphics.putString(new TerminalPosition(5,2 ), s);
     }
 
     private void Selectable(){
@@ -82,7 +90,7 @@ public class ShopState extends GameState{
     private void doAction() {
         if(resume.isSelected()){
             super.bomberMan.terminal.removeKeyListener(menuController);
-            super.bomberMan.setLastGameState();
+            super.bomberMan.restoreBeforeShop();
             return;
         }
         if(skin.isSelected()){

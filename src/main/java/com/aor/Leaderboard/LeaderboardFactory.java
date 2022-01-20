@@ -3,9 +3,9 @@ package com.aor.Leaderboard;
 import java.io.*;
 import java.util.ArrayList;
 
-public class Leaderboard {
+public class LeaderboardFactory {
     private String fileName;
-    public Leaderboard(String fileName){
+    public LeaderboardFactory(String fileName){
         this.fileName = fileName;
         try
         {

@@ -15,7 +15,7 @@ public class IncreaseSpeed implements PowerUpModel {
 
     @Override
     public void startTimer() {
-
+        timestarted = System.currentTimeMillis();
     }
 
     @Override
@@ -40,20 +40,25 @@ public class IncreaseSpeed implements PowerUpModel {
 
     @Override
     public void draw(TextGraphics graphics) {
-        if(!selected) {
+        if(!selected && !red) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#00bd03"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,20 ), "-> p (INCREASE SPEED)");
+            graphics.putString(new TerminalPosition(20,6 ), "p (INCREASE SPEED)");
         }
         else if(selected && red) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#880808"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,20 ), "-> p (INCREASE SPEED)");
+            graphics.putString(new TerminalPosition(20,6 ), "-> p (INCREASE SPEED)");
+        }
+        else if(red) {
+            graphics.setForegroundColor(TextColor.Factory.fromString("#880808"));
+            graphics.enableModifiers(SGR.BOLD);
+            graphics.putString(new TerminalPosition(20,6 ), "p (INCREASE SPEED)");
         }
         else if(selected) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#006400"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,20 ), "-> p (INCREASE SPEED)");
+            graphics.putString(new TerminalPosition(20,6 ), "-> p (INCREASE SPEED)");
         }
     }
     @Override

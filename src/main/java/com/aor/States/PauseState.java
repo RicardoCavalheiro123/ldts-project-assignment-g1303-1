@@ -29,6 +29,8 @@ public class PauseState extends GameState{
     public void start() {
         super.bomberMan.terminal.addKeyListener(menuController);
         resume.setSelected();
+        shop.setUnselected();
+        menu.setUnselected();
     }
 
     @Override
@@ -84,7 +86,8 @@ public class PauseState extends GameState{
         }
         if(shop.isSelected()){
             super.bomberMan.terminal.removeKeyListener(menuController);
-            changeState(null);
+            super.bomberMan.setGameStateBeforeShop(super.bomberMan.getGameLastState());
+            changeState(new ShopState(this.bomberMan));
             return;
         }
 

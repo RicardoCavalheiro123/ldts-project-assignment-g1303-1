@@ -18,8 +18,7 @@ public class BomberMan {
     public User user = new User("Unknown");
     public Screen screen;
     private static BomberMan bomberMan = null;
-    private GameState gameState;
-    private GameState LastGameState;
+    private GameState gameState,LastGameState = null,LastBeforeShop = null;
     public AWTTerminalFrame terminal = LanternaGUI.AWTTerminalFrameFactory();
 
     public BomberMan() throws IOException {
@@ -43,6 +42,23 @@ public class BomberMan {
         this.gameState = this.LastGameState;
         if (gameState != null)
             this.gameState.start();
+    }
+    public void restoreBeforeShop(){
+        this.gameState = this.LastGameState;
+        this.LastGameState = this.LastBeforeShop;
+        if (gameState != null)
+            this.gameState.start();
+
+    }
+    public void setGameStateBeforeShop(GameState gameState) {
+        this.LastBeforeShop = gameState;
+
+    }
+    public GameState getGameState(){
+        return this.gameState;
+    }
+    public GameState getGameLastState(){
+        return this.LastGameState;
     }
     public static BomberMan getInstance() throws IOException, FontFormatException {
         if (bomberMan == null) {

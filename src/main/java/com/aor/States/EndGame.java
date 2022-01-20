@@ -66,13 +66,13 @@ public class EndGame extends GameState{
     private void doAction() {
         if(menu.isSelected()){
             super.bomberMan.terminal.removeKeyListener(menuController);
-            changeState(new MenuState(super.bomberMan));
+            changeState(new MenuState(this.bomberMan));
             return;
         }
         if(play.isSelected()){
             super.bomberMan.terminal.removeKeyListener(menuController);
             try {
-                changeState(new PlayingState(super.bomberMan));
+                changeState(new PlayingState(this.bomberMan));
             } catch (IOException | FontFormatException e) {
                 e.printStackTrace();
             }

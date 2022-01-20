@@ -8,14 +8,11 @@ import com.aor.Models.Element.Robot;
 import com.aor.InputHandler.GameController;
 import com.aor.LanternaGui.LanternaGUI;
 
-import com.aor.Leaderboard.Leaderboard;
 import com.aor.Music.MusicPlayer;
-import com.aor.Positions.Position;
 
 
 import com.aor.Models.Positions.Position;
 
-import com.aor.Music.MusicPlayer;
 import com.aor.Strategy.FollowHeroMovement;
 import com.aor.Strategy.RandomMovement;
 import com.aor.Strategy.Strategy;
@@ -172,7 +169,7 @@ public class PlayingState extends GameState {
         if(gameController.Menu){
             gameController.Menu = false;
             super.bomberMan.terminal.removeKeyListener(gameController);
-            changeState(new PauseState(super.bomberMan));
+            changeState(new PauseState(this.bomberMan));
             return false;
         }
         CheckAddBomb();
@@ -201,18 +198,18 @@ public class PlayingState extends GameState {
 
         if(!bomberman.isAlive()){
             super.bomberMan.terminal.removeKeyListener(gameController);
-            changeState(new EndGame(super.bomberMan));
+            changeState(new EndGame(this.bomberMan));
             return false;
         }
         if(robots.size()== 0){
             super.bomberMan.terminal.removeKeyListener(gameController);
-            changeState(new EndGame(super.bomberMan));
+            changeState(new EndGame(this.bomberMan));
             return false;
         }
         for(Robot robot : robots){
             if(robot.getPosition().equals(bomberman.getPosition())){
                 super.bomberMan.terminal.removeKeyListener(gameController);
-                changeState(new EndGame(super.bomberMan));
+                changeState(new EndGame(this.bomberMan));
                 return false;
             }
         }
@@ -239,7 +236,7 @@ public class PlayingState extends GameState {
         }
         if(bomberman.getPosition().equals(door.getPosition())){
             super.bomberMan.terminal.removeKeyListener(gameController);
-            changeState(new EndGame(super.bomberMan));
+            changeState(new EndGame(this.bomberMan));
             return false;
         }
     return true;

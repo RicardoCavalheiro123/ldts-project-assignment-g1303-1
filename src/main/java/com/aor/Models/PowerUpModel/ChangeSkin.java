@@ -15,7 +15,7 @@ public class ChangeSkin implements PowerUpModel {
 
     @Override
     public void startTimer() {
-
+        timestarted = System.currentTimeMillis();
     }
 
     @Override
@@ -40,20 +40,25 @@ public class ChangeSkin implements PowerUpModel {
 
     @Override
     public void draw(TextGraphics graphics) {
-        if(!selected) {
+        if(!selected && !red) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#00bd03"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,20 ), "-> r (CHANGE SKIN)");
+            graphics.putString(new TerminalPosition(20,4 ), "r (CHANGE SKIN)");
         }
         else if(selected && red) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#880808"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,20 ), "-> r (CHANGE SKIN)");
+            graphics.putString(new TerminalPosition(20,4 ), "-> r (CHANGE SKIN)");
+        }
+        else if(red) {
+            graphics.setForegroundColor(TextColor.Factory.fromString("#880808"));
+            graphics.enableModifiers(SGR.BOLD);
+            graphics.putString(new TerminalPosition(20,4 ), "r (CHANGE SKIN)");
         }
         else if(selected) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#006400"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,20 ), "-> r (CHANGE SKIN)");
+            graphics.putString(new TerminalPosition(20,4 ), "-> r (CHANGE SKIN)");
         }
     }
     @Override
