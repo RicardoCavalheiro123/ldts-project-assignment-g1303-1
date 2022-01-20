@@ -19,6 +19,7 @@ public class BomberMan {
     public Screen screen;
     private static BomberMan bomberMan = null;
     private GameState gameState,LastGameState = null,LastBeforeShop = null;
+    private int fps = 30;
     public AWTTerminalFrame terminal = LanternaGUI.AWTTerminalFrameFactory();
 
     public BomberMan() throws IOException {
@@ -67,6 +68,7 @@ public class BomberMan {
         return bomberMan;
     }
     public void start() throws IOException, InterruptedException {
+
         this.gameState.start();
 
         while (gameState != null){
@@ -75,7 +77,7 @@ public class BomberMan {
             gameState.update(this);
 
             long elapsedTime = System.currentTimeMillis() - startTime;
-            long sleepTime = 1000 /60 - elapsedTime;
+            long sleepTime = 1000 /fps - elapsedTime;
 
             if (sleepTime > 0) try {
                 Thread.sleep(sleepTime);
@@ -88,5 +90,8 @@ public class BomberMan {
 
         return;
 
+    }
+    public void changeFps(int fps){
+        this.fps = fps;
     }
 }
