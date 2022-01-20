@@ -23,7 +23,7 @@ public class PauseState extends GameState{
         resume = new ResumePause();
         shop = new ShopPause();
         menu = new MenuPause();
-        music.startMenuMusic();
+        music.startPauseMusic();
     }
 
     @Override
@@ -78,13 +78,13 @@ public class PauseState extends GameState{
         if(menu.isSelected()){
             super.bomberMan.terminal.removeKeyListener(menuController);
             changeState(new MenuState(super.bomberMan));
-            music.endMenuMusic();
+            music.endPauseMusic();
             return;
         }
         if(resume.isSelected()){
             super.bomberMan.terminal.removeKeyListener(menuController);
             setLastGameState();
-            music.endMenuMusic();
+            music.endPauseMusic();
             return;
         }
         if(shop.isSelected()){

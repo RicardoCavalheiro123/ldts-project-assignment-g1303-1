@@ -84,7 +84,7 @@ public class PlayingState extends GameState {
     @Override
     public void start(){
         super.bomberMan.terminal.addKeyListener(gameController);
-        music.startMusic();
+        music.startGameMusic();
     }
 
     public void readMap() {
@@ -167,7 +167,7 @@ public class PlayingState extends GameState {
     private boolean update1(){
         gameController.moving = false;
         if(gameController.Menu){
-            music.endMusic();
+            music.endGameMusic();
             gameController.Menu = false;
             super.bomberMan.terminal.removeKeyListener(gameController);
             changeState(new PauseState(this.bomberMan));
@@ -199,7 +199,7 @@ public class PlayingState extends GameState {
 
         if(!bomberman.isAlive()){
             super.bomberMan.terminal.removeKeyListener(gameController);
-            music.endMusic();
+            music.endGameMusic();
             music.startLoseMusic();
             changeState(new EndGame(this.bomberMan));
             return false;
@@ -212,7 +212,7 @@ public class PlayingState extends GameState {
         for(Robot robot : robots){
             if(robot.getPosition().equals(bomberman.getPosition())){
                 super.bomberMan.terminal.removeKeyListener(gameController);
-                music.endMusic();
+                music.endGameMusic();
                 music.startLoseMusic();
                 changeState(new EndGame(this.bomberMan));
                 return false;
@@ -241,7 +241,7 @@ public class PlayingState extends GameState {
         }
         if(bomberman.getPosition().equals(door.getPosition())){
             super.bomberMan.terminal.removeKeyListener(gameController);
-            music.endMusic();
+            music.endGameMusic();
             music.startWinMusic();
             changeState(new EndGame(this.bomberMan));
             return false;
