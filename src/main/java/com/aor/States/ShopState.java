@@ -90,17 +90,26 @@ public class ShopState extends GameState{
                 super.bomberMan.user.takeFromBalence(skin.getPrice());
                 super.bomberMan.user.addPowerUp(new ChangeSkin());
             }
+            else{
+                skin.setRed();
+            }
         }
         if(fast.isSelected()){
             if(super.bomberMan.user.getBalence()>fast.getPrice()){
                 super.bomberMan.user.takeFromBalence(fast.getPrice());
                 super.bomberMan.user.addPowerUp(new IncreaseSpeed());
             }
+            else{
+                fast.setRed();
+            }
         }
         if(slow.isSelected()){
             if(super.bomberMan.user.getBalence()>slow.getPrice()){
                 super.bomberMan.user.takeFromBalence(slow.getPrice());
                 super.bomberMan.user.addPowerUp(new SlowTime());
+            }
+            else{
+                slow.setRed();
             }
         }
     }
