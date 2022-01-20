@@ -7,11 +7,11 @@ import java.io.IOException;
 
 public abstract class GameState {
     protected final BomberMan bomberMan;
-    MusicPlayer music;
+    //MusicPlayer music;
 
     public GameState(BomberMan game) {
         this.bomberMan = game;
-        music = new MusicPlayer();
+        //music = new MusicPlayer();
     }
     public abstract void start();
     public abstract void update(BomberMan bomberMan) throws IOException, InterruptedException;

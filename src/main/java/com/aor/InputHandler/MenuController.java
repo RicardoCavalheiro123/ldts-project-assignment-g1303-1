@@ -21,15 +21,15 @@ public class MenuController extends KeyAdapter {
 
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             up = true;
-            music.startScrollSound();
+            //music.startScrollSound();
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             down = true;
-            music.startScrollSound();
+            //music.startScrollSound();
         }
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             Enter = true;
-            music.EnterSoundEffect();
+            //music.EnterSoundEffect();
         }
     }
 }
