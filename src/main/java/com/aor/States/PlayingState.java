@@ -419,7 +419,7 @@ public class PlayingState extends GameState implements UserObserver{
     public void checkExplosions() {
         for (Explosion exp : explosions) {
             if (!exp.isVanished()) {
-                if (exp.getTime() > 1000) {
+                if (exp.getTime() > 250) {
                     exp.setVanished();
                 }
             }
