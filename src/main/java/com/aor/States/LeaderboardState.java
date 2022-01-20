@@ -5,6 +5,9 @@ import com.aor.InputHandler.MenuController;
 import com.aor.LanternaGui.LanternaGUI;
 import com.aor.Leaderboard.LeaderboardFactory;
 import com.aor.Leaderboard.LeaderboardObject;
+import com.aor.Models.LeaderBoardModel.BackMenu;
+import com.aor.Models.LeaderBoardModel.ChangeUser;
+import com.aor.Models.LeaderBoardModel.LeaderBoardModel;
 import com.aor.User.User;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
@@ -17,18 +20,23 @@ import java.util.ArrayList;
 
 
 public class LeaderboardState extends GameState{
+    LeaderBoardModel user,menu;
     ArrayList<LeaderboardObject> leaderboardObjects;
     LeaderboardFactory leaderboardFactory;
     MenuController menuController = new MenuController();
     public LeaderboardState(BomberMan game) {
         super(game);
         leaderboardFactory = new LeaderboardFactory("src/main/resources/Leaderboard/leaderboard.txt");
+        user = new ChangeUser();
+        menu = new BackMenu();
     }
 
     @Override
     public void start() {
         super.bomberMan.terminal.addKeyListener(menuController);
         leaderboardObjects = leaderboardFactory.getLeaderboardsList();
+        menu.setSelected();
+        user.setUnselected();
     }
 
     @Override
@@ -40,7 +48,8 @@ public class LeaderboardState extends GameState{
         drawLeaderBoard(t);
         drawBestScoreUser(t);
         drawText(t);
-        drawMenuButton(t);
+        menu.draw(t);
+        user.draw(t);
         Selectable();
         super.bomberMan.screen.refresh();
     }
@@ -62,11 +71,6 @@ public class LeaderboardState extends GameState{
         }
 
     }
-    private void drawMenuButton(TextGraphics graphics){
-        graphics.setForegroundColor(TextColor.Factory.fromString("#006400"));
-        graphics.enableModifiers(SGR.BOLD);
-        graphics.putString(new TerminalPosition(2,1 ), "-> MENU");
-    }
     private void drawText(TextGraphics graphics){
         graphics.setForegroundColor(TextColor.Factory.fromString("#880808"));
         graphics.enableModifiers(SGR.BOLD);
@@ -79,17 +83,36 @@ public class LeaderboardState extends GameState{
         graphics.putString(new TerminalPosition(30,2 ), s);
     }
 
-    private void Selectable() {
+    private void Selectable(){
+        if(menuController.down){
+            menuController.down = false;
+            if(menu.isSelected()){
+                menu.setUnselected();
+                user.setSelected();
+            }
+        }
+        if(menuController.up){
+            menuController.up = false;
+            if(user.isSelected()){
+                user.setUnselected();
+                menu.setSelected();
+            }
+        }
         if(menuController.Enter){
             menuController.Enter = false;
             doAction();
         }
     }
-
-    private void doAction() {
-        super.bomberMan.terminal.removeKeyListener(menuController);
-        changeState(new MenuState(super.bomberMan));
+    private void doAction(){
+        if(menu.isSelected()){
+            super.bomberMan.terminal.removeKeyListener(menuController);
+            changeState(new MenuState(this.bomberMan));
+            return;
+        }
+        if(user.isSelected()){
+            super.bomberMan.terminal.removeKeyListener(menuController);
+            changeState(new MenuState(this.bomberMan));
+            return;
+        }
     }
-
-
 }
