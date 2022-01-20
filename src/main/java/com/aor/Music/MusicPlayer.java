@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.Objects;
 
 public class MusicPlayer {
-    private final Clip backgroundMusic, bombMusic, winMusic, loseMusic, bombExplosion, footstep, scroll, pauseMusic, enter, mainMenu;
+    private final Clip backgroundMusic, bombMusic, winMusic, loseMusic, bombExplosion, footstep, scroll, pauseMusic, enter, mainMenu, error, confirmation;
 
 
 
@@ -23,6 +23,8 @@ public class MusicPlayer {
         this.pauseMusic = loadPauseMusic();
         this.enter = loadEnterSfx();
         this.mainMenu = loadMainMenuMusic();
+        this.error = loadErrorSfx();
+        this.confirmation = loadConfirmationSfx();
     }
 
     private Clip loadMusic() throws NullPointerException{
@@ -167,6 +169,34 @@ public class MusicPlayer {
         }
         return null;
     }
+    private Clip loadConfirmationSfx() throws NullPointerException{
+        try {
+            File musicFile = new File(Objects.requireNonNull(MusicPlayer.class.getResource("/music/confirmation.wav")).getFile());
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicFile);
+            Clip musicClip = AudioSystem.getClip();
+            musicClip.open(audioInput);
+            FloatControl gainControl = (FloatControl) musicClip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-20.0f);
+            return musicClip;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    private Clip loadErrorSfx() throws NullPointerException{
+        try {
+            File musicFile = new File(Objects.requireNonNull(MusicPlayer.class.getResource("/music/error.wav")).getFile());
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicFile);
+            Clip musicClip = AudioSystem.getClip();
+            musicClip.open(audioInput);
+            FloatControl gainControl = (FloatControl) musicClip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-20.0f);
+            return musicClip;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     public void startBombMusic() {
         bombMusic.setMicrosecondPosition(0);
         bombMusic.start();
@@ -218,8 +248,16 @@ public class MusicPlayer {
         scroll.setMicrosecondPosition(0);
         scroll.start();
     }
-    public void EnterSoundEffect() {
+    public void enterSoundEffect() {
         enter.setMicrosecondPosition(0);
         enter.start();
+    }
+    public void errorSfx() {
+        error.setMicrosecondPosition(0);
+        error.start();
+    }
+    public void confirmationSfx() {
+        confirmation.setMicrosecondPosition(0);
+        confirmation.start();
     }
 }

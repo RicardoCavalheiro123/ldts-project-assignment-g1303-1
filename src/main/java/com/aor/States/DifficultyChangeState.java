@@ -42,7 +42,7 @@ public class DifficultyChangeState extends GameState {
         super.bomberMan.screen.refresh();
     }
 
-    private void Selectable(){
+    private void Selectable() throws InterruptedException {
         if(menuController.down){
             menuController.down = false;
             if(easy.isSelected()){
@@ -59,6 +59,8 @@ public class DifficultyChangeState extends GameState {
         }
         if(menuController.Enter){
             menuController.Enter = false;
+            music.confirmationSfx();
+            Thread.sleep(500);
             doAction();
         }
     }
