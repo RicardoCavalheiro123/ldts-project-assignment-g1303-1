@@ -1,4 +1,4 @@
 PlayerName,Time
-Diogo,10
-Ricardo,50
-Joao,212
+DIOGO,10
+RICARDO,50
+JOAO,212

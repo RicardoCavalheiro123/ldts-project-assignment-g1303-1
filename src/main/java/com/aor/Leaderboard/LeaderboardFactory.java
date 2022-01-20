@@ -25,14 +25,14 @@ public class LeaderboardFactory {
         }
 
     }
-    public ArrayList<Lead> getLeaderboardsList(){
-        ArrayList<Lead> l = new ArrayList<Lead>();
+    public ArrayList<LeaderboardObject> getLeaderboardsList(){
+        ArrayList<LeaderboardObject> l = new ArrayList<LeaderboardObject>();
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
             line = br.readLine();
             while ((line = br.readLine()) != null) {
                 String parts[] = line.split(",");
-                Lead l2 = new Lead(parts[0].toString(),Integer.parseInt(parts[1].toString()));
+                LeaderboardObject l2 = new LeaderboardObject(parts[0].toString(),Integer.parseInt(parts[1].toString()));
                 l.add(l2);
             }
         }
@@ -44,15 +44,15 @@ public class LeaderboardFactory {
         return l;
     }
 
-    public void updateLeaderboardFile(Lead lead) throws IOException {
-        ArrayList<Lead> leaderboard = getLeaderboardsList();
-        leaderboard.add(lead);
+    public void updateLeaderboardFile(LeaderboardObject leaderboardObject) throws IOException {
+        ArrayList<LeaderboardObject> leaderboard = getLeaderboardsList();
+        leaderboard.add(leaderboardObject);
         leaderboard.sort(new LeadComparator());
         PrintWriter erasor = new PrintWriter(fileName);
         erasor.close();
         FileWriter myWriter = new FileWriter(fileName);
         myWriter.write("PlayerName,Time");
-        for(Lead l1 : leaderboard){
+        for(LeaderboardObject l1 : leaderboard){
             Integer time = l1.getTime();
             String name = l1.getName();
             myWriter.write("\n" +name + "," + time.toString());

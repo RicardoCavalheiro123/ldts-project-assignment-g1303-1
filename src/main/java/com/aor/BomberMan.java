@@ -15,7 +15,7 @@ import java.awt.*;
 import java.io.IOException;
 
 public class BomberMan {
-    public User user = new User("Unknown");
+    public User user = new User("USER");
     public Screen screen;
     private static BomberMan bomberMan = null;
     private GameState gameState,LastGameState = null,LastBeforeShop = null;

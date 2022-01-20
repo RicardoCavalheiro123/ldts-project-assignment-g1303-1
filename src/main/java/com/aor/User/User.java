@@ -18,6 +18,18 @@ public class User {
     public void addTime(long timeToAdd){
         time = time + timeToAdd;
     }
+    public void setTime(long time){
+        if(this.time == 0){
+            this.time = time;
+        }
+        else if(time>this.time){
+            return;
+        }
+        this.time = time;
+    }
+    public long getTime(){
+        return time;
+    }
     public int getBalence(){
         return balence;
     }
@@ -30,6 +42,9 @@ public class User {
         }else {
             balence = 0;
         }
+    }
+    public String getName(){
+        return name;
     }
     public ArrayList<PowerUpModel> getPowerUpList(){
         return powerUpModels;

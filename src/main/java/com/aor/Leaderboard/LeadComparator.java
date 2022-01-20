@@ -2,9 +2,9 @@ package com.aor.Leaderboard;
 
 import java.util.Comparator;
 
-class LeadComparator implements Comparator<Lead> {
+class LeadComparator implements Comparator<LeaderboardObject> {
 
-    public int compare(Lead s1, Lead s2)
+    public int compare(LeaderboardObject s1, LeaderboardObject s2)
     {
         if (s1.getName() == s2.getName() && s1.getTime() == s2.getTime())
             return 0;

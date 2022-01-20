@@ -198,18 +198,19 @@ public class PlayingState extends GameState {
 
         if(!bomberman.isAlive()){
             super.bomberMan.terminal.removeKeyListener(gameController);
-            changeState(new EndGame(this.bomberMan));
+            changeState(new EndGame(this.bomberMan,0,0));
             return false;
         }
         if(robots.size()== 0){
             super.bomberMan.terminal.removeKeyListener(gameController);
-            changeState(new EndGame(this.bomberMan));
+            super.bomberMan.user.setTime((System.currentTimeMillis()-time)/1000);
+            changeState(new EndGame(this.bomberMan,1,(System.currentTimeMillis()-time)/1000));
             return false;
         }
         for(Robot robot : robots){
             if(robot.getPosition().equals(bomberman.getPosition())){
                 super.bomberMan.terminal.removeKeyListener(gameController);
-                changeState(new EndGame(this.bomberMan));
+                changeState(new EndGame(this.bomberMan,0,0));
                 return false;
             }
         }
@@ -236,7 +237,8 @@ public class PlayingState extends GameState {
         }
         if(bomberman.getPosition().equals(door.getPosition())){
             super.bomberMan.terminal.removeKeyListener(gameController);
-            changeState(new EndGame(this.bomberMan));
+            super.bomberMan.user.setTime((System.currentTimeMillis()-time)/1000);
+            changeState(new EndGame(this.bomberMan,1,(System.currentTimeMillis()-time)/1000));
             return false;
         }
     return true;

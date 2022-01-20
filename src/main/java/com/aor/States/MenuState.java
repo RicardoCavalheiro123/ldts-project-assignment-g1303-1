@@ -103,7 +103,7 @@ public class MenuState extends GameState{
         }
         if(leaderboard.isSelected()){
             super.bomberMan.terminal.removeKeyListener(menuController);
-            changeState(null);
+            changeState(new LeaderboardState(this.bomberMan));
             return;
         }
         if(exit.isSelected()){
