@@ -94,8 +94,11 @@ public class PlayingState extends GameState implements UserObserver{
     @Override
     public void start() {
         super.bomberMan.terminal.addKeyListener(gameController);
+
+        music.startGameMusic();
+
         super.bomberMan.user.ChangeObserver(this);
-        //music.startMusic();
+
     }
 
     public void verifyPowerUp() {
@@ -208,7 +211,10 @@ public class PlayingState extends GameState implements UserObserver{
 
     private boolean update1() {
         gameController.moving = false;
-        if (gameController.Menu) {
+
+        if(gameController.Menu){
+            music.endGameMusic();
+
             gameController.Menu = false;
             super.bomberMan.terminal.removeKeyListener(gameController);
             changeState(new PauseState(this.bomberMan));
@@ -242,7 +248,12 @@ public class PlayingState extends GameState implements UserObserver{
 
         if (!bomberman.isAlive()) {
             super.bomberMan.terminal.removeKeyListener(gameController);
+
+            music.endGameMusic();
+            music.startLoseMusic();
+
             changeState(new EndGame(this.bomberMan, 0, 0));
+
             return false;
         }
         if (robots.size() == 0) {
@@ -254,15 +265,24 @@ public class PlayingState extends GameState implements UserObserver{
         for (Robot robot : robots) {
             if (robot.getPosition().equals(bomberman.getPosition())) {
                 super.bomberMan.terminal.removeKeyListener(gameController);
+
+                music.endGameMusic();
+                music.startLoseMusic();
+              
                 changeState(new EndGame(this.bomberMan, 0, 0));
+
                 return false;
             }
         }
 
 
-        if (gameController.moving) {
-            //music.startFootstep();
-            if (gameController.right) {
+
+
+       
+
+        if ( gameController.moving) {
+            music.startFootstep();
+            if ( gameController.right) {
                 bomberman.moveRight();
                 gameController.right = false;
             } else if (gameController.left) {
@@ -278,8 +298,12 @@ public class PlayingState extends GameState implements UserObserver{
         }
         if (bomberman.getPosition().equals(door.getPosition())) {
             super.bomberMan.terminal.removeKeyListener(gameController);
+
+            music.endGameMusic();
+            music.startWinMusic();
             super.bomberMan.user.setTime((System.currentTimeMillis() - time) / 1000);
             changeState(new EndGame(this.bomberMan, 1, (System.currentTimeMillis() - time) / 1000));
+          
             return false;
         }
         return true;
@@ -290,7 +314,7 @@ public class PlayingState extends GameState implements UserObserver{
             gameController.setBomb = false;
             Bomb b = new Bomb(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY()));
             bombs.add(b);
-            //music.startBombMusic();
+            music.startBombMusic();
         }
     }
 
@@ -300,7 +324,7 @@ public class PlayingState extends GameState implements UserObserver{
                 if (bomb.getTime() > 4000) {
                     bomb.setExploded();
                     destroyBlocks(bomb.getPosition());
-                    //music.startBombExplosionMusic();
+                    music.startBombExplosionMusic();
                 }
             }
         }
