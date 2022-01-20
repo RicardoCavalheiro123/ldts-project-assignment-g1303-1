@@ -9,7 +9,6 @@ import com.aor.InputHandler.GameController;
 import com.aor.LanternaGui.LanternaGUI;
 
 import com.aor.Models.PowerUpModel.PowerUpModel;
-import com.aor.Music.MusicPlayer;
 
 
 import com.aor.Models.Positions.Position;
@@ -36,7 +35,6 @@ import java.util.ArrayList;
 public class PlayingState extends GameState implements UserObserver{
     GameController gameController = new GameController();
 
-    private Strategy strategy;
     Hero bomberman;
     Door door;
 
@@ -93,7 +91,6 @@ public class PlayingState extends GameState implements UserObserver{
     @Override
     public void start() {
         super.bomberMan.terminal.addKeyListener(gameController);
-
         //music.startGameMusic();
 
         super.bomberMan.user.ChangeObserver(this);
@@ -160,7 +157,7 @@ public class PlayingState extends GameState implements UserObserver{
             }
         }
         for (Coin coin : coins) {
-            if (coin.getPosition().equals(bomberman.getPosition())) {
+            if (coin.getPosition().equals(position)) {
                 coin.setDestroyed();
                 coins.remove(coin);
                 super.bomberMan.user.addToBalence(1);
@@ -223,7 +220,9 @@ public class PlayingState extends GameState implements UserObserver{
         CheckAddBomb();
         CheckExplodedBomb();
         checkExplosions();
-        easyRobots();
+
+        super.bomberMan.strategy.moveRobot(this);
+
         if (gameController.right && canMove(new Position(bomberman.getPosition().getX() + 1, bomberman.getPosition().getY()))) {
             gameController.moving = true;
         } else {
@@ -422,16 +421,6 @@ public class PlayingState extends GameState implements UserObserver{
                 verifyRPositionBomb(new Position(p.getX(), p.getY() - (x)));
             }
         }
-    }
-
-    public void easyRobots() {
-        this.strategy = new RandomMovement();
-        strategy.moveRobot(this);
-    }
-
-    public void hardRobots() {
-        this.strategy = new FollowHeroMovement();
-        strategy.moveRobot(this);
     }
 
     public Hero getHero() {

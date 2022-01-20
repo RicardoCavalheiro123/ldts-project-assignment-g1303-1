@@ -12,12 +12,12 @@ public class LeaderBoard implements MenuModel{
         if(selected) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#006400"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(17, 8), "-> LEADERBOARD");
+            graphics.putString(new TerminalPosition(17, 6), "-> LEADERBOARD");
         }
         else {
             graphics.setForegroundColor(TextColor.Factory.fromString("#00bd03"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(17, 8), "LEADERBOARD");
+            graphics.putString(new TerminalPosition(17, 6), "LEADERBOARD");
         }
     }
 

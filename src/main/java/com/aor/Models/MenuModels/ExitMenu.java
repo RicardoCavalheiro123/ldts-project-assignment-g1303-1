@@ -12,12 +12,12 @@ public class ExitMenu implements MenuModel{
         if(selected) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#006400"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20, 12), "-> EXIT");
+            graphics.putString(new TerminalPosition(20, 10), "-> EXIT");
         }
         else {
             graphics.setForegroundColor(TextColor.Factory.fromString("#00bd03"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20, 12), "EXIT");
+            graphics.putString(new TerminalPosition(20, 10), "EXIT");
         }
     }
 
