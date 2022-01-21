@@ -460,7 +460,7 @@ public class PlayingState extends GameState implements UserObserver{
             this.notifyRobotsTimeBegin();
         }
         if (powerUpModel.increaseSpeed()) {
-            super.bomberMan.changeFps(1000);
+            super.bomberMan.changeFps(190);
         }
     }
     @Override
