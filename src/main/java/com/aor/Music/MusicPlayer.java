@@ -199,6 +199,9 @@ public class MusicPlayer {
     }
     public void startBombMusic() {
         try {
+            if(bombMusic.isRunning()){
+                bombMusic.stop();
+            }
             bombMusic.setMicrosecondPosition(0);
             bombMusic.start();
         }catch (Exception e){
@@ -207,6 +210,9 @@ public class MusicPlayer {
     }
     public void startGameMusic() {
         try {
+            if(backgroundMusic.isRunning()){
+                backgroundMusic.stop();
+            }
             backgroundMusic.setMicrosecondPosition(0);
             backgroundMusic.start();
             backgroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
@@ -224,6 +230,9 @@ public class MusicPlayer {
     }
     public void startMenuMusic() {
         try {
+            if(mainMenu.isRunning()){
+                mainMenu.stop();
+            }
             mainMenu.setMicrosecondPosition(0);
             mainMenu.start();
             mainMenu.loop(Clip.LOOP_CONTINUOUSLY);
@@ -241,6 +250,9 @@ public class MusicPlayer {
 
     public void startPauseMusic() {
         try {
+            if(pauseMusic.isRunning()){
+                pauseMusic.stop();
+            }
             pauseMusic.setMicrosecondPosition(0);
             pauseMusic.start();
             pauseMusic.loop(Clip.LOOP_CONTINUOUSLY);
@@ -259,6 +271,9 @@ public class MusicPlayer {
 
     public void startWinMusic() {
         try {
+            if(winMusic.isRunning()){
+                winMusic.stop();
+            }
             winMusic.setMicrosecondPosition(0);
             winMusic.start();
         }catch (Exception e){
@@ -267,6 +282,9 @@ public class MusicPlayer {
     }
     public void startLoseMusic() {
         try {
+            if(loseMusic.isRunning()){
+                loseMusic.stop();
+            }
             loseMusic.setMicrosecondPosition(0);
             loseMusic.start();
         }catch (Exception e){
@@ -275,6 +293,9 @@ public class MusicPlayer {
     }
     public void startBombExplosionMusic() {
         try {
+            if(bombExplosion.isRunning()){
+                bombExplosion.stop();
+            }
             bombExplosion.setMicrosecondPosition(0);
             bombExplosion.start();
         }catch (Exception e){
@@ -283,6 +304,9 @@ public class MusicPlayer {
     }
     public void startFootstep() {
         try {
+            if(footstep.isRunning()){
+                footstep.stop();
+            }
             footstep.setMicrosecondPosition(0);
             footstep.start();
         }catch (Exception e){
@@ -291,6 +315,9 @@ public class MusicPlayer {
     }
     public void startScrollSound() {
         try {
+            if(scroll.isRunning()){
+                scroll.stop();
+            }
             scroll.setMicrosecondPosition(0);
             scroll.start();
         }catch (Exception e){
@@ -299,6 +326,9 @@ public class MusicPlayer {
     }
     public void enterSoundEffect() {
         try {
+            if(enter.isRunning()){
+                enter.stop();
+            }
             enter.setMicrosecondPosition(0);
             enter.start();
         }catch (Exception e){
@@ -307,6 +337,9 @@ public class MusicPlayer {
     }
     public void errorSfx() {
         try {
+            if(error.isRunning()){
+                error.stop();
+            }
             error.setMicrosecondPosition(0);
             error.start();
         }catch (Exception e){
@@ -315,6 +348,9 @@ public class MusicPlayer {
     }
     public void confirmationSfx() {
         try {
+            if(confirmation.isRunning()){
+                confirmation.stop();
+            }
             confirmation.setMicrosecondPosition(0);
             confirmation.start();
         }catch (Exception e){
