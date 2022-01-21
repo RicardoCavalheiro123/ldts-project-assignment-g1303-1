@@ -198,66 +198,127 @@ public class MusicPlayer {
         return null;
     }
     public void startBombMusic() {
-        bombMusic.setMicrosecondPosition(0);
-        bombMusic.start();
+        try {
+            bombMusic.setMicrosecondPosition(0);
+            bombMusic.start();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public void startGameMusic() {
-        backgroundMusic.setMicrosecondPosition(0);
-        backgroundMusic.start();
-        backgroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
+        try {
+            backgroundMusic.setMicrosecondPosition(0);
+            backgroundMusic.start();
+            backgroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public void endGameMusic() {
-        backgroundMusic.stop();
+        try {
+            backgroundMusic.stop();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
     public void startMenuMusic() {
-        mainMenu.setMicrosecondPosition(0);
-        mainMenu.start();
-        mainMenu.loop(Clip.LOOP_CONTINUOUSLY);
+        try {
+            mainMenu.setMicrosecondPosition(0);
+            mainMenu.start();
+            mainMenu.loop(Clip.LOOP_CONTINUOUSLY);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public void endMainMusic() {
-        mainMenu.stop();
+        try {
+            mainMenu.stop();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void startPauseMusic() {
-        pauseMusic.setMicrosecondPosition(0);
-        pauseMusic.start();
-        pauseMusic.loop(Clip.LOOP_CONTINUOUSLY);
+        try {
+            pauseMusic.setMicrosecondPosition(0);
+            pauseMusic.start();
+            pauseMusic.loop(Clip.LOOP_CONTINUOUSLY);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public void endPauseMusic() {
-        pauseMusic.stop();
+        try {
+            pauseMusic.stop();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
     public void startWinMusic() {
-        winMusic.setMicrosecondPosition(0);
-        winMusic.start();
+        try {
+            winMusic.setMicrosecondPosition(0);
+            winMusic.start();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public void startLoseMusic() {
-        loseMusic.setMicrosecondPosition(0);
-        loseMusic.start();
+        try {
+            loseMusic.setMicrosecondPosition(0);
+            loseMusic.start();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public void startBombExplosionMusic() {
-        bombExplosion.setMicrosecondPosition(0);
-        bombExplosion.start();
+        try {
+            bombExplosion.setMicrosecondPosition(0);
+            bombExplosion.start();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public void startFootstep() {
-        footstep.setMicrosecondPosition(0);
-        footstep.start();
+        try {
+            footstep.setMicrosecondPosition(0);
+            footstep.start();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public void startScrollSound() {
-        scroll.setMicrosecondPosition(0);
-        scroll.start();
+        try {
+            scroll.setMicrosecondPosition(0);
+            scroll.start();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public void enterSoundEffect() {
-        enter.setMicrosecondPosition(0);
-        enter.start();
+        try {
+            enter.setMicrosecondPosition(0);
+            enter.start();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public void errorSfx() {
-        error.setMicrosecondPosition(0);
-        error.start();
+        try {
+            error.setMicrosecondPosition(0);
+            error.start();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public void confirmationSfx() {
-        confirmation.setMicrosecondPosition(0);
-        confirmation.start();
+        try {
+            confirmation.setMicrosecondPosition(0);
+            confirmation.start();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
