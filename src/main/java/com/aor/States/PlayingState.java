@@ -16,9 +16,7 @@ import com.aor.Models.Positions.Position;
 
 import com.aor.Music.MusicPlayer;
 import com.aor.States.Observer.UserObserver;
-import com.aor.Strategy.FollowHeroMovement;
-import com.aor.Strategy.RandomMovement;
-import com.aor.Strategy.Strategy;
+
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -43,6 +41,7 @@ public class PlayingState extends GameState implements UserObserver{
 
     ArrayList<Explosion> explosions = new ArrayList<>();
 
+    private long timerToBomUp;
 
     PowerUpModel powerUpModelUsing = null;
 
@@ -87,6 +86,7 @@ public class PlayingState extends GameState implements UserObserver{
         readMap();
         time = System.currentTimeMillis();
         music = new MusicPlayer();
+        timerToBomUp = System.currentTimeMillis();
     }
 
     @Override
@@ -295,6 +295,14 @@ public class PlayingState extends GameState implements UserObserver{
                 bomberman.moveDown();
                 gameController.down = false;
             }
+            for (Coin coin : coins) {
+                if (coin.getPosition().equals(bomberman.getPosition())) {
+                    coin.setDestroyed();
+                    coins.remove(coin);
+                    super.bomberMan.user.addToBalence(1);
+                    break;
+                }
+            }
         }
         if (bomberman.getPosition().equals(door.getPosition())) {
             super.bomberMan.terminal.removeKeyListener(gameController);
@@ -303,14 +311,18 @@ public class PlayingState extends GameState implements UserObserver{
             music.startWinMusic();
             super.bomberMan.user.setTime((System.currentTimeMillis() - time) / 1000);
             changeState(new EndGame(this.bomberMan, 1, (System.currentTimeMillis() - time) / 1000));
-          
+
             return false;
         }
         return true;
     }
 
     private void CheckAddBomb() {
+        if(!(System.currentTimeMillis() -timerToBomUp > 250)){
+            return;
+        }
         if (gameController.setBomb) {
+            timerToBomUp = System.currentTimeMillis();
             gameController.setBomb = false;
             Bomb b = new Bomb(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY()));
             bombs.add(b);

@@ -210,7 +210,7 @@ public class MusicPlayer {
         backgroundMusic.stop();
     }
     public void startMenuMusic() {
-        //mainMenu.setMicrosecondPosition(0);
+        mainMenu.setMicrosecondPosition(0);
         mainMenu.start();
         mainMenu.loop(Clip.LOOP_CONTINUOUSLY);
     }

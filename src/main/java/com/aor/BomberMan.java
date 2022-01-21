@@ -13,16 +13,19 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class BomberMan {
+
     public Strategy strategy = new RandomMovement();
     public User user = new User("USER");
     public Screen screen;
     private static BomberMan bomberMan = null;
     private GameState gameState,LastGameState = null,LastBeforeShop = null;
     private int fps = 30;
+    private static final long BackFps = 6000;
+    private long TimerFps;
+    private boolean flagFps = false;
     public AWTTerminalFrame terminal = LanternaGUI.AWTTerminalFrameFactory();
 
     public BomberMan() throws IOException {
@@ -64,7 +67,7 @@ public class BomberMan {
     public GameState getGameLastState(){
         return this.LastGameState;
     }
-    public static BomberMan getInstance() throws IOException, FontFormatException {
+    public static BomberMan getInstance() throws IOException {
         if (bomberMan == null) {
             bomberMan = new BomberMan();
         }
@@ -82,6 +85,13 @@ public class BomberMan {
             long elapsedTime = System.currentTimeMillis() - startTime;
             long sleepTime = 1000 /fps - elapsedTime;
 
+            if(flagFps){
+                if(System.currentTimeMillis() - TimerFps>BackFps){
+                    flagFps = false;
+                    fps = 30;
+                }
+            }
+
             if (sleepTime > 0) try {
                 Thread.sleep(sleepTime);
             } catch (InterruptedException e) {
@@ -91,10 +101,11 @@ public class BomberMan {
         screen.close();
         terminal.close();
 
-        return;
 
     }
     public void changeFps(int fps){
         this.fps = fps;
+        flagFps = true;
+        TimerFps = System.currentTimeMillis();
     }
 }
