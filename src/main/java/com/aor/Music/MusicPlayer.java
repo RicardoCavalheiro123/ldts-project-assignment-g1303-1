@@ -162,7 +162,7 @@ public class MusicPlayer {
             Clip musicClip = AudioSystem.getClip();
             musicClip.open(audioInput);
             FloatControl gainControl = (FloatControl) musicClip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-20.0f);
+            gainControl.setValue(-25.0f);
             return musicClip;
         } catch (Exception e) {
             e.printStackTrace();

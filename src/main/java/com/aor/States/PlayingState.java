@@ -14,6 +14,7 @@ import com.aor.Models.PowerUpModel.PowerUpModel;
 import com.aor.Models.Positions.Position;
 
 
+import com.aor.Music.MusicPlayer;
 import com.aor.States.Observer.UserObserver;
 import com.aor.Strategy.FollowHeroMovement;
 import com.aor.Strategy.RandomMovement;
@@ -85,13 +86,13 @@ public class PlayingState extends GameState implements UserObserver{
         super(superb);
         readMap();
         time = System.currentTimeMillis();
-        //music = new MusicPlayer();
+        music = new MusicPlayer();
     }
 
     @Override
     public void start() {
         super.bomberMan.terminal.addKeyListener(gameController);
-        //music.startGameMusic();
+        music.startGameMusic();
 
         super.bomberMan.user.ChangeObserver(this);
 
@@ -157,7 +158,7 @@ public class PlayingState extends GameState implements UserObserver{
             }
         }
         for (Coin coin : coins) {
-            if (coin.getPosition().equals(position)) {
+            if (coin.getPosition().equals(bomberman.getPosition())) {
                 coin.setDestroyed();
                 coins.remove(coin);
                 super.bomberMan.user.addToBalence(1);
@@ -191,14 +192,15 @@ public class PlayingState extends GameState implements UserObserver{
             }
             bomb.draw(graphics);
         }
+        for (Coin coin : coins) {
+            coin.draw(graphics);
+        }
         bomberman.draw(graphics);
         for (Robot robot : robots) {
             robot.draw(graphics);
         }
         door.draw(graphics);
-        for (Coin coin : coins) {
-            coin.draw(graphics);
-        }
+
         for (Explosion explode : explosions) {
             explode.draw(graphics);
         }
@@ -209,7 +211,7 @@ public class PlayingState extends GameState implements UserObserver{
         gameController.moving = false;
 
         if(gameController.Menu){
-            //music.endGameMusic();
+            music.endGameMusic();
 
             gameController.Menu = false;
             super.bomberMan.terminal.removeKeyListener(gameController);
@@ -247,8 +249,8 @@ public class PlayingState extends GameState implements UserObserver{
         if (!bomberman.isAlive()) {
             super.bomberMan.terminal.removeKeyListener(gameController);
 
-            //music.endGameMusic();
-            //music.startLoseMusic();
+            music.endGameMusic();
+            music.startLoseMusic();
 
             changeState(new EndGame(this.bomberMan, 0, 0));
 
@@ -264,8 +266,8 @@ public class PlayingState extends GameState implements UserObserver{
             if (robot.getPosition().equals(bomberman.getPosition())) {
                 super.bomberMan.terminal.removeKeyListener(gameController);
 
-                //music.endGameMusic();
-                //music.startLoseMusic();
+                music.endGameMusic();
+                music.startLoseMusic();
               
                 changeState(new EndGame(this.bomberMan, 0, 0));
 
@@ -279,7 +281,7 @@ public class PlayingState extends GameState implements UserObserver{
        
 
         if ( gameController.moving) {
-            //music.startFootstep();
+            music.startFootstep();
             if ( gameController.right) {
                 bomberman.moveRight();
                 gameController.right = false;
@@ -297,8 +299,8 @@ public class PlayingState extends GameState implements UserObserver{
         if (bomberman.getPosition().equals(door.getPosition())) {
             super.bomberMan.terminal.removeKeyListener(gameController);
 
-            //music.endGameMusic();
-            //music.startWinMusic();
+            music.endGameMusic();
+            music.startWinMusic();
             super.bomberMan.user.setTime((System.currentTimeMillis() - time) / 1000);
             changeState(new EndGame(this.bomberMan, 1, (System.currentTimeMillis() - time) / 1000));
           
@@ -312,7 +314,7 @@ public class PlayingState extends GameState implements UserObserver{
             gameController.setBomb = false;
             Bomb b = new Bomb(new Position(bomberman.getPosition().getX(), bomberman.getPosition().getY()));
             bombs.add(b);
-            //music.startBombMusic();
+            music.startBombMusic();
         }
     }
 
@@ -322,7 +324,7 @@ public class PlayingState extends GameState implements UserObserver{
                 if (bomb.getTime() > 4000) {
                     bomb.setExploded();
                     destroyBlocks(bomb.getPosition());
-                    //music.startBombExplosionMusic();
+                    music.startBombExplosionMusic();
                 }
             }
         }

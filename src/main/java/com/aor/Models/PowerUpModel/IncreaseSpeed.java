@@ -43,22 +43,22 @@ public class IncreaseSpeed implements PowerUpModel {
         if(!selected && !red) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#00bd03"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,6 ), "p (INCREASE SPEED)");
+            graphics.putString(new TerminalPosition(20,6 ), "p (INCREASE SPEED) 5s");
         }
         else if(selected && red) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#880808"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,6 ), "-> p (INCREASE SPEED)");
+            graphics.putString(new TerminalPosition(20,6 ), "-> p (INCREASE SPEED) 5s");
         }
         else if(red) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#880808"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,6 ), "p (INCREASE SPEED)");
+            graphics.putString(new TerminalPosition(20,6 ), "p (INCREASE SPEED) 5s");
         }
         else if(selected) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#006400"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,6 ), "-> p (INCREASE SPEED)");
+            graphics.putString(new TerminalPosition(20,6 ), "-> p (INCREASE SPEED) 5s");
         }
     }
     @Override

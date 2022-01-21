@@ -17,7 +17,7 @@ class ConcreteBlockTest extends Specification {
         when:
             b.draw(graphics)
         then:
-            1 * graphics.putString(new TerminalPosition(3, 3), "j");
+            1 * graphics.putString(new TerminalPosition(3, 3), "j")
     }
 
     def "IsDestroyed"() {

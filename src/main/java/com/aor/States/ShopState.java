@@ -46,7 +46,7 @@ public class ShopState extends GameState{
     private void drawBalence(TextGraphics graphics){
         graphics.setForegroundColor(TextColor.Factory.fromString("#FFEA17"));
         graphics.enableModifiers(SGR.BOLD);
-        String s = "BALENCE: " + String.valueOf(this.bomberMan.user.getBalence()) + "s";
+        String s = "BALANCE: " + String.valueOf(this.bomberMan.user.getBalence()) + "s";
         graphics.putString(new TerminalPosition(5,2 ), s);
     }
 
@@ -94,7 +94,7 @@ public class ShopState extends GameState{
             return;
         }
         if(skin.isSelected()){
-            if(super.bomberMan.user.getBalence()>skin.getPrice()){
+            if(super.bomberMan.user.getBalence()>=skin.getPrice()){
                 music.confirmationSfx();
                 super.bomberMan.user.takeFromBalence(skin.getPrice());
                 super.bomberMan.user.addPowerUp(new ChangeSkin());
@@ -105,7 +105,7 @@ public class ShopState extends GameState{
             }
         }
         if(fast.isSelected()){
-            if(super.bomberMan.user.getBalence()>fast.getPrice()){
+            if(super.bomberMan.user.getBalence()>=fast.getPrice()){
                 music.confirmationSfx();
                 super.bomberMan.user.takeFromBalence(fast.getPrice());
                 super.bomberMan.user.addPowerUp(new IncreaseSpeed());
@@ -116,7 +116,7 @@ public class ShopState extends GameState{
             }
         }
         if(slow.isSelected()){
-            if(super.bomberMan.user.getBalence()>slow.getPrice()){
+            if(super.bomberMan.user.getBalence()>=slow.getPrice()){
                 music.confirmationSfx();
                 super.bomberMan.user.takeFromBalence(slow.getPrice());
                 super.bomberMan.user.addPowerUp(new SlowTime());

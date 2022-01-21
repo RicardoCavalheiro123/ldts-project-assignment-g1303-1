@@ -22,7 +22,7 @@ public class RandomMovement implements Strategy {
             else if(num == 3 && game.canMove(new Position(temp.getPosition().getX(), temp.getPosition().getY() - 1))) {
                 temp.moveUp();
             }
-            else if(num == 3 && game.canMove(new Position(temp.getPosition().getX(), temp.getPosition().getY() + 1))) {
+            else if(num == 4 && game.canMove(new Position(temp.getPosition().getX(), temp.getPosition().getY() + 1))) {
                 temp.moveDown();
             }
         }

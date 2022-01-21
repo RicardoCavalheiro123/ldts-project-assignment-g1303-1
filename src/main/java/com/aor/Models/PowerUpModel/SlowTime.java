@@ -43,22 +43,22 @@ public class SlowTime implements PowerUpModel {
         if(!selected && !red) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#00bd03"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,8 ), "q (SLOW TIME)");
+            graphics.putString(new TerminalPosition(20,8 ), "q (SLOW TIME) 5s");
         }
         else if(selected && red) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#880808"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,8 ), "-> q (SLOW TIME)");
+            graphics.putString(new TerminalPosition(20,8 ), "-> q (SLOW TIME) 5s");
         }
         else if(red) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#880808"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,8 ), "q (SLOW TIME)");
+            graphics.putString(new TerminalPosition(20,8 ), "q (SLOW TIME) 5s");
         }
         else if(selected) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#006400"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,8 ), "-> q (SLOW TIME)");
+            graphics.putString(new TerminalPosition(20,8 ), "-> q (SLOW TIME) 5s");
         }
     }
     @Override

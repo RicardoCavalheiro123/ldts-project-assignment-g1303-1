@@ -43,22 +43,22 @@ public class ChangeSkin implements PowerUpModel {
         if(!selected && !red) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#00bd03"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,4 ), "r (CHANGE SKIN)");
+            graphics.putString(new TerminalPosition(20,4 ), "r (CHANGE SKIN) 5s");
         }
         else if(selected && red) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#880808"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,4 ), "-> r (CHANGE SKIN)");
+            graphics.putString(new TerminalPosition(20,4 ), "-> r (CHANGE SKIN) 5s");
         }
         else if(red) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#880808"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,4 ), "r (CHANGE SKIN)");
+            graphics.putString(new TerminalPosition(20,4 ), "r (CHANGE SKIN) 5s");
         }
         else if(selected) {
             graphics.setForegroundColor(TextColor.Factory.fromString("#006400"));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(new TerminalPosition(20,4 ), "-> r (CHANGE SKIN)");
+            graphics.putString(new TerminalPosition(20,4 ), "-> r (CHANGE SKIN) 5s");
         }
     }
     @Override

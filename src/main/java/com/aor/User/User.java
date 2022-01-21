@@ -11,7 +11,7 @@ public class User {
     String name;
     long time = 0;
     ArrayList<PowerUpModel> powerUpModels = new ArrayList<>();
-    int balence = 500;
+    int balence = 10;
     public User(String name){
         this.name = name;
     }
