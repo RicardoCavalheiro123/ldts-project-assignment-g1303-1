@@ -5,7 +5,7 @@ Our game consists in a Hero, known as, Bomberman who has the ability to drop BOM
 
 ## For a more detailed version of this description click [here](./docs/README.md)
 
-##How to Play
+## How to Play
 
 You can move the character using
 - `🔼` to go up

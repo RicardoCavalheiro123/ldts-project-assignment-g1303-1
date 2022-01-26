@@ -13,7 +13,8 @@ Our game consists in a Hero, known as, *Bomberman* who has the ability to drop *
 6. [Testing](#testing)
 
 
-##How to Play
+## How to Play
+
 You can move the character using
 - `🔼` to go up
 - `▶️` to go right
