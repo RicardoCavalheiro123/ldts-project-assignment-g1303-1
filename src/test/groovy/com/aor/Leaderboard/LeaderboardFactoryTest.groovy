@@ -14,9 +14,10 @@ class LeaderboardFactoryTest extends Specification {
         then:
             l.get(0).getName() == "DIOGO"
             l.get(0).getTime() == 10
-            l.get(1).getName() == "RICARDO"
-            l.get(1).getTime() == 50
-            l.get(2).getName() == "JOAO"
-            l.get(2).getTime() == 212
+            l.get(1).getName() == "USER"
+            l.get(1).getTime() == 46
+            l.get(2).getName() == "RICARDO"
+            l.get(2).getTime() == 50
+
     }
 }

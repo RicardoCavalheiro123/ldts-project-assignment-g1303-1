@@ -38,7 +38,7 @@ class SlowTimeTest extends Specification {
         when:
         slow.draw(graphics)
         then:
-        1 * graphics.putString(new TerminalPosition(20,8 ), "q (SLOW TIME)");
+        1 * graphics.putString(new TerminalPosition(20,8 ), "q (SLOW TIME) 5s")
     }
     def "IsSelected"() {
         expect:
