@@ -3,7 +3,7 @@ Our game consists in a Hero, known as, Bomberman who has the ability to drop BOM
 
 >This game was developed by *Diogo Babo* (up202004950@fe.up.pt), *João Oliveira* (up202004407@fe.up.pt) and *Ricardo Cavalheiro* (up202005103@fe.up.pt) for LDTS 2021/2022.
 
-## For a more detailed version of this description click [here](./docs/README.md).
+## For a more detailed version of this description click [here](./docs/README.md)
 
 ##How to Play
 
@@ -55,7 +55,7 @@ The following mock-ups will illustrate how the game will look!
 ### Menus
 
 <p align="center" justify="center">
-  <img src="docs/images/screenshots/mainMenu.png"/>
+  <img src="docs/images/screenshots/MainMenu.png"/>
 </p>
 <p align="center">
   <b><i>Fig 2. Main Menu </i></b>
@@ -106,7 +106,7 @@ The following mock-ups will illustrate how the game will look!
 <br />
 
 <p align="center" justify="center">
-  <img src="docs/images/screenshots/Leaderboard.png"/>
+  <img src="docs/images/screenshots/LEADERBOARD.png"/>
 </p>
 <p align="center">
   <b><i>Fig 6. Leaderboard </i></b>  
