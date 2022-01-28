@@ -7,7 +7,7 @@ import spock.lang.Specification
 class IncreaseSpeedTest extends Specification {
     def speed
     def setup(){
-        speed = new IncreaseSpeed();
+        speed = new IncreaseSpeed()
     }
     def "GetPrice"() {
         when:
@@ -38,7 +38,7 @@ class IncreaseSpeedTest extends Specification {
         when:
         speed.draw(graphics)
         then:
-        1 * graphics.putString(new TerminalPosition(20,6 ), "p (INCREASE SPEED)");
+        1 * graphics.putString(new TerminalPosition(20,6 ), "p (INCREASE SPEED) 5s")
     }
     def "IsSelected"() {
         expect:

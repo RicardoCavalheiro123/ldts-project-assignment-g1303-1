@@ -38,7 +38,7 @@ class ChangeSkinTest extends Specification {
         when:
             skin.draw(graphics)
         then:
-            1 * graphics.putString(new TerminalPosition(20,4 ), "r (CHANGE SKIN)")
+            1 * graphics.putString(new TerminalPosition(20,4 ), "r (CHANGE SKIN) 5s")
     }
     def "IsSelected"() {
         expect:

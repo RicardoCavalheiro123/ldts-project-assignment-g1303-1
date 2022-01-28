@@ -45,7 +45,7 @@ class UserTest extends Specification {
 
     def "GetBalence"() {
         expect:
-            user.getBalence() == 500
+            user.getBalence() == 10
     }
 
 
@@ -53,7 +53,7 @@ class UserTest extends Specification {
         when:
         user.addToBalence(3)
         then:
-        user.getBalence() == 503
+        user.getBalence() == 13
 
     }
 
@@ -61,7 +61,7 @@ class UserTest extends Specification {
         when:
         user.takeFromBalence(3)
         then:
-        user.getBalence() == 497
+        user.getBalence() == 7
     }
 
     def "GetPowerUpList"() {
@@ -99,7 +99,7 @@ class UserTest extends Specification {
             user.ChangeObserver(observer)
             user.notifyObserverBegin()
         then:
-            1 * observer.notifyObserverBeginPowerUp(power);
+            1 * observer.notifyObserverBeginPowerUp(power)
     }
     def "NotifyObserverEnd"(){
         given:
@@ -110,7 +110,7 @@ class UserTest extends Specification {
             user.ChangeObserver(observer)
             user.notifyObserverEnd()
         then:
-            1 * observer.notifyObserverEndPowerUp(power);
+            1 * observer.notifyObserverEndPowerUp(power)
 
     }
 }

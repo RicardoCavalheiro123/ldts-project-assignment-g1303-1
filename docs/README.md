@@ -1,21 +1,68 @@
 ## LDTS<13><03> - BOMBERMAN
 
-> Our game consists in a Hero, known as, Bomberman who has the ability to drop BOMBS which are able to destroy some types of blocks and also to KILL the enemies. By destroying the blocks you will be able to create a path leading to the door (EXIT) and then win the game. You can also win the game by killing every robot, be CAREFUL!
-This game was developed by *Diogo Babo* (up202004950@fe.up.pt), *João Oliveira* (up202004407@fe.up.pt) and *Ricardo Cavalheiro* (up202005103@fe.up.pt) for LDTS 2021/2022.
+Our game consists in a Hero, known as, *Bomberman* who has the ability to drop *BOMBS* which are able to destroy some types of blocks and also to KILL the enemies. The Bomberman can collect *Coins* scattered around the map and use it to buy Power-Ups at the shop. At the Start of the Game your Balance is 10 Coins. By destroying the blocks you will be able to create a path leading to the door (EXIT) and then win the game. You can also win the game by killing every robot, be CAREFUL (*they are fast*)!
+
+>This game was developed by *Diogo Babo* (up202004950@fe.up.pt), *João Oliveira* (up202004407@fe.up.pt) and *Ricardo Cavalheiro* (up202005103@fe.up.pt) for LDTS 2021/2022.
+
+## Table of contents
+1. [How to Play](#how-to-play)
+2. [Implemented Features](#implemented-features)
+3. [Game Preview](#game-preview)
+4. [Design Patterns](#design)
+5. [Code Smells](#known-code-smells-and-refactoring-suggestions)
+6. [Testing](#testing)
+
+
+## How to Play
+
+You can move the character using
+- `🔼` to go up
+- `▶️` to go right
+- `◀️` to go left
+- `🔽️󠀠󠀠󠀠` to go down󠀠
+
+Or you can use `Spacebar` to drop bombs that take 4 seconds to explode.
+
+The main objective is to reach the Exit or destroy all Robots.
+
 
 ### IMPLEMENTED FEATURES
 
-- **Movement** - The game character (hero) will move depending on which arrow key is pressed.
-- **Droping a Bomb** - The game character (hero) will drop a bomb where is he currently standing when the space bar is pressed. This bomb is able to destroy the non-concrete blocks but not the others. It also capable of killing the robots. (The bomb has a time of 4s to explode, and a range of 4 blocks, be careful, don't too close to it!).
-- **Robots** - There will be many robots which move randomly (implemented already) or accordingly to the hero position (to develop further on!). These robots will try to kill you, so you better either avoid them or kill them!
-- **End Game Message** - There will be a message displayed on the screen depending on if you win/lose. It will also show the time of survival.
-  
+- **Main Menu** - Menu where you can Play the Game, go to the Shop, go to the Leaderboard, select the Difficulty or Exit the Game.
+- **Pause Menu** - Pause Menu of the game where you can Resume the Game, go to the Shop or return to the Main Menu.
+- **Game Over Menu** - Menu that depends on if you Win or Lose the Game where you can Play Again or return to the Main Menu.
+- **Menu To Get Player Name** - Menu where the user types the `PLAYER` name.
+- **Difficulty Options** - The Game has two Difficulties (Hard or Easy) that alters robots movement.
+- **Shop** - Shop of the Game where you can Buy Power-Ups such as: Change Skin; Increase Speed; Slow Time; (Each One costs 5 Coins) 
+- **Background, Menu and Pause Music** - The Game and both Pause and Main Menus have specific Musics.
+- **Sound Effects** - Added a special sound effect for every interaction: Scrolling through Menu; Selecting an option; Choosing difficulty; Buying a Power-up or not having enough balance; Winning; Losing; Walking; Dropping and Exploding a Bomb; 
+- **Bomberman Movement** - The game character (hero) will move depending on which arrow key is pressed (Up, Down, Left or Right).
+- **Robots** - The map has Robots that move around the Map.
+- **Robots Strategies** - Robots have two types of Strategies: RandomMovement - Robots move randomly; FollowHeroMovement - Robots chase the Bomberman;
+- **Destructible and Indestructible Blocks** - There are two types of blocks, ones which can be destroyed by Bombs and the other that is indestructible;
+- **Coins** - There are Coins scattered around the map that the Bomberman can get by walking to them.
+- **Bomb and Explosion Particles** - The game character (hero) will drop a bomb where is he currently standing when the space bar is pressed. This bomb is able to destroy the non-concrete blocks but not the others. It is also capable of killing the robots. (The bomb has a time of 4s to explode, and a range of 4 blocks, be careful, don't too close to it!). Also added particles for the explosion to show the range of the Bomb.
+- **Power-ups** - The Game has three Power-Ups that the Bomberman can buy at the shop, each one lasts 10 seconds: Change Skin - Hero changes the skin; Increase Speed - Hero moves faster; Slow Time - Robots move slower;
+- **Exit Door** - There is A Door in the map where you can go to Win the Game.
 
-### PLANNED FEATURES
 
-- **Menu** - The menu with all the features to be implemented, is yet to be developed.
-- **LeaderBoard** - You will be able to check the list of winners, based on their time for winning the game.
-- **Shop** - Will you will be able to buy new characters and maybe powerups (not defined yet).
+### Game Preview
+![Menu](images/screenshots/MainMenu.png)
+
+![Pause](images/screenshots/PauseMenu.png)
+
+![Win](images/screenshots/WinMenu.png)
+
+![Lose](images/screenshots/LoseMenu.png)
+
+![Leaderboard](images/screenshots/LEADERBOARD.png)
+
+![PlayerName](images/screenshots/SetNameMenu.gif)
+
+![Game](images/screenshots/Game.png)
+
+![BombExplosion](images/screenshots/BombExplosion.gif)
+
 
 ### DESIGN
 
@@ -33,9 +80,9 @@ This game was developed by *Diogo Babo* (up202004950@fe.up.pt), *João Oliveira*
 
 These classes can be found in the following files:
 
-- [Element](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Element/Element.java)
-- [Hero](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Element/Hero.java)
-- [Robot](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Element/Robot.java)
+- [Element](../src/main/java/com/aor/Models/Element/Element.java)
+- [Hero](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/d5044200c46a421956e177b9635a93681e65f4c7/src/main/java/com/aor/Models/Element/Hero.java)
+- [Robot](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/d5044200c46a421956e177b9635a93681e65f4c7/src/main/java/com/aor/Models/Element/Robot.java)
 
 
 - **Consequences :**
@@ -48,17 +95,19 @@ The use of the Factory Method Pattern allows some benefits to the design:
 
 #### Diferents Strategies of a Robot
 
+![img](images/UML/Strategy.png)
+
 - **Problem in Context :** We wanted the Robots to have different ways of deciding where they wanna move in each step to make it harder for the user to win. 
 
-- **Strategy Method :** We will use the **Strategy Pattern** to have different ways to move the Robot.Currently we have a strategy where Robots move randomly across the board and we are planning on adding another strategy where Robots move each time closer to the Hero making it harder for the user to win the game.
+- **Strategy Method :** We used the **Strategy Pattern** to have different ways to move the Robot. 
 
-- **Implementation :** *Not implemented yet*
+- **Implementation :** We created two classes that implement the *Strategy* interface: **FollowHeroMovement** which is a strategy where the robots chase the hero; **RandomMovement** which is the other strategy where the robots move randomly across the map.
 
 These classes can be found in the following files:
 
-- [___]()
-- [___]()
-- [___]()
+- [Strategy](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/Strategy/Strategy.java)
+- [FollowHeroMovement](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/Strategy/FollowHeroMovement.java)
+- [RandomMovement](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/Strategy/RandomMovement.java)
 
 **Consequences**
 
@@ -67,6 +116,61 @@ The advantages of using the Strategy Pattern are the following:
 - You can switch algorithms used inside an object at runtime.
 - Clean code because you avoid conditional-infested code.
 - Open/Closed Principle. You can add new strategies to the Robot without having to change the context.
+  
+#### Game State
+
+- **Problem in Context :** We needed to alternate between various game states, such as: Playing State, Menu State, Pause State, Shop State, Leaderboard State etc. Initially we thought about having it all on the same class, but soon we realized that was not ideal.
+
+- **State Pattern:** We used the **State Pattern** to allow an object to alter its behavior when his internal state changes.
+
+- **Implementation :** An abstract class **GameState** was created and every state of the game such as Playing State, MenuState, EndGameState and many more, extend this class.
+
+![img](images/UML/States.png)
+
+These classes can be found in the following files:
+
+- [GameState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/GameState.java)
+- [DifficultyChangeState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/DifficultyChangeState.java)
+- [EndGame](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/EndGame.java)
+- [GetNameState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/GetNameState.java)
+- [LeaderboardState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/LeaderboardState.java)
+- [MenuState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/MenuState.java)
+- [PauseState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/PauseState.java)
+- [PlayingState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/PlayingState.java)
+- [ShopState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/ShopState.java)
+
+
+**Consequences**
+
+The advantages of using the State Pattern are the following:
+
+- Organize the code related to particular states into separate classes.
+- Introduce new states without changing existing state classes or the context.
+- Simplify the code of the context by eliminating bulky state machine conditionals.
+
+#### Observer
+
+- **Problem in Context :** When a power-up is bought by the user we had to notify the game so that it changes in the PlayingState and also after 10 seconds of that power-up we needed to notify it ended.
+
+- **Observer Pattern:** For that we used the **Observer Pattern** which is a behavioral design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they’re observing. That way when the user gets for example the *Slow Time* power-up it notifies the robots to move slower.
+
+- **Implementation :** We have a User class which receives a notification that a Playing State is active and notifys it that a power-up has started or ended. Depending on the power-up it changes the skin, speeds up the Hero or slows the Robots.
+
+
+These classes can be found in the following files:
+
+- [User](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/User/User.java)
+- [Playing State](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/PlayingState.java)
+
+
+**Consequences**
+
+The advantages of using the State Pattern are the following:
+
+- You can establish relations between objects at runtime.
+- This method carefully describes the coupling existing between the objects and the observer.
+- With the Open/Closed Principle's help, we can introduce the new subscriber class without making a change in the publisher's code.
+
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
@@ -75,14 +179,13 @@ The advantages of using the Strategy Pattern are the following:
 
 The `Position` class is a **Data Class**, because it contains fields and not a lot of behavior. However, it is not a bad code smell as it a consequence of the design we choose. It allows you to understand and organize the code and the operations are now gathered in a single place, instead of throughout the code.
 
-
 #### **SWITCH STATEMENTS**
 
 We had the need to use several if's depending on the direction the hero chooses to go. The refactoring suggestion is to use polymorphism, but we don't find it wise in this case as the code gets far less readable.
 
 #### **LARGE CLASS**
 
-The `Game` class contains many fields and long methods. We find it reasonable as it is the main class of the program and most of the methods don't really make sense to split into other classes.
+The `PlayingState` class contains many fields and long methods. We find it reasonable as it is the main class of the program and most of the methods don't really make sense to split into other classes.
 
 
 ### TESTING
