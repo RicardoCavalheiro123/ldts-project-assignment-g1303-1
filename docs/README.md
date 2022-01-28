@@ -80,7 +80,7 @@ The main objective is to reach the Exit or destroy all Robots.
 
 These classes can be found in the following files:
 
-- [Element](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/d5044200c46a421956e177b9635a93681e65f4c7/src/main/java/com/aor/Models/Element/Element.java)
+- [Element](../src/main/java/com/aor/Models/Element/Element.java)
 - [Hero](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/d5044200c46a421956e177b9635a93681e65f4c7/src/main/java/com/aor/Models/Element/Hero.java)
 - [Robot](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/d5044200c46a421956e177b9635a93681e65f4c7/src/main/java/com/aor/Models/Element/Robot.java)
 
@@ -94,6 +94,8 @@ The use of the Factory Method Pattern allows some benefits to the design:
 - You can introduce new types of Elements into the program without changing existing code.
 
 #### Diferents Strategies of a Robot
+
+![img](images/UML/Strategy.png)
 
 - **Problem in Context :** We wanted the Robots to have different ways of deciding where they wanna move in each step to make it harder for the user to win. 
 
@@ -123,6 +125,8 @@ The advantages of using the Strategy Pattern are the following:
 
 - **Implementation :** An abstract class **GameState** was created and every state of the game such as Playing State, MenuState, EndGameState and many more, extend this class.
 
+![img](images/UML/States.png)
+
 These classes can be found in the following files:
 
 - [GameState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/GameState.java)
@@ -151,6 +155,7 @@ The advantages of using the State Pattern are the following:
 - **Observer Pattern:** For that we used the **Observer Pattern** which is a behavioral design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they’re observing. That way when the user gets for example the *Slow Time* power-up it notifies the robots to move slower.
 
 - **Implementation :** We have a User class which receives a notification that a Playing State is active and notifys it that a power-up has started or ended. Depending on the power-up it changes the skin, speeds up the Hero or slows the Robots.
+
 
 These classes can be found in the following files:
 
