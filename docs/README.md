@@ -80,9 +80,9 @@ The main objective is to reach the Exit or destroy all Robots.
 
 These classes can be found in the following files:
 
-- [Element](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Models/Element.java)
-- [Hero](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Models/Element/Hero.java)
-- [Robot](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Models/Element/Robot.java)
+- [Element](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/d5044200c46a421956e177b9635a93681e65f4c7/src/main/java/com/aor/Models/Element/Element.java)
+- [Hero](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/d5044200c46a421956e177b9635a93681e65f4c7/src/main/java/com/aor/Models/Element/Hero.java)
+- [Robot](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/d5044200c46a421956e177b9635a93681e65f4c7/src/main/java/com/aor/Models/Element/Robot.java)
 
 
 - **Consequences :**
