@@ -81,8 +81,8 @@ The main objective is to reach the Exit or destroy all Robots.
 These classes can be found in the following files:
 
 - [Element](../src/main/java/com/aor/Models/Element/Element.java)
-- [Hero](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/d5044200c46a421956e177b9635a93681e65f4c7/src/main/java/com/aor/Models/Element/Hero.java)
-- [Robot](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/d5044200c46a421956e177b9635a93681e65f4c7/src/main/java/com/aor/Models/Element/Robot.java)
+- [Hero](../src/main/java/com/aor/Models/Element/Hero.java)
+- [Robot](../src/main/java/com/aor/Models/Element/Robot.java)
 
 
 - **Consequences :**
@@ -105,9 +105,9 @@ The use of the Factory Method Pattern allows some benefits to the design:
 
 These classes can be found in the following files:
 
-- [Strategy](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/Strategy/Strategy.java)
-- [FollowHeroMovement](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/Strategy/FollowHeroMovement.java)
-- [RandomMovement](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/Strategy/RandomMovement.java)
+- [Strategy](../src/main/java/com/aor/Strategy/Strategy.java)
+- [FollowHeroMovement](../src/main/java/com/aor/Strategy/FollowHeroMovement.java)
+- [RandomMovement](../src/main/java/com/aor/Strategy/RandomMovement.java)
 
 **Consequences**
 
@@ -129,15 +129,15 @@ The advantages of using the Strategy Pattern are the following:
 
 These classes can be found in the following files:
 
-- [GameState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/GameState.java)
-- [DifficultyChangeState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/DifficultyChangeState.java)
-- [EndGame](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/EndGame.java)
-- [GetNameState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/GetNameState.java)
-- [LeaderboardState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/LeaderboardState.java)
-- [MenuState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/MenuState.java)
-- [PauseState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/PauseState.java)
-- [PlayingState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/PlayingState.java)
-- [ShopState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/ShopState.java)
+- [GameState](../src/main/java/com/aor/States/GameState.java)
+- [DifficultyChangeState](../src/main/java/com/aor/States/DifficultyChangeState.java)
+- [EndGame](../src/main/java/com/aor/States/EndGame.java)
+- [GetNameState](../src/main/java/com/aor/States/GetNameState.java)
+- [LeaderboardState](../src/main/java/com/aor/States/LeaderboardState.java)
+- [MenuState](../src/main/java/com/aor/States/MenuState.java)
+- [PauseState](../src/main/java/com/aor/States/PauseState.java)
+- [PlayingState](../src/main/java/com/aor/States/PlayingState.java)
+- [ShopState](../src/main/java/com/aor/States/ShopState.java)
 
 
 **Consequences**
@@ -156,12 +156,13 @@ The advantages of using the State Pattern are the following:
 
 - **Implementation :** We have a User class which receives a notification that a Playing State is active and notifys it that a power-up has started or ended. Depending on the power-up it changes the skin, speeds up the Hero or slows the Robots.
 
+![img](images/UML/ObserverPattern.png)
 
 These classes can be found in the following files:
 
-- [User](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/User/User.java)
-- [Playing State](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/PlayingState.java)
-
+- [User](../src/main/java/com/aor/User/User.java)
+- [Playing State](../src/main/java/com/aor/States/PlayingState.java)
+- [UserObserver](../src/main/java/com/aor/States/Observer/UserObserver.java)
 
 **Consequences**
 
