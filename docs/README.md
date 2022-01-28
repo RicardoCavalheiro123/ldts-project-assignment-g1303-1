@@ -80,9 +80,9 @@ The main objective is to reach the Exit or destroy all Robots.
 
 These classes can be found in the following files:
 
-- [Element](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Element/Element.java)
-- [Hero](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Element/Hero.java)
-- [Robot](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Element/Robot.java)
+- [Element](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Models/Element.java)
+- [Hero](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Models/Element/Hero.java)
+- [Robot](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/109d3ca525284eabda8cbbab17f4a8623753fc18/src/main/java/com/aor/Models/Element/Robot.java)
 
 
 - **Consequences :**
@@ -97,15 +97,15 @@ The use of the Factory Method Pattern allows some benefits to the design:
 
 - **Problem in Context :** We wanted the Robots to have different ways of deciding where they wanna move in each step to make it harder for the user to win. 
 
-- **Strategy Method :** We will use the **Strategy Pattern** to have different ways to move the Robot. 
+- **Strategy Method :** We used the **Strategy Pattern** to have different ways to move the Robot. 
 
-- **Implementation :** *Not implemented yet*
+- **Implementation :** We created two classes that implement the *Strategy* interface: **FollowHeroMovement** which is a strategy where the robots chase the hero; **RandomMovement** which is the other strategy where the robots move randomly across the map.
 
 These classes can be found in the following files:
 
-- [___]()
-- [___]()
-- [___]()
+- [Strategy](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/Strategy/Strategy.java)
+- [FollowHeroMovement](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/Strategy/FollowHeroMovement.java)
+- [RandomMovement](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/Strategy/RandomMovement.java)
 
 **Consequences**
 
@@ -114,6 +114,58 @@ The advantages of using the Strategy Pattern are the following:
 - You can switch algorithms used inside an object at runtime.
 - Clean code because you avoid conditional-infested code.
 - Open/Closed Principle. You can add new strategies to the Robot without having to change the context.
+  
+#### Game State
+
+- **Problem in Context :** We needed to alternate between various game states, such as: Playing State, Menu State, Pause State, Shop State, Leaderboard State etc. Initially we thought about having it all on the same class, but soon we realized that was not ideal.
+
+- **State Pattern:** We used the **State Pattern** to allow an object to alter its behavior when his internal state changes.
+
+- **Implementation :** An abstract class **GameState** was created and every state of the game such as Playing State, MenuState, EndGameState and many more, extend this class.
+
+These classes can be found in the following files:
+
+- [GameState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/GameState.java)
+- [DifficultyChangeState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/DifficultyChangeState.java)
+- [EndGame](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/EndGame.java)
+- [GetNameState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/GetNameState.java)
+- [LeaderboardState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/LeaderboardState.java)
+- [MenuState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/MenuState.java)
+- [PauseState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/PauseState.java)
+- [PlayingState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/PlayingState.java)
+- [ShopState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/ShopState.java)
+
+
+**Consequences**
+
+The advantages of using the State Pattern are the following:
+
+- Organize the code related to particular states into separate classes.
+- Introduce new states without changing existing state classes or the context.
+- Simplify the code of the context by eliminating bulky state machine conditionals.
+
+#### Observer
+
+- **Problem in Context :** When a power-up is bought by the user we had to notify the game so that it changes in the PlayingState and also after 10 seconds of that power-up we needed to notify it ended.
+
+- **Observer Pattern:** For that we used the **Observer Pattern** which is a behavioral design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they’re observing. That way when the user gets for example the *Slow Time* power-up it notifies the robots to move slower.
+
+- **Implementation :** We have a User class which receives a notification that a Playing State is active and notifys it that a power-up has started or ended. Depending on the power-up it changes the skin, speeds up the Hero or slows the Robots.
+
+These classes can be found in the following files:
+
+- [User](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/User/User.java)
+- [Playing State](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g1303/blob/ddcef494d67cd6c3a60f3071113633076d9132be/src/main/java/com/aor/States/PlayingState.java)
+
+
+**Consequences**
+
+The advantages of using the State Pattern are the following:
+
+- You can establish relations between objects at runtime.
+- This method carefully describes the coupling existing between the objects and the observer.
+- With the Open/Closed Principle's help, we can introduce the new subscriber class without making a change in the publisher's code.
+
 
 #### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 

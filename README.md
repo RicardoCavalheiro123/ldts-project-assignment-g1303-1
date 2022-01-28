@@ -39,7 +39,7 @@ The main objective is to reach the Exit or destroy all Robots.
 
 ## Screenshots
   
-The following mock-ups will illustrate how the game will look!
+The following mock-ups will illustrate how the game looks!
 ### Game preview
 <p align="center" justify="center">
   <img src="docs/images/screenshots/Game.png"/>
