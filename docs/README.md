@@ -71,7 +71,7 @@ The main objective is to reach the Exit or destroy all Robots.
 - **Problem in Context :** One problem we knew from the start we had to deal with was the different methods we had to create to draw each class of the game(Ex: Hero, Robot, Blocks, Bomb).
 
 
-- **Factory Method :** So we have applied the **Factory Method** pattern. **Element** is an abstract class that has an abstract **draw** method which is overridden by the Hero and Robot classes; that way when you are drawing the board it knows how to draw each class. We also did the same thing for the Concrete Blocks, Destructable Blocks and Bomb.
+- **Factory Method :** So we have applied the **Factory Method** pattern. **Element** is an abstract class that has an abstract **draw** method which is overridden by the Hero and Robot classes; that way when you are drawing the board it knows how to draw each class. We also did the same thing for the Concrete Blocks, Destructible Blocks and Bomb.
 
 
 - **Implementation :** Element is an abstract class which is responsible for creating the moving elements of the board but only the subclasses know how to draw themselves.
@@ -174,10 +174,10 @@ The advantages of using the State Pattern are the following:
 
 ### Abstract
 
-- **Problem in Context :** From the start we believed that it was important to have multiple objects that although different, may be part of a class that agregates them. In order to keep the code in check and forfeit the need to have different variables or arrays for different types of elementes we came to this solution.
+- **Problem in Context :** From the start we believed that it was important to have multiple objects that although different, may be part of a class that aggregates them. In order to keep the code in check and forfeit the need to have different variables or arrays for different types of elements we came to this solution.
 
 
-- **Abstract Method :** So we have applied the **Abstract Method** pattern. **GameBlock** is an interface class that has a set of methods which are overridden by the different types of blocks present in the game. Such as **Bomb**,**ConcreteBlock**,etc... This way we can treat two different objecs as the same type although their methods definition is different.
+- **Abstract Method :** So we have applied the **Abstract Method** pattern. **GameBlock** is an interface class that has a set of methods which are overridden by the different types of blocks present in the game. Such as **Bomb**,**ConcreteBlock**,etc... This way we can treat two different objects as the same type although their methods' definition is different.
 
 - **Implementation :** GameBlock is an interface class which is responsible for aggregating objects that are fixed in the same position throughout the game.
 
@@ -188,7 +188,7 @@ The advantages of using the State Pattern are the following:
 The advantages of using the State Pattern are the following:
 
 - You can create new types of objects without changing any current code.
-- This method makes it easy to manipulate the standard code and extendit to our own benefit.
+- This method makes it easy to manipulate the standard code and extend it to our own benefit.
 - Solves the problem of creating entire product families without specifying their concrete classes.
 
 
@@ -225,21 +225,21 @@ The `PlayingState` class contains many fields and long methods. We find it reaso
 
 -Automate Tests -> doesn't support groovy tests, so we didn't pass it.
 
--Write Simple Units Of Code -> The way we developed it is nearly impossible to avoid writing a bunch of IF's & Else's, and we have alot of these, for example, in the movement of the game characters, verifying if a certain position on the map is free. Other example is the menu, to check the keys pressed by the user, and it's movement we need to check the various conditions.
+-Write Simple Units Of Code -> The way we developed it is nearly impossible to avoid writing a bunch of IF's & Else's, and we have a lot of these, for example, in the movement of the game characters, verifying if a certain position on the map is free. Other example is the menu, to check the keys pressed by the user, and it's movement we need to check the various conditions.
 
--Write Code Once -> As we used lots of abstract classes, and interfaces some code is duplicated because we have the same methods but with small differences from classes to classes. 
+-Write Code Once -> As we used lots of abstract classes, and interfaces some code is duplicated because we have the same methods but with small differences from class to class. 
 
 **Groovy Tests**:
 
 -Input handler package is responsible for observing the keyboard and notify that class that is using its classes of an input, therefore there is no way to test it
 
--LanternaGUI package is responsible only for constructing and returning a terminal. Therefore there isn't the need to test as it doesn't depend on other objects.
+-LanternaGUI package is responsible only for constructing and returning a terminal. Therefore, there isn't the need to test as it doesn't depend on other objects.
 
 -The strategy package is only responsible for giving one of two ways, "strategies", for the robots to move. They either follow the Bomberman or move randomly, this is allowed by the design pattern. So, given that it's not "essential" to test it, we didn't feel the need to do it (as one of the strategies is random) and it's also hard to do so. 
 
--States package has several trivial classes which are either abstact or interface, or were refactored. Although we should have tested this package we also recognize that majority of this package is contituted by **playingState** and this means most of the code present here is either private or hard to test it since it doesn't work alone. Therefore we weren't able to test.
+-States package has several trivial classes which are either abstract or interface, or were refactored. Although we should have tested this package we also recognize that majority of this package is contituted by **playingState** and this means most of the code present here is either private or hard to test it since it doesn't work alone. Therefore we weren't able to test.
 
--The Music package has classes which are audio related so it was quite hard to test it and we didn't feel the need to do it. Also we based this class on the example it was given to us.
+-The Music package has classes which are audio related, so it was quite hard to test it and we didn't feel the need to do it. Also we based this class on the example it was given to us.
 
 ### SELF-EVALUATION
 
