@@ -233,14 +233,20 @@ The `PlayingState` class contains many fields and long methods. We find it reaso
 
 -Input handler package is responsible for observing the keyboard and notify that class that is using its classes of an input, therefore there is no way to test it
 
--
+-LanternaGUI package is responsible only for constructing and returning a terminal. Therefore there isn't the need to test as it doesn't depend on other objects.
+
+-The strategy package is only responsible for giving one of two ways, "strategies", for the robots to move. They either follow the Bomberman or move randomly, this is allowed by the design pattern. So, given that it's not "essential" to test it, we didn't feel the need to do it (as one of the strategies is random) and it's also hard to do so. 
+
+-States package has several trivial classes which are either abstact or interface, or were refactored. Although we should have tested this package we also recognize that majority of this package is contituted by **playingState** and this means most of the code present here is either private or hard to test it since it doesn't work alone. Therefore we weren't able to test.
+
+-The Music package has classes which are audio related so it was quite hard to test it and we didn't feel the need to do it. Also we based this class on the example it was given to us.
 
 ### SELF-EVALUATION
 
 > In this section describe how the work regarding the project was divided between the students. In the event that members of the group do not agree on a work distribution, the group should send an email to the teacher explaining the disagreement.
 
 
-- Diogo Babo: 33.3%
-- João Oliveira: 33.3%
-- Ricardo Cavalheiro: 33.3%
-- Bruno Lima: 0.1%
+- Diogo Babo: 32%
+- João Oliveira: 32%
+- Ricardo Cavalheiro: 32%
+- Bruno Lima: 4%
