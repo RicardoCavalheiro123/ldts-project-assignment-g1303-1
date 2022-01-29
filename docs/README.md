@@ -229,8 +229,11 @@ The `PlayingState` class contains many fields and long methods. We find it reaso
 
 -Write Code Once -> As we used lots of abstract classes, and interfaces some code is duplicated because we have the same methods but with small differences from classes to classes. 
 
-**Groovy Testes**:
+**Groovy Tests**:
 
+-Input handler package is responsible for observing the keyboard and notify that class that is using its classes of an input, therefore there is no way to test it
+
+-
 
 ### SELF-EVALUATION
 
