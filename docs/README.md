@@ -195,7 +195,7 @@ The `PlayingState` class contains many fields and long methods. We find it reaso
 ![img](images/screenshots/CodeCoverage.png)
 
 ### Screenshot of pit teste report
-![img](images/screenshots/CodeCoverage.png)
+![img](images/screenshots/PitestReport.png)
 
 ### Link to mutation testing report
 [Mutation tests](../Pitest/index.html)
