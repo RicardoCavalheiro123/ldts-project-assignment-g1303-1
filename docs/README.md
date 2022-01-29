@@ -222,6 +222,7 @@ The `PlayingState` class contains many fields and long methods. We find it reaso
 ### TESTING COMMENTARIES
 
 **Better Code Hub**:
+
 -Automate Tests -> doesn't support groovy tests, so we didn't pass it.
 
 -Write Simple Units Of Code -> The way we developed it is nearly impossible to avoid writing a bunch of IF's & Else's, and we have alot of these, for example, in the movement of the game characters, verifying if a certain position on the map is free. Other example is the menu, to check the keys pressed by the user, and it's movement we need to check the various conditions.
