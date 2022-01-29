@@ -172,9 +172,7 @@ The advantages of using the State Pattern are the following:
 - This method carefully describes the coupling existing between the objects and the observer.
 - With the Open/Closed Principle's help, we can introduce the new subscriber class without making a change in the publisher's code.
 
-### DESIGN
-
-#### Methods to Draw each class
+### Abstract
 
 - **Problem in Context :** From the start we belived to be importan that we have multiple objects that although diferent may be part of a class that agregates them. In orther to keep the code in check and forfeit the need to have diferente variables or arrays for diferete types of elementes we must come to a solution.
 
