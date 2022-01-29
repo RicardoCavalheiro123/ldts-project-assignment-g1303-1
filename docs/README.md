@@ -228,6 +228,9 @@ The `PlayingState` class contains many fields and long methods. We find it reaso
 
 -Write Code Once -> As we used lots of abstract classes, and interfaces some code is duplicated because we have the same methods but with small differences from classes to classes. 
 
+**Groovy Testes**:
+
+
 ### SELF-EVALUATION
 
 > In this section describe how the work regarding the project was divided between the students. In the event that members of the group do not agree on a work distribution, the group should send an email to the teacher explaining the disagreement.
