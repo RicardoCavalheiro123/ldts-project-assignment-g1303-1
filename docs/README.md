@@ -219,6 +219,15 @@ The `PlayingState` class contains many fields and long methods. We find it reaso
 ### Link to mutation testing report
 [Mutation tests](../Pitest/index.html)
 
+### TESTING COMMENTARIES
+
+**Better Code Hub**:
+-Automate Tests -> doesn't support groovy tests, so we didn't pass it.
+
+-Write Simple Units Of Code -> The way we developed it is nearly impossible to avoid writing a bunch of IF's & Else's, and we have alot of these, for example, in the movement of the game characters, verifying if a certain position on the map is free. Other example is the menu, to check the keys pressed by the user, and it's movement we need to check the various conditions.
+
+-Write Code Once -> As we used lots of abstract classes, and interfaces some code is duplicated because we have the same methods but with small differences from classes to classes. 
+
 ### SELF-EVALUATION
 
 > In this section describe how the work regarding the project was divided between the students. In the event that members of the group do not agree on a work distribution, the group should send an email to the teacher explaining the disagreement.
