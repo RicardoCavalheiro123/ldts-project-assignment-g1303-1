@@ -181,6 +181,8 @@ The advantages of using the State Pattern are the following:
 
 - **Implementation :** GameBlock is an interface class which is responsible for aggregating objects that are fixed in the same position throughout the game.
 
+![img](images/UML/Elementblock.png)
+
 **Consequences**
 
 The advantages of using the State Pattern are the following:
