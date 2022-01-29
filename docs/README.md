@@ -174,13 +174,12 @@ The advantages of using the State Pattern are the following:
 
 ### Abstract
 
-- **Problem in Context :** From the start we belived to be importan that we have multiple objects that although diferent may be part of a class that agregates them. In orther to keep the code in check and forfeit the need to have diferente variables or arrays for diferete types of elementes we must come to a solution.
+- **Problem in Context :** From the start we believed that it was important to have multiple objects that although different, may be part of a class that agregates them. In order to keep the code in check and forfeit the need to have different variables or arrays for different types of elementes we came to this solution.
 
 
-- **Abstract Method :** So we have applied the **Abstract Method** pattern. **GameBlock** is an interface class that has a set of methods which are overridden by the different types of blocks present in the game. Such as **Bomb**,**ConcreteBlock**,etc... This way we can treat two difertent objecs as the same type although their methods defenition is diferent.
+- **Abstract Method :** So we have applied the **Abstract Method** pattern. **GameBlock** is an interface class that has a set of methods which are overridden by the different types of blocks present in the game. Such as **Bomb**,**ConcreteBlock**,etc... This way we can treat two different objecs as the same type although their methods definition is different.
 
-
-- **Implementation :** GameBlock is an interface class which is responsible for agregating objects that are fixed in the same position throughout the game.
+- **Implementation :** GameBlock is an interface class which is responsible for aggregating objects that are fixed in the same position throughout the game.
 
 **Consequences**
 
